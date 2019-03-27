@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D1F224B2FB200340DC0 /* AppDelegate.swift */; };
-		10656D22224B2FB200340DC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D21224B2FB200340DC0 /* ViewController.swift */; };
+		10656D22224B2FB200340DC0 /* PlatformController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D21224B2FB200340DC0 /* PlatformController.swift */; };
 		10656D25224B2FB200340DC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10656D23224B2FB200340DC0 /* Main.storyboard */; };
 		10656D28224B2FB200340DC0 /* GameTrkr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 10656D26224B2FB200340DC0 /* GameTrkr.xcdatamodeld */; };
 		10656D2A224B2FB600340DC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10656D29224B2FB600340DC0 /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 /* Begin PBXFileReference section */
 		10656D1C224B2FB200340DC0 /* GameTrkr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTrkr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10656D1F224B2FB200340DC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		10656D21224B2FB200340DC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		10656D21224B2FB200340DC0 /* PlatformController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformController.swift; sourceTree = "<group>"; };
 		10656D24224B2FB200340DC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10656D27224B2FB200340DC0 /* GameTrkr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameTrkr.xcdatamodel; sourceTree = "<group>"; };
 		10656D29224B2FB600340DC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		10656D54224B308A00340DC0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				10656D21224B2FB200340DC0 /* ViewController.swift */,
+				10656D21224B2FB200340DC0 /* PlatformController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,7 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10656D22224B2FB200340DC0 /* ViewController.swift in Sources */,
+				10656D22224B2FB200340DC0 /* PlatformController.swift in Sources */,
 				10656D28224B2FB200340DC0 /* GameTrkr.xcdatamodeld in Sources */,
 				10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */,
 			);

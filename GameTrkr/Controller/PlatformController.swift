@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PlatformController.swift
 //  GameTrkr
 //
 //  Created by Sean Foreman on 3/26/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PlatformController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

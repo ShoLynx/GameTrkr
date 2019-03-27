@@ -100,12 +100,13 @@
 			isa = PBXGroup;
 			children = (
 				10656D1F224B2FB200340DC0 /* AppDelegate.swift */,
-				10656D21224B2FB200340DC0 /* ViewController.swift */,
-				10656D23224B2FB200340DC0 /* Main.storyboard */,
-				10656D29224B2FB600340DC0 /* Assets.xcassets */,
-				10656D2B224B2FB600340DC0 /* LaunchScreen.storyboard */,
 				10656D2E224B2FB600340DC0 /* Info.plist */,
 				10656D26224B2FB200340DC0 /* GameTrkr.xcdatamodeld */,
+				10656D29224B2FB600340DC0 /* Assets.xcassets */,
+				10656D52224B305000340DC0 /* Model */,
+				10656D53224B306300340DC0 /* View */,
+				10656D54224B308A00340DC0 /* Controller */,
+				10656D55224B309700340DC0 /* Storyboard */,
 			);
 			path = GameTrkr;
 			sourceTree = "<group>";
@@ -126,6 +127,37 @@
 				10656D44224B2FB700340DC0 /* Info.plist */,
 			);
 			path = GameTrkrUITests;
+			sourceTree = "<group>";
+		};
+		10656D52224B305000340DC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		10656D53224B306300340DC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		10656D54224B308A00340DC0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				10656D21224B2FB200340DC0 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		10656D55224B309700340DC0 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				10656D23224B2FB200340DC0 /* Main.storyboard */,
+				10656D2B224B2FB600340DC0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -15,6 +15,8 @@
 		10656D2D224B2FB600340DC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10656D2B224B2FB600340DC0 /* LaunchScreen.storyboard */; };
 		10656D38224B2FB700340DC0 /* GameTrkrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D37224B2FB700340DC0 /* GameTrkrTests.swift */; };
 		10656D43224B2FB700340DC0 /* GameTrkrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D42224B2FB700340DC0 /* GameTrkrUITests.swift */; };
+		10656D57224C3B7000340DC0 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D56224C3B7000340DC0 /* Platform.swift */; };
+		10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D58224C3EDA00340DC0 /* PlatformCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		10656D3E224B2FB700340DC0 /* GameTrkrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameTrkrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10656D42224B2FB700340DC0 /* GameTrkrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTrkrUITests.swift; sourceTree = "<group>"; };
 		10656D44224B2FB700340DC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10656D56224C3B7000340DC0 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		10656D58224C3EDA00340DC0 /* PlatformCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 		10656D52224B305000340DC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				10656D56224C3B7000340DC0 /* Platform.swift */,
+				10656D58224C3EDA00340DC0 /* PlatformCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,6 +299,8 @@
 			files = (
 				10656D22224B2FB200340DC0 /* PlatformController.swift in Sources */,
 				10656D28224B2FB200340DC0 /* GameTrkr.xcdatamodeld in Sources */,
+				10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */,
+				10656D57224C3B7000340DC0 /* Platform.swift in Sources */,
 				10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

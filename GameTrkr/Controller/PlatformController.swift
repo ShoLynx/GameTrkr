@@ -11,7 +11,7 @@ import UIKit
 class PlatformController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var platformTable: UITableView!
-    @IBOutlet weak var noPlatformsLabel: UILabel!
+    @IBOutlet weak var noPlatformsText: UITextView!
     @IBOutlet weak var addPlatformButton: UIBarButtonItem!
     
     var platforms: [Platform] = []
@@ -22,9 +22,10 @@ class PlatformController: UIViewController, UITableViewDataSource {
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.leftBarButtonItem = editButton
         
-        noPlatformsLabel.isHidden = true
+        noPlatformsText.isHidden = true
         if platforms.isEmpty {
-            noPlatformsLabel.isHidden = false
+            platformTable.isHidden = true
+            noPlatformsText.isHidden = false
         }
         updateEditButton()
     }

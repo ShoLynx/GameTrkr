@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class PlatformCell: UITableViewCell {
+internal final class PlatformCell: UITableViewCell, Cell {
     
     @IBOutlet weak var platformName: UILabel!
     @IBOutlet weak var gamesSub: UILabel!
     
-    func configure(with model: Platform) {
-        platformName.text = model.name
-        gamesSub.text = "Games: \(model.games.count)"
+    override func prepareForReuse() {
+        platformName.text = nil
+        gamesSub.text = nil
     }
 }

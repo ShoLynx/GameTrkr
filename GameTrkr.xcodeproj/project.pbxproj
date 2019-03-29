@@ -17,6 +17,7 @@
 		10656D43224B2FB700340DC0 /* GameTrkrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D42224B2FB700340DC0 /* GameTrkrUITests.swift */; };
 		10656D57224C3B7000340DC0 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D56224C3B7000340DC0 /* Platform.swift */; };
 		10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D58224C3EDA00340DC0 /* PlatformCell.swift */; };
+		10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABB224DA5BD00A7BF0F /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		10656D44224B2FB700340DC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10656D56224C3B7000340DC0 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		10656D58224C3EDA00340DC0 /* PlatformCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformCell.swift; sourceTree = "<group>"; };
+		10FBFABB224DA5BD00A7BF0F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				10656D56224C3B7000340DC0 /* Platform.swift */,
-				10656D58224C3EDA00340DC0 /* PlatformCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +146,8 @@
 		10656D53224B306300340DC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				10FBFAB9224DA54700A7BF0F /* Cells */,
+				10FBFABA224DA58300A7BF0F /* Protocols */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,6 +167,22 @@
 				10656D2B224B2FB600340DC0 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		10FBFAB9224DA54700A7BF0F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				10656D58224C3EDA00340DC0 /* PlatformCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		10FBFABA224DA58300A7BF0F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				10FBFABB224DA5BD00A7BF0F /* Cell.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +321,7 @@
 				10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */,
 				10656D57224C3B7000340DC0 /* Platform.swift in Sources */,
 				10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */,
+				10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

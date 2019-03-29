@@ -10,7 +10,7 @@ import Foundation
 
 struct Platform {
     let name: String
-    let games: [Games]
+    let games: [Games] = []
 }
 
 struct Games {

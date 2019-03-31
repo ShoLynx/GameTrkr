@@ -20,6 +20,7 @@
 		10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABB224DA5BD00A7BF0F /* Cell.swift */; };
 		10FBFABE224DC93600A7BF0F /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABD224DC93600A7BF0F /* GameCell.swift */; };
 		10FBFAC0224DC9F000A7BF0F /* GamesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABF224DC9F000A7BF0F /* GamesController.swift */; };
+		10FBFAC222504AB000A7BF0F /* GameDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFAC122504AB000A7BF0F /* GameDetailsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		10FBFABB224DA5BD00A7BF0F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		10FBFABD224DC93600A7BF0F /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		10FBFABF224DC9F000A7BF0F /* GamesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesController.swift; sourceTree = "<group>"; };
+		10FBFAC122504AB000A7BF0F /* GameDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			children = (
 				10656D21224B2FB200340DC0 /* PlatformController.swift */,
 				10FBFABF224DC9F000A7BF0F /* GamesController.swift */,
+				10FBFAC122504AB000A7BF0F /* GameDetailsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */,
 				10656D57224C3B7000340DC0 /* Platform.swift in Sources */,
 				10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */,
+				10FBFAC222504AB000A7BF0F /* GameDetailsController.swift in Sources */,
 				10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */,
 				10FBFABE224DC93600A7BF0F /* GameCell.swift in Sources */,
 			);

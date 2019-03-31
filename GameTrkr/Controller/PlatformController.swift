@@ -20,7 +20,7 @@ class PlatformController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
-        self.navigationItem.leftBarButtonItem = editButton
+        self.navigationItem.rightBarButtonItem = editButton
         
         noPlatformsText.isHidden = true
         if platforms.isEmpty {
@@ -32,7 +32,7 @@ class PlatformController: UIViewController, UITableViewDataSource {
     
     @objc private func toggleEditing() {
         platformTable.setEditing(!platformTable.isEditing, animated: true)
-        navigationItem.leftBarButtonItem?.title = platformTable.isEditing ? "Done" : "Edit"
+        navigationItem.rightBarButtonItem?.title = platformTable.isEditing ? "Done" : "Edit"
     }
     
     @IBAction func addTapped(sender: Any) {
@@ -56,7 +56,7 @@ class PlatformController: UIViewController, UITableViewDataSource {
     }
     
     func updateEditButton() {
-        navigationItem.leftBarButtonItem?.isEnabled = numberOfPlatforms > 0
+        navigationItem.rightBarButtonItem?.isEnabled = numberOfPlatforms > 0
     }
     
     func newPlatformAlert() {

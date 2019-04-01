@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -127,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
@@ -166,7 +167,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="1300" width="0.0" height="44"/>
                                 <items>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w"/>
                                 </items>
@@ -200,10 +201,10 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
             </objects>
             <point key="canvasLocation" x="979.71014492753636" y="97.767857142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--Game Details Controller-->
         <scene sceneID="ld8-cb-8nF">
             <objects>
-                <viewController id="f60-RZ-aMQ" sceneMemberID="viewController">
+                <viewController id="f60-RZ-aMQ" customClass="GameDetailsController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c9l-py-aoK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,16 +230,36 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem title="Watch Another Video" id="dx6-ZL-dj1"/>
                                         </items>
                                     </toolbar>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Egm-kx-JU6">
+                                        <rect key="frame" x="0.0" y="244" width="414" height="100"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioDigitalOff" translatesAutoresizingMaskIntoConstraints="NO" id="S1L-YM-6G1">
+                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="100"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioHasBoxOff" translatesAutoresizingMaskIntoConstraints="NO" id="xJ6-1f-nue">
+                                                <rect key="frame" x="140.5" y="0.0" width="133" height="100"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioSpecialEditionOff" translatesAutoresizingMaskIntoConstraints="NO" id="vdH-d2-YFn">
+                                                <rect key="frame" x="281.5" y="0.0" width="132.5" height="100"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="vha-lR-z9w"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="YMk-bA-Ml2" secondAttribute="bottom" constant="530" id="35l-01-2Xk"/>
-                                    <constraint firstItem="YMk-bA-Ml2" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="6PF-gO-DNc"/>
-                                    <constraint firstItem="tye-lp-uc9" firstAttribute="centerX" secondItem="xLR-Vj-1ia" secondAttribute="centerX" id="NTW-N2-kuE"/>
-                                    <constraint firstItem="tye-lp-uc9" firstAttribute="top" secondItem="xLR-Vj-1ia" secondAttribute="top" id="XK4-K6-jve"/>
-                                    <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="bSN-fw-pKL"/>
-                                    <constraint firstAttribute="trailing" secondItem="YMk-bA-Ml2" secondAttribute="trailing" id="fel-QH-aAC"/>
-                                    <constraint firstAttribute="trailing" secondItem="tye-lp-uc9" secondAttribute="trailing" id="myA-ky-TBp"/>
-                                    <constraint firstItem="YMk-bA-Ml2" firstAttribute="top" secondItem="tye-lp-uc9" secondAttribute="bottom" id="nmb-C5-4gb"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="05u-tA-Cqs"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="centerX" secondItem="xLR-Vj-1ia" secondAttribute="centerX" id="93q-L1-MRB"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="YMk-bA-Ml2" secondAttribute="leading" id="96q-Tz-kny"/>
+                                    <constraint firstItem="Egm-kx-JU6" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="Ihd-Cf-t9Z"/>
+                                    <constraint firstItem="Egm-kx-JU6" firstAttribute="top" secondItem="YMk-bA-Ml2" secondAttribute="bottom" id="Pia-Ok-7LC"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="top" secondItem="xLR-Vj-1ia" secondAttribute="top" id="REJ-d1-fBy"/>
+                                    <constraint firstAttribute="bottom" secondItem="tye-lp-uc9" secondAttribute="bottom" constant="574" id="TOl-nO-6x2"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="bottom" secondItem="YMk-bA-Ml2" secondAttribute="top" id="i70-KE-ud1"/>
+                                    <constraint firstItem="tye-lp-uc9" firstAttribute="trailing" secondItem="YMk-bA-Ml2" secondAttribute="trailing" id="jmc-Gd-E2s"/>
+                                    <constraint firstAttribute="trailing" secondItem="Egm-kx-JU6" secondAttribute="trailing" id="qlB-gP-hrH"/>
+                                    <constraint firstAttribute="trailing" secondItem="tye-lp-uc9" secondAttribute="trailing" id="y1h-RN-LAl"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -255,7 +276,12 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aug-xT-Grr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815.9420289855075" y="97.767857142857139"/>
+            <point key="canvasLocation" x="1779.7101449275365" y="97.767857142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="RadioDigitalOff" width="516" height="333"/>
+        <image name="RadioHasBoxOff" width="516" height="333"/>
+        <image name="RadioSpecialEditionOff" width="516" height="333"/>
+    </resources>
 </document>

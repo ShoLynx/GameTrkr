@@ -11,6 +11,9 @@ import UIKit
 
 class GameDetailsController: UIViewController {
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

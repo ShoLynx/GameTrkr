@@ -21,6 +21,7 @@
 		10FBFABE224DC93600A7BF0F /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABD224DC93600A7BF0F /* GameCell.swift */; };
 		10FBFAC0224DC9F000A7BF0F /* GamesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABF224DC9F000A7BF0F /* GamesController.swift */; };
 		10FBFAC222504AB000A7BF0F /* GameDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFAC122504AB000A7BF0F /* GameDetailsController.swift */; };
+		10FBFAC422519C9A00A7BF0F /* GamePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFAC322519C9A00A7BF0F /* GamePhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		10FBFABD224DC93600A7BF0F /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		10FBFABF224DC9F000A7BF0F /* GamesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesController.swift; sourceTree = "<group>"; };
 		10FBFAC122504AB000A7BF0F /* GameDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsController.swift; sourceTree = "<group>"; };
+		10FBFAC322519C9A00A7BF0F /* GamePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			children = (
 				10656D58224C3EDA00340DC0 /* PlatformCell.swift */,
 				10FBFABD224DC93600A7BF0F /* GameCell.swift */,
+				10FBFAC322519C9A00A7BF0F /* GamePhotoCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				10656D20224B2FB200340DC0 /* AppDelegate.swift in Sources */,
 				10FBFAC222504AB000A7BF0F /* GameDetailsController.swift in Sources */,
 				10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */,
+				10FBFAC422519C9A00A7BF0F /* GamePhotoCell.swift in Sources */,
 				10FBFABE224DC93600A7BF0F /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

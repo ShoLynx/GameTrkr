@@ -128,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
@@ -167,7 +167,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="1300" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w"/>
                                 </items>
@@ -247,19 +247,87 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <constraint firstAttribute="height" constant="100" id="vha-lR-z9w"/>
                                         </constraints>
                                     </stackView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tJI-gI-eGF">
+                                        <rect key="frame" x="0.0" y="344" width="414" height="120"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="120" id="Llu-s5-8Wx"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b0g-Yo-0hr">
+                                            <size key="itemSize" width="114" height="120"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your image collection is empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="reZ-FN-dkH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GamePhotoCell" id="7II-b1-FiJ" customClass="GamePhotoCell" customModule="GameTrkr" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="114" height="120"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="120"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sVr-Bz-woP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="114" height="120"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                </view>
+                                                <connections>
+                                                    <outlet property="gameImage" destination="sVr-Bz-woP" id="p3D-zZ-ATo"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpy-x1-imQ">
+                                        <rect key="frame" x="0.0" y="464" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="DxB-Bl-vUT"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Add New Photo" id="taG-0E-ceL"/>
+                                            <barButtonItem systemItem="edit" id="f12-Nn-RTE"/>
+                                        </items>
+                                    </toolbar>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LZK-sE-Oah">
+                                        <rect key="frame" x="0.0" y="508" width="414" height="170"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="170" id="0gF-vq-u2M"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="05u-tA-Cqs"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="centerX" secondItem="xLR-Vj-1ia" secondAttribute="centerX" id="93q-L1-MRB"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="YMk-bA-Ml2" secondAttribute="leading" id="96q-Tz-kny"/>
                                     <constraint firstItem="Egm-kx-JU6" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="Ihd-Cf-t9Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="LZK-sE-Oah" secondAttribute="trailing" id="KnO-AV-eaE"/>
                                     <constraint firstItem="Egm-kx-JU6" firstAttribute="top" secondItem="YMk-bA-Ml2" secondAttribute="bottom" id="Pia-Ok-7LC"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="top" secondItem="xLR-Vj-1ia" secondAttribute="top" id="REJ-d1-fBy"/>
                                     <constraint firstAttribute="bottom" secondItem="tye-lp-uc9" secondAttribute="bottom" constant="574" id="TOl-nO-6x2"/>
+                                    <constraint firstItem="LZK-sE-Oah" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="UFh-uY-zeP"/>
+                                    <constraint firstAttribute="trailing" secondItem="zpy-x1-imQ" secondAttribute="trailing" id="bep-sn-IVG"/>
+                                    <constraint firstAttribute="trailing" secondItem="tJI-gI-eGF" secondAttribute="trailing" id="bjt-nm-4fl"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="bottom" secondItem="YMk-bA-Ml2" secondAttribute="top" id="i70-KE-ud1"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="trailing" secondItem="YMk-bA-Ml2" secondAttribute="trailing" id="jmc-Gd-E2s"/>
+                                    <constraint firstItem="zpy-x1-imQ" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="m5A-tW-jKd"/>
+                                    <constraint firstItem="LZK-sE-Oah" firstAttribute="top" secondItem="zpy-x1-imQ" secondAttribute="bottom" id="pO7-UA-yej"/>
                                     <constraint firstAttribute="trailing" secondItem="Egm-kx-JU6" secondAttribute="trailing" id="qlB-gP-hrH"/>
+                                    <constraint firstItem="zpy-x1-imQ" firstAttribute="top" secondItem="tJI-gI-eGF" secondAttribute="bottom" id="v1B-Vb-Fpt"/>
+                                    <constraint firstItem="tJI-gI-eGF" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="vVB-R4-gHb"/>
                                     <constraint firstAttribute="trailing" secondItem="tye-lp-uc9" secondAttribute="trailing" id="y1h-RN-LAl"/>
+                                    <constraint firstItem="tJI-gI-eGF" firstAttribute="top" secondItem="Egm-kx-JU6" secondAttribute="bottom" id="yRy-Df-xzS"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

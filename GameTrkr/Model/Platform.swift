@@ -10,15 +10,21 @@ import Foundation
 
 struct Platform {
     let name: String
-    let games: [Games] = []
+    let games: [Game] = []
 }
 
-struct Games {
+struct Game {
     let name: String
     let isDigital: Bool
     let hasBox: Bool
-    let specialEdition: Bool
+    let isSpecialEdition: Bool
     //need variable for photo group
+    let photos: [Photo]
     //need variable for YouTube video
+    let youTubeURL: String
     let description: String
+}
+
+struct Photo {
+    //need variable fo
 }

@@ -19,10 +19,10 @@ struct Game {
     let hasBox: Bool
     let isSpecialEdition: Bool
     //need variable for photo group
-    let photos: [Photo]
+    let photos: [Photo]?
     //need variable for YouTube video
-    let youTubeURL: String
-    let description: String
+    let youTubeURL: String?
+    let description: String?
 }
 
 struct Photo {

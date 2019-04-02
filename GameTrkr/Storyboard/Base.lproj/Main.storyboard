@@ -227,7 +227,9 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="ywC-Ch-oqt"/>
                                         </constraints>
                                         <items>
-                                            <barButtonItem title="Watch Another Video" id="dx6-ZL-dj1"/>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="qSx-8J-XeK"/>
+                                            <barButtonItem title="Watch Another Video" width="200" id="dx6-ZL-dj1"/>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="KIx-5L-MZe"/>
                                         </items>
                                     </toolbar>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Egm-kx-JU6">
@@ -292,8 +294,13 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <constraint firstAttribute="height" constant="44" id="DxB-Bl-vUT"/>
                                         </constraints>
                                         <items>
-                                            <barButtonItem title="Add New Photo" id="taG-0E-ceL"/>
-                                            <barButtonItem title="Remove Photos" id="f12-Nn-RTE"/>
+                                            <barButtonItem title="Add New Photo" width="100" id="taG-0E-ceL"/>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="vnJ-cO-9Uy"/>
+                                            <barButtonItem title="Remove Photos" width="100" id="f12-Nn-RTE">
+                                                <connections>
+                                                    <action selector="toggleEditing:" destination="f60-RZ-aMQ" id="peE-Aa-jgE"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                     </toolbar>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZK-sE-Oah">
@@ -347,6 +354,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="addNewPhotoButton" destination="taG-0E-ceL" id="eCL-sq-j01"/>
                         <outlet property="deletePhotoButton" destination="f12-Nn-RTE" id="Cau-Ul-uNg"/>
                         <outlet property="digitalRadio" destination="S1L-YM-6G1" id="tlj-G2-UDR"/>
+                        <outlet property="editButton" destination="yUL-QB-qrY" id="X8l-id-zRe"/>
                         <outlet property="emptyImageCollectionLabel" destination="reZ-FN-dkH" id="nYy-ZY-Bgg"/>
                         <outlet property="gameDescription" destination="LZK-sE-Oah" id="BU0-b2-gNT"/>
                         <outlet property="gameImageCollection" destination="tJI-gI-eGF" id="EKy-at-Cjl"/>

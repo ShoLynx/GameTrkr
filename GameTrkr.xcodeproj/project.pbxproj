@@ -19,6 +19,7 @@
 		10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10656D58224C3EDA00340DC0 /* PlatformCell.swift */; };
 		10A9C1502251D18900C7A4E8 /* GameImageDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9C14F2251D18900C7A4E8 /* GameImageDetailController.swift */; };
 		10A9C1522251D3E800C7A4E8 /* GameDetailsEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9C1512251D3E800C7A4E8 /* GameDetailsEditController.swift */; };
+		10A9C1542252AA6700C7A4E8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9C1532252AA6700C7A4E8 /* Game.swift */; };
 		10FBFABC224DA5BD00A7BF0F /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABB224DA5BD00A7BF0F /* Cell.swift */; };
 		10FBFABE224DC93600A7BF0F /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABD224DC93600A7BF0F /* GameCell.swift */; };
 		10FBFAC0224DC9F000A7BF0F /* GamesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FBFABF224DC9F000A7BF0F /* GamesController.swift */; };
@@ -62,6 +63,7 @@
 		10656D58224C3EDA00340DC0 /* PlatformCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformCell.swift; sourceTree = "<group>"; };
 		10A9C14F2251D18900C7A4E8 /* GameImageDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameImageDetailController.swift; sourceTree = "<group>"; };
 		10A9C1512251D3E800C7A4E8 /* GameDetailsEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailsEditController.swift; sourceTree = "<group>"; };
+		10A9C1532252AA6700C7A4E8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		10FBFABB224DA5BD00A7BF0F /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		10FBFABD224DC93600A7BF0F /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		10FBFABF224DC9F000A7BF0F /* GamesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				10656D56224C3B7000340DC0 /* Platform.swift */,
+				10A9C1532252AA6700C7A4E8 /* Game.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				10656D22224B2FB200340DC0 /* PlatformController.swift in Sources */,
 				10FBFAC0224DC9F000A7BF0F /* GamesController.swift in Sources */,
 				10656D28224B2FB200340DC0 /* GameTrkr.xcdatamodeld in Sources */,
+				10A9C1542252AA6700C7A4E8 /* Game.swift in Sources */,
 				10656D59224C3EDA00340DC0 /* PlatformCell.swift in Sources */,
 				10A9C1522251D3E800C7A4E8 /* GameDetailsEditController.swift in Sources */,
 				10A9C1502251D18900C7A4E8 /* GameImageDetailController.swift in Sources */,
@@ -521,6 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RDLDA5X9X8;
 				INFOPLIST_FILE = GameTrkr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,6 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RDLDA5X9X8;
 				INFOPLIST_FILE = GameTrkr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

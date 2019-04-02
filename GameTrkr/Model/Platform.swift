@@ -7,24 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
-struct Platform {
+class Platform {
     let name: String
-    let games: [Game] = []
-}
-
-struct Game {
-    let name: String
-    let isDigital: Bool
-    let hasBox: Bool
-    let isSpecialEdition: Bool
-    //need variable for photo group
-    let photos: [Photo]?
-    //need variable for YouTube video
-    let youTubeURL: String?
-    let description: String?
-}
-
-struct Photo {
-    //need variable fo
+    var games: [Game] = []
+    
+    init(name: String) {
+        self.name = name
+        games = []
+    }
 }

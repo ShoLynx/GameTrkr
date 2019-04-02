@@ -49,7 +49,7 @@ class PlatformController: UIViewController, UITableViewDataSource {
     func deletePlatform(at indexPath: IndexPath) {
         platforms.remove(at: indexPath.row)
         platformTable.deleteRows(at: [indexPath], with: .fade)
-        if platforms.count == 0 {
+        if numberOfPlatforms == 0 {
             setEditing(false, animated: true)
         }
         updateEditButton()

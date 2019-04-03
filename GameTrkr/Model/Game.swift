@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class Game {
-    let name: String
-    let isDigital: Bool
-    let hasBox: Bool
-    let isSpecialEdition: Bool
+    var name: String
+    var isDigital: Bool
+    var hasBox: Bool
+    var isSpecialEdition: Bool
     var photos: [Photo] = []
-    let youTubeURL: String?
-    let description: String?
+    var youTubeURL: String?
+    var description: String?
     
     init(name: String) {
         self.name = name

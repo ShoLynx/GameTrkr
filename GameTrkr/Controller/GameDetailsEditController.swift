@@ -20,33 +20,39 @@ class GameDetailsEditController: UIViewController {
     @IBOutlet weak var descriptionText: UITextView!
     
     var game: Game! //selected game from indexPath
+    let gameDetails = GameDetailsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = game.name
+        youTubeField.isEnabled = false
+        descriptionText.isEditable = false
         
         defaultVideoSwitch.isOn = false
         if defaultVideoSwitch.isOn {
-            //game.youTubeURL = youTubeField.text ?? ""
+            youTubeField.isEnabled = true
+            game.youTubeURL = youTubeField.text ?? ""
+            
         }
         digitalSwitch.isOn = false
         if digitalSwitch.isOn {
-            //game.isDigital = true
+            game.isDigital = true
         }
         hasBoxSwitch.isOn = false
         if digitalSwitch.isOn {
-            //game.hasBox = true
+            game.hasBox = true
         }
         specialEditionSwitch.isOn = false
         if specialEditionSwitch.isOn {
-            //game.isSpecialEdition = true
+            game.isSpecialEdition = true
         }
         
         addDescriptionSwitch.isOn = false
         if addDescriptionSwitch.isOn {
             descriptionText.isEditable = true
-            //game.description = descriptionText.text
+            gameDetails.hasDescription = true
+            game.description = descriptionText.text
         }
     }
 }

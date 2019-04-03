@@ -62,6 +62,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         gameDescription.isHidden = true
         if hasDescription {
             gameDescription.isHidden = false
+            gameDescription.text = game.description
         }
         
         updateDeleteButton()

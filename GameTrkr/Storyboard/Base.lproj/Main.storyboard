@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vRl-eI-I40">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,7 +16,7 @@
             <objects>
                 <navigationController id="vRl-eI-I40" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OaW-bg-aPK">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -32,29 +32,29 @@
             <objects>
                 <viewController id="SmP-sQ-Tbq" customClass="PlatformController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUE-jh-vj7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63H-Kv-q70">
-                                <rect key="frame" x="0.0" y="64" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlatformCell" textLabel="waD-Ug-QCo" detailTextLabel="s3L-EE-teJ" style="IBUITableViewCellStyleSubtitle" id="Ks4-Tb-mNs" customClass="PlatformCell" customModule="GameTrkr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ks4-Tb-mNs" id="MFd-Ba-GWJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="waD-Ug-QCo">
-                                                    <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s3L-EE-teJ">
-                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -70,7 +70,7 @@
                                 </prototypes>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIk-5u-ebC">
-                                <rect key="frame" x="20" y="284" width="374" height="168"/>
+                                <rect key="frame" x="20" y="249.5" width="335" height="168"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="168" id="09d-0y-zCI"/>
@@ -82,13 +82,15 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="tdc-l5-3b2">
-                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cas-TU-6Pw"/>
                                     <barButtonItem title="Add New Platform" id="4NQ-E7-kKj">
                                         <connections>
                                             <action selector="addTappedWithSender:" destination="SmP-sQ-Tbq" id="CIJ-GC-Qch"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GCZ-Wu-bTL"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -124,22 +126,22 @@
             <objects>
                 <viewController id="tBg-60-Mfv" customClass="GamesController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hnG-p9-Law">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="64" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TPG-e7-Qkx" id="Zy2-xc-MAw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HVn-S7-J6e">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -154,7 +156,7 @@
                                 </prototypes>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-7Z-Tcs">
-                                <rect key="frame" x="20" y="293" width="374" height="150"/>
+                                <rect key="frame" x="20" y="258.5" width="335" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="42X-Q7-FxG"/>
@@ -167,9 +169,11 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Md9-Qg-Vp6"/>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eF6-DR-I5E"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -206,14 +210,14 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
             <objects>
                 <viewController id="f60-RZ-aMQ" customClass="GameDetailsController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c9l-py-aoK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLR-Vj-1ia">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tye-lp-uc9">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="5FF-vu-06T"/>
@@ -221,7 +225,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">
-                                        <rect key="frame" x="0.0" y="200" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="200" width="375" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uYa-zX-zwb"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="ywC-Ch-oqt"/>
@@ -233,16 +237,16 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </items>
                                     </toolbar>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Egm-kx-JU6">
-                                        <rect key="frame" x="0.0" y="244" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="244" width="375" height="100"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioDigitalOff" translatesAutoresizingMaskIntoConstraints="NO" id="S1L-YM-6G1">
-                                                <rect key="frame" x="0.0" y="0.0" width="132.66666666666666" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="100"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioHasBoxOff" translatesAutoresizingMaskIntoConstraints="NO" id="xJ6-1f-nue">
-                                                <rect key="frame" x="140.66666666666669" y="0.0" width="132.66666666666669" height="100"/>
+                                                <rect key="frame" x="127.5" y="0.0" width="120" height="100"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioSpecialEditionOff" translatesAutoresizingMaskIntoConstraints="NO" id="vdH-d2-YFn">
-                                                <rect key="frame" x="281.33333333333331" y="0.0" width="132.66666666666669" height="100"/>
+                                                <rect key="frame" x="255.5" y="0.0" width="119.5" height="100"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -250,7 +254,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tJI-gI-eGF">
-                                        <rect key="frame" x="0.0" y="344" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="344" width="375" height="120"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="Llu-s5-8Wx"/>
@@ -262,7 +266,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your image collection is empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="reZ-FN-dkH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -289,7 +293,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </cells>
                                     </collectionView>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpy-x1-imQ">
-                                        <rect key="frame" x="0.0" y="464" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="464" width="375" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="DxB-Bl-vUT"/>
                                         </constraints>
@@ -304,7 +308,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </items>
                                     </toolbar>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZK-sE-Oah">
-                                        <rect key="frame" x="0.0" y="508" width="414" height="170"/>
+                                        <rect key="frame" x="0.0" y="508" width="375" height="170"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="0gF-vq-u2M"/>
@@ -375,161 +379,154 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
             <objects>
                 <viewController id="hd0-LW-aIc" customClass="GameDetailsEditController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dXi-cE-hFt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3b-uJ-uiS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube share URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
-                                        <rect key="frame" x="8" y="52" width="398.33333333333331" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="216" translatesAutoresizingMaskIntoConstraints="NO" id="IBt-ni-fSq">
-                                        <rect key="frame" x="8" y="0.0" width="398.33333333333331" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Default Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GY-OM-ncF">
-                                                <rect key="frame" x="0.0" y="0.0" width="133.33333333333334" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGF-du-hRR">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="51" height="44"/>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Otj-2o-lE3"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="245" translatesAutoresizingMaskIntoConstraints="NO" id="Xcp-Ol-zwG">
-                                        <rect key="frame" x="8" y="104" width="398.33333333333331" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Digital game?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtQ-GC-0zz">
-                                                <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfB-c6-o4e">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="51" height="44"/>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="fst-i3-ZZe"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="183" translatesAutoresizingMaskIntoConstraints="NO" id="DIf-KW-VLT">
-                                        <rect key="frame" x="8" y="148" width="398.33333333333331" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have box/paperwork?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTx-I7-8d1">
-                                                <rect key="frame" x="0.0" y="0.0" width="166.33333333333334" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4qK-vA-Pqi">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="51" height="44"/>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="SAH-vo-3QB"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="220" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-tf-KCl">
-                                        <rect key="frame" x="8" y="192" width="398.33333333333331" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special Edition?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-PN-mYL">
-                                                <rect key="frame" x="0.0" y="0.0" width="129.33333333333334" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pc4-4d-brd">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="51" height="44"/>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="VCW-Og-lTi"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="210" translatesAutoresizingMaskIntoConstraints="NO" id="TPY-m7-kC0">
-                                        <rect key="frame" x="8" y="236" width="398.33333333333331" height="44"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Description?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbS-AR-AAX">
-                                                <rect key="frame" x="0.0" y="0.0" width="139.33333333333334" height="44"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7T-Rq-FJH">
-                                                <rect key="frame" x="349.33333333333331" y="0.0" width="51" height="44"/>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="biH-0X-MzU"/>
-                                        </constraints>
-                                    </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a description for your game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bLa-rX-ecG">
-                                        <rect key="frame" x="8" y="288" width="398.33333333333331" height="185"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="185" id="v7N-Bj-lau"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                </subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube share URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
+                                <rect key="frame" x="8" y="116" width="359" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="bLa-rX-ecG" secondAttribute="trailing" constant="8" id="6Tw-ZN-Eco"/>
-                                    <constraint firstItem="TPY-m7-kC0" firstAttribute="top" secondItem="Yah-tf-KCl" secondAttribute="bottom" id="7hd-tN-KQ9"/>
-                                    <constraint firstItem="bLa-rX-ecG" firstAttribute="top" secondItem="TPY-m7-kC0" secondAttribute="bottom" constant="8" id="8eS-Ru-bOW"/>
-                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="top" secondItem="IBt-ni-fSq" secondAttribute="bottom" constant="8" id="BGr-4p-h6M"/>
-                                    <constraint firstItem="Yah-tf-KCl" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="Jdm-7e-5tQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="bLa-rX-ecG" secondAttribute="bottom" constant="199" id="RUe-2u-iiD"/>
-                                    <constraint firstAttribute="trailing" secondItem="DIf-KW-VLT" secondAttribute="trailing" constant="8" id="Tqj-Nn-4Vk"/>
-                                    <constraint firstItem="bLa-rX-ecG" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="Wbn-em-e7J"/>
-                                    <constraint firstAttribute="trailing" secondItem="IBt-ni-fSq" secondAttribute="trailing" constant="8" id="Wxb-Z0-Mw2"/>
-                                    <constraint firstAttribute="trailing" secondItem="Yah-tf-KCl" secondAttribute="trailing" constant="8" id="Z58-iO-qz0"/>
-                                    <constraint firstAttribute="trailing" secondItem="fCo-fO-zSz" secondAttribute="trailing" constant="8" id="cMC-8P-I59"/>
-                                    <constraint firstItem="DIf-KW-VLT" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="ePo-Gj-AH1"/>
-                                    <constraint firstItem="Yah-tf-KCl" firstAttribute="top" secondItem="DIf-KW-VLT" secondAttribute="bottom" id="gXx-GC-BTF"/>
-                                    <constraint firstItem="IBt-ni-fSq" firstAttribute="top" secondItem="x3b-uJ-uiS" secondAttribute="top" id="iwt-Vi-y9o"/>
-                                    <constraint firstItem="TPY-m7-kC0" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="jyw-ln-vA2"/>
-                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="paQ-fW-yD3"/>
-                                    <constraint firstAttribute="trailing" secondItem="Xcp-Ol-zwG" secondAttribute="trailing" constant="8" id="qe4-kv-rqT"/>
-                                    <constraint firstItem="IBt-ni-fSq" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="rLQ-Zs-Sv2"/>
-                                    <constraint firstAttribute="trailing" secondItem="TPY-m7-kC0" secondAttribute="trailing" constant="8" id="rbh-SM-OJQ"/>
-                                    <constraint firstItem="Xcp-Ol-zwG" firstAttribute="leading" secondItem="x3b-uJ-uiS" secondAttribute="leading" constant="8" id="s9e-gw-SoK"/>
-                                    <constraint firstItem="DIf-KW-VLT" firstAttribute="top" secondItem="Xcp-Ol-zwG" secondAttribute="bottom" id="sxb-cg-f28"/>
-                                    <constraint firstAttribute="trailing" secondItem="bLa-rX-ecG" secondAttribute="trailing" constant="8" id="vvw-Et-3zQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="TPY-m7-kC0" secondAttribute="trailing" constant="8" id="xlE-lj-emR"/>
-                                    <constraint firstItem="Xcp-Ol-zwG" firstAttribute="top" secondItem="fCo-fO-zSz" secondAttribute="bottom" constant="8" id="ykh-76-SD8"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="oXc-w6-d12"/>
+                                    <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>
                                 </constraints>
-                            </scrollView>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-DL-6zZ">
+                                <rect key="frame" x="0.0" y="-5" width="336" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="TeP-gR-2EL"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Set Default Video" id="JTh-dX-a6D">
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="ysZ-us-BUO"/>
+                                    <barButtonItem style="plain" id="jUB-Ee-z9F">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="hGF-du-hRR">
+                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trr-ZW-vTf">
+                                <rect key="frame" x="0.0" y="99" width="336" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="G2Q-gn-UQS"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Is this a digital game?" id="zb3-Pn-wBy">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ySa-gd-agY"/>
+                                    <barButtonItem style="plain" id="OeX-uy-oPm">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="eTc-Gc-ecS">
+                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sW5-uS-u0f">
+                                <rect key="frame" x="0.0" y="143" width="336" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="eG1-ia-WDQ"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Have box/paperwork?" id="aBZ-vy-Qek">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wU7-jP-L4X"/>
+                                    <barButtonItem style="plain" id="vcJ-XD-K2Y">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="4qK-vA-Pqi">
+                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JW-3n-aLC">
+                                <rect key="frame" x="0.0" y="187" width="336" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cev-bl-V4l"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Special/collectors edition?" id="StC-oQ-Naf">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Qgz-zn-Fe9"/>
+                                    <barButtonItem style="plain" id="in1-vN-OSa">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="Pc4-4d-brd">
+                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLP-K0-Nby">
+                                <rect key="frame" x="0.0" y="231" width="336" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="w8H-xT-JkU"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Add a description?" id="ShC-kA-D68">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9cT-zQ-WHc"/>
+                                    <barButtonItem style="plain" id="EEd-Zk-S1l">
+                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="c7T-Rq-FJH">
+                                            <rect key="frame" x="308" y="6.5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </switch>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a description for your game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bLa-rX-ecG">
+                                <rect key="frame" x="8" y="344" width="359" height="185"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="185" id="01c-6L-Koj"/>
+                                    <constraint firstAttribute="height" constant="185" id="v7N-Bj-lau"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="7zH-9B-hA6"/>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="centerX" secondItem="dXi-cE-hFt" secondAttribute="centerX" id="8Zj-dj-ePq"/>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="dkw-is-6mV"/>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="top" secondItem="dXi-cE-hFt" secondAttribute="top" id="hru-80-DUV"/>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="bottom" secondItem="yuI-YI-vGZ" secondAttribute="bottom" id="sUR-ai-hI9"/>
-                            <constraint firstItem="x3b-uJ-uiS" firstAttribute="centerY" secondItem="dXi-cE-hFt" secondAttribute="centerY" id="sxm-KG-I9h"/>
+                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="fCo-fO-zSz" secondAttribute="trailing" constant="8" id="1ZC-9F-ZVc"/>
+                            <constraint firstItem="fCo-fO-zSz" firstAttribute="top" secondItem="EnQ-DL-6zZ" secondAttribute="bottom" constant="8" id="Fbo-0P-Jgt"/>
+                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="JxI-Nz-yJo"/>
+                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="leading" secondItem="dXi-cE-hFt" secondAttribute="leading" id="MDn-aS-sA4"/>
+                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="top" secondItem="fCo-fO-zSz" secondAttribute="bottom" constant="8" id="Mas-04-DYy"/>
+                            <constraint firstItem="bLa-rX-ecG" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" constant="8" id="NzQ-Dy-dX9"/>
+                            <constraint firstItem="sW5-uS-u0f" firstAttribute="top" secondItem="Trr-ZW-vTf" secondAttribute="bottom" id="QSu-xj-8Bo"/>
+                            <constraint firstItem="5JW-3n-aLC" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="VEi-oo-Irz"/>
+                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="Wg2-Vp-rkH"/>
+                            <constraint firstItem="sW5-uS-u0f" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="YYB-OO-lMe"/>
+                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="EnQ-DL-6zZ" secondAttribute="trailing" id="Ziw-bY-xHN"/>
+                            <constraint firstItem="bLa-rX-ecG" firstAttribute="top" secondItem="KLP-K0-Nby" secondAttribute="bottom" id="a5J-V3-1Ph"/>
+                            <constraint firstItem="KLP-K0-Nby" firstAttribute="top" secondItem="5JW-3n-aLC" secondAttribute="bottom" id="aAE-fP-uYs"/>
+                            <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" constant="8" id="ar6-jA-e0c"/>
+                            <constraint firstItem="5JW-3n-aLC" firstAttribute="top" secondItem="sW5-uS-u0f" secondAttribute="bottom" id="c8M-UT-pq1"/>
+                            <constraint firstItem="sW5-uS-u0f" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="d2j-Db-haJ"/>
+                            <constraint firstItem="KLP-K0-Nby" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="f3G-yE-eVc"/>
+                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="top" secondItem="yuI-YI-vGZ" secondAttribute="top" id="iLv-NL-HDa"/>
+                            <constraint firstItem="5JW-3n-aLC" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="mpR-9l-SA5"/>
+                            <constraint firstItem="KLP-K0-Nby" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="re7-Qj-3gA"/>
+                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="bLa-rX-ecG" secondAttribute="trailing" constant="8" id="xB3-1b-FNV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yuI-YI-vGZ"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="YhR-iL-Z7A"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addDescriptionSwitch" destination="c7T-Rq-FJH" id="JBu-fW-Uav"/>
                         <outlet property="defaultVideoSwitch" destination="hGF-du-hRR" id="I8q-LE-5QR"/>
                         <outlet property="descriptionText" destination="bLa-rX-ecG" id="Zfw-QO-AyG"/>
-                        <outlet property="digitalSwitch" destination="OfB-c6-o4e" id="dSK-93-jHd"/>
+                        <outlet property="digitalSwitch" destination="eTc-Gc-ecS" id="gC9-6S-sJa"/>
                         <outlet property="hasBoxSwitch" destination="4qK-vA-Pqi" id="SLh-fU-YsX"/>
                         <outlet property="specialEditionSwitch" destination="Pc4-4d-brd" id="0x0-pH-oy3"/>
                         <outlet property="youTubeField" destination="fCo-fO-zSz" id="yku-Ev-idq"/>
@@ -544,11 +541,11 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
             <objects>
                 <viewController id="JDs-aX-KrJ" customClass="GameImageDetailController" customModule="GameTrkr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E2Y-tR-6Y1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SsH-DX-cGe">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -11,6 +11,7 @@ import UIKit
 
 class GameDetailsEditController: UIViewController {
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var defaultVideoSwitch: UISwitch!
     @IBOutlet weak var youTubeField: UITextField!
     @IBOutlet weak var digitalSwitch: UISwitch!
@@ -19,30 +20,34 @@ class GameDetailsEditController: UIViewController {
     @IBOutlet weak var addDescriptionSwitch: UISwitch!
     @IBOutlet weak var descriptionText: UITextView!
     
-    var game: Game! //selected game from indexPath
+    var platform: Platform!
+    var game: Game!
     let gameDetails = GameDetailsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = game.name
+        navigationItem.title = platform.name + " " + game.name
         youTubeField.isEnabled = false
         descriptionText.isEditable = false
         
         defaultVideoSwitch.isOn = false
         if defaultVideoSwitch.isOn {
             youTubeField.isEnabled = true
-            game.youTubeURL = youTubeField.text ?? ""
-            
+            gameDetails.hasDefaultYoutubeURL = true
+            game.youtubeURL = youTubeField.text ?? ""
         }
+        
         digitalSwitch.isOn = false
         if digitalSwitch.isOn {
             game.isDigital = true
         }
+        
         hasBoxSwitch.isOn = false
         if digitalSwitch.isOn {
             game.hasBox = true
         }
+        
         specialEditionSwitch.isOn = false
         if specialEditionSwitch.isOn {
             game.isSpecialEdition = true
@@ -52,7 +57,12 @@ class GameDetailsEditController: UIViewController {
         if addDescriptionSwitch.isOn {
             descriptionText.isEditable = true
             gameDetails.hasDescription = true
-            game.description = descriptionText.text
+            game.gameText = descriptionText.text
         }
+        
+    }
+    
+    @IBAction func exitEdit(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }

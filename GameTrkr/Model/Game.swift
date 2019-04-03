@@ -15,8 +15,8 @@ class Game {
     var hasBox: Bool
     var isSpecialEdition: Bool
     var photos: [Photo] = []
-    var youTubeURL: String?
-    var description: String?
+    var youtubeURL: String?
+    var gameText: String?
     
     init(name: String) {
         self.name = name
@@ -24,8 +24,8 @@ class Game {
         hasBox = false
         isSpecialEdition = false
         photos = []
-        youTubeURL = nil
-        description = nil
+        youtubeURL = nil
+        gameText = nil
     }
 }
 

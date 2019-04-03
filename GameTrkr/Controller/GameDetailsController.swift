@@ -24,19 +24,22 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var gameDescription: UITextView!
     
     var youtubeURL: String!
-    var isDigital: Bool!
-    var hasBox: Bool!
-    var isSpecialEdition: Bool!
+    var hasDefaultYoutubeURL: Bool!
     var gameImages: [UIImage] = []
     var hasDescription: Bool!
+    var platform: Platform!
     var game: Game!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = game.name
+        navigationItem.title = platform.name + " " + game.name
         
+        hasDefaultYoutubeURL = false
         //need default youtubeURL to be search with Platform and Game
+        if hasDefaultYoutubeURL {
+            //apply game.youtubeURL to player
+        }
         
         digitalRadio.image = UIImage(named: "RadioDigitalOff")
         if game.isDigital {
@@ -62,7 +65,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         gameDescription.isHidden = true
         if hasDescription {
             gameDescription.isHidden = false
-            gameDescription.text = game.description
+            gameDescription.text = game.gameText
         }
         
         updateDeleteButton()

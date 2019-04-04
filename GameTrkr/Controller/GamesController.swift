@@ -66,6 +66,9 @@ class GamesController: UIViewController {
     }
     
     func deleteGame(at indexPath: IndexPath) {
+        let gameToDelete = game(at: indexPath)
+        dataController.viewContext.delete(gameToDelete)
+        try? dataController.viewContext.save()
         games.remove(at: indexPath.row)
         gameTable.deleteRows(at: [indexPath], with: .fade)
         if numberOfGames == 0 {

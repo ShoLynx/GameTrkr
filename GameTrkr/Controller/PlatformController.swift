@@ -9,18 +9,20 @@
 import UIKit
 import CoreData
 
-class PlatformController: UIViewController, UITableViewDataSource {
+class PlatformController: UIViewController {
     
     @IBOutlet weak var platformTable: UITableView!
     @IBOutlet weak var noPlatformsText: UITextView!
     @IBOutlet weak var addPlatformButton: UIBarButtonItem!
     
     var platforms: [Platform] = []
-    
     var dataController: DataController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        platformTable.dataSource = self
+        platformTable.delegate = self
         
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
@@ -33,12 +35,8 @@ class PlatformController: UIViewController, UITableViewDataSource {
             platformTable.reloadData()
         }
         
-        noPlatformsText.isHidden = true
-        if platforms.isEmpty {
-            platformTable.isHidden = true
-            noPlatformsText.isHidden = false
-        }
         updateEditButton()
+        updateEmptyText()
     }
     
     @objc private func toggleEditing() {
@@ -57,19 +55,36 @@ class PlatformController: UIViewController, UITableViewDataSource {
         try? dataController.viewContext.save()
         platformTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         updateEditButton()
+        updateEmptyText()
+        platformTable.reloadData()
     }
     
     func deletePlatform(at indexPath: IndexPath) {
+        let platformToDelete = platform(at: indexPath)
+        dataController.viewContext.delete(platformToDelete)
+        try? dataController.viewContext.save()
         platforms.remove(at: indexPath.row)
         platformTable.deleteRows(at: [indexPath], with: .fade)
         if numberOfPlatforms == 0 {
             setEditing(false, animated: true)
         }
+        
         updateEditButton()
+        updateEmptyText()
+        platformTable.reloadData()
     }
     
     func updateEditButton() {
         navigationItem.rightBarButtonItem?.isEnabled = numberOfPlatforms > 0
+    }
+    
+    func updateEmptyText() {
+        if platforms.isEmpty {
+            platformTable.isHidden = true
+            noPlatformsText.isHidden = false
+        } else {
+            noPlatformsText.isHidden = true
+        }
     }
     
     func newPlatformAlert() {
@@ -97,6 +112,19 @@ class PlatformController: UIViewController, UITableViewDataSource {
         present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GamesController {
+            if let indexPath = platformTable.indexPathForSelectedRow {
+                destinationVC.platform = platform(at: indexPath)
+                destinationVC.dataController = dataController
+            }
+        }
+    }
+    
+}
+
+extension PlatformController: UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -112,14 +140,18 @@ class PlatformController: UIViewController, UITableViewDataSource {
         if let count = iPlatform.games?.count {
             cell.gamesSub.text = "Games: \(count)"
         }
+        
         cell.platformName.text = iPlatform.name
         
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //segue to selected platform's Games controller
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete: deletePlatform(at: indexPath)
+        default: ()
+        }
     }
     
     func platform(at indexPath: IndexPath) -> Platform {

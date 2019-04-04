@@ -114,7 +114,7 @@
                         <outlet property="addPlatformButton" destination="4NQ-E7-kKj" id="U4K-hY-tc5"/>
                         <outlet property="noPlatformsText" destination="IIk-5u-ebC" id="Jhb-ep-s0f"/>
                         <outlet property="platformTable" destination="63H-Kv-q70" id="g8z-bK-2Lh"/>
-                        <segue destination="tBg-60-Mfv" kind="push" id="Sad-bw-bkV"/>
+                        <segue destination="tBg-60-Mfv" kind="push" identifier="toGamesController" id="Sad-bw-bkV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mgh-um-Owh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -381,20 +381,161 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube share URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
-                                <rect key="frame" x="8" y="116" width="398" height="44"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDs-Vf-7fx">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube share URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
+                                        <rect key="frame" x="8" y="55" width="398" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trr-ZW-vTf">
+                                        <rect key="frame" x="0.0" y="251" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="G2Q-gn-UQS"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Is this a digital game?" id="zb3-Pn-wBy">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="ySa-gd-agY"/>
+                                            <barButtonItem style="plain" id="OeX-uy-oPm">
+                                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="eTc-Gc-ecS">
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW5-uS-u0f">
+                                        <rect key="frame" x="0.0" y="295" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="eG1-ia-WDQ"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Have box/paperwork?" id="aBZ-vy-Qek">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="wU7-jP-L4X"/>
+                                            <barButtonItem style="plain" id="vcJ-XD-K2Y">
+                                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="4qK-vA-Pqi">
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JW-3n-aLC">
+                                        <rect key="frame" x="0.0" y="339" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="cev-bl-V4l"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Special/collectors edition?" id="StC-oQ-Naf">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="Qgz-zn-Fe9"/>
+                                            <barButtonItem style="plain" id="in1-vN-OSa">
+                                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="Pc4-4d-brd">
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLP-K0-Nby">
+                                        <rect key="frame" x="0.0" y="383" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="w8H-xT-JkU"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Add a description?" id="ShC-kA-D68">
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="9cT-zQ-WHc"/>
+                                            <barButtonItem style="plain" id="EEd-Zk-S1l">
+                                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="c7T-Rq-FJH">
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4g-05-2na">
+                                        <rect key="frame" x="4" y="151" width="406" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="388-v1-U0O"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFt-kQ-PbG">
+                                        <rect key="frame" x="0.0" y="107" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="8NS-TK-zhh"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem title="Update Current Platform" id="ZCY-2I-1nG">
+                                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a description for your game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bLa-rX-ecG">
+                                        <rect key="frame" x="8" y="435" width="398" height="185"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="185" id="01c-6L-Koj"/>
+                                            <constraint firstAttribute="height" constant="185" id="v7N-Bj-lau"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="oXc-w6-d12"/>
-                                    <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pDs-Vf-7fx" secondAttribute="leadingMargin" id="0Wc-42-vi2"/>
+                                    <constraint firstItem="Trr-ZW-vTf" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="13g-Mn-Lxz"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="top" secondItem="pDs-Vf-7fx" secondAttribute="top" constant="55" id="31J-Xi-L5v"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="centerX" secondItem="sW5-uS-u0f" secondAttribute="centerX" id="3KC-o9-EQg"/>
+                                    <constraint firstAttribute="trailing" secondItem="sW5-uS-u0f" secondAttribute="trailing" id="87K-nB-lC0"/>
+                                    <constraint firstAttribute="trailing" secondItem="C4g-05-2na" secondAttribute="trailing" constant="4" id="96D-4w-hhd"/>
+                                    <constraint firstAttribute="trailing" secondItem="5JW-3n-aLC" secondAttribute="trailing" id="AXn-HL-ITA"/>
+                                    <constraint firstItem="bLa-rX-ecG" firstAttribute="top" secondItem="KLP-K0-Nby" secondAttribute="bottom" constant="8" id="C0G-mR-kBU"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fCo-fO-zSz" secondAttribute="trailing" id="Ca0-KT-6Ol"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="centerX" secondItem="KLP-K0-Nby" secondAttribute="centerX" id="EUc-ki-jtb"/>
+                                    <constraint firstItem="Trr-ZW-vTf" firstAttribute="top" secondItem="C4g-05-2na" secondAttribute="bottom" id="Ekh-4w-ONu"/>
+                                    <constraint firstItem="vFt-kQ-PbG" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="Hfn-6b-KOO"/>
+                                    <constraint firstItem="sW5-uS-u0f" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="LAo-Wa-sUB"/>
+                                    <constraint firstItem="5JW-3n-aLC" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="NmJ-2V-jiC"/>
+                                    <constraint firstItem="C4g-05-2na" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" constant="4" id="NvO-Hb-raa"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="centerX" secondItem="pDs-Vf-7fx" secondAttribute="centerX" id="QTm-i3-wk8"/>
+                                    <constraint firstItem="C4g-05-2na" firstAttribute="top" secondItem="vFt-kQ-PbG" secondAttribute="bottom" id="Ra0-c7-p9k"/>
+                                    <constraint firstItem="KLP-K0-Nby" firstAttribute="top" secondItem="5JW-3n-aLC" secondAttribute="bottom" id="Rjo-GF-Lxr"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bLa-rX-ecG" secondAttribute="leading" id="UuR-yV-G6E"/>
+                                    <constraint firstAttribute="bottom" secondItem="fCo-fO-zSz" secondAttribute="bottom" constant="573" id="Wzm-bz-nqk"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="XUW-yu-JoD"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="centerX" secondItem="5JW-3n-aLC" secondAttribute="centerX" id="XyK-m6-9nx"/>
+                                    <constraint firstAttribute="trailing" secondItem="bLa-rX-ecG" secondAttribute="trailing" constant="8" id="bVg-vr-kLU"/>
+                                    <constraint firstAttribute="trailing" secondItem="vFt-kQ-PbG" secondAttribute="trailing" id="cy3-SO-G3T"/>
+                                    <constraint firstAttribute="trailing" secondItem="KLP-K0-Nby" secondAttribute="trailing" id="diI-rn-VyM"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bLa-rX-ecG" secondAttribute="trailing" id="gNQ-3T-AGX"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pDs-Vf-7fx" secondAttribute="trailingMargin" id="hMq-fc-e9o"/>
+                                    <constraint firstItem="5JW-3n-aLC" firstAttribute="top" secondItem="sW5-uS-u0f" secondAttribute="bottom" id="ihb-OR-7T3"/>
+                                    <constraint firstItem="KLP-K0-Nby" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" id="j5c-43-0jY"/>
+                                    <constraint firstItem="fCo-fO-zSz" firstAttribute="centerX" secondItem="vFt-kQ-PbG" secondAttribute="centerX" id="peI-DY-IUT"/>
+                                    <constraint firstItem="vFt-kQ-PbG" firstAttribute="top" secondItem="fCo-fO-zSz" secondAttribute="bottom" constant="8" id="rZR-TZ-D4i"/>
+                                    <constraint firstItem="bLa-rX-ecG" firstAttribute="leading" secondItem="pDs-Vf-7fx" secondAttribute="leading" constant="8" id="uSB-Sd-Mew"/>
+                                    <constraint firstAttribute="trailing" secondItem="Trr-ZW-vTf" secondAttribute="trailing" id="vLQ-ae-RcP"/>
+                                    <constraint firstItem="sW5-uS-u0f" firstAttribute="top" secondItem="Trr-ZW-vTf" secondAttribute="bottom" id="zEf-Y0-NIM"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnQ-DL-6zZ">
                                 <rect key="frame" x="0.0" y="64" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="TeP-gR-2EL"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="44" id="ev6-YX-wAb"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="oUU-B0-eGu"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Set Default Video" id="JTh-dX-a6D">
@@ -409,112 +550,20 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trr-ZW-vTf">
-                                <rect key="frame" x="0.0" y="168" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="G2Q-gn-UQS"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Is this a digital game?" id="zb3-Pn-wBy">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ySa-gd-agY"/>
-                                    <barButtonItem style="plain" id="OeX-uy-oPm">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="eTc-Gc-ecS">
-                                            <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </switch>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW5-uS-u0f">
-                                <rect key="frame" x="0.0" y="212" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="eG1-ia-WDQ"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Have box/paperwork?" id="aBZ-vy-Qek">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="wU7-jP-L4X"/>
-                                    <barButtonItem style="plain" id="vcJ-XD-K2Y">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="4qK-vA-Pqi">
-                                            <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </switch>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JW-3n-aLC">
-                                <rect key="frame" x="0.0" y="256" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="cev-bl-V4l"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Special/collectors edition?" id="StC-oQ-Naf">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Qgz-zn-Fe9"/>
-                                    <barButtonItem style="plain" id="in1-vN-OSa">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="Pc4-4d-brd">
-                                            <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </switch>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLP-K0-Nby">
-                                <rect key="frame" x="0.0" y="300" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="w8H-xT-JkU"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Add a description?" id="ShC-kA-D68">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9cT-zQ-WHc"/>
-                                    <barButtonItem style="plain" id="EEd-Zk-S1l">
-                                        <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="c7T-Rq-FJH">
-                                            <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </switch>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter a description for your game." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bLa-rX-ecG">
-                                <rect key="frame" x="8" y="344" width="398" height="185"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="185" id="01c-6L-Koj"/>
-                                    <constraint firstAttribute="height" constant="185" id="v7N-Bj-lau"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="fCo-fO-zSz" secondAttribute="trailing" constant="8" id="1ZC-9F-ZVc"/>
-                            <constraint firstItem="fCo-fO-zSz" firstAttribute="top" secondItem="EnQ-DL-6zZ" secondAttribute="bottom" constant="8" id="Fbo-0P-Jgt"/>
-                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="JxI-Nz-yJo"/>
-                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="leading" secondItem="dXi-cE-hFt" secondAttribute="leading" id="MDn-aS-sA4"/>
-                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="top" secondItem="fCo-fO-zSz" secondAttribute="bottom" constant="8" id="Mas-04-DYy"/>
-                            <constraint firstItem="bLa-rX-ecG" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" constant="8" id="NzQ-Dy-dX9"/>
-                            <constraint firstItem="sW5-uS-u0f" firstAttribute="top" secondItem="Trr-ZW-vTf" secondAttribute="bottom" id="QSu-xj-8Bo"/>
-                            <constraint firstItem="5JW-3n-aLC" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="VEi-oo-Irz"/>
-                            <constraint firstItem="Trr-ZW-vTf" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="Wg2-Vp-rkH"/>
-                            <constraint firstItem="sW5-uS-u0f" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="YYB-OO-lMe"/>
-                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="EnQ-DL-6zZ" secondAttribute="trailing" id="Ziw-bY-xHN"/>
-                            <constraint firstItem="bLa-rX-ecG" firstAttribute="top" secondItem="KLP-K0-Nby" secondAttribute="bottom" id="a5J-V3-1Ph"/>
-                            <constraint firstItem="KLP-K0-Nby" firstAttribute="top" secondItem="5JW-3n-aLC" secondAttribute="bottom" id="aAE-fP-uYs"/>
-                            <constraint firstItem="fCo-fO-zSz" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" constant="8" id="ar6-jA-e0c"/>
-                            <constraint firstItem="5JW-3n-aLC" firstAttribute="top" secondItem="sW5-uS-u0f" secondAttribute="bottom" id="c8M-UT-pq1"/>
-                            <constraint firstItem="sW5-uS-u0f" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="d2j-Db-haJ"/>
-                            <constraint firstItem="KLP-K0-Nby" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="f3G-yE-eVc"/>
-                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="top" secondItem="yuI-YI-vGZ" secondAttribute="top" id="iLv-NL-HDa"/>
-                            <constraint firstItem="5JW-3n-aLC" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="mpR-9l-SA5"/>
-                            <constraint firstItem="KLP-K0-Nby" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="re7-Qj-3gA"/>
-                            <constraint firstItem="yuI-YI-vGZ" firstAttribute="trailing" secondItem="bLa-rX-ecG" secondAttribute="trailing" constant="8" id="xB3-1b-FNV"/>
+                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="top" secondItem="yuI-YI-vGZ" secondAttribute="top" id="4jf-CL-7jq"/>
+                            <constraint firstAttribute="bottom" secondItem="pDs-Vf-7fx" secondAttribute="bottom" id="Bqw-jr-Dd5"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="trailing" secondItem="EnQ-DL-6zZ" secondAttribute="trailing" id="CEx-bi-Iqc"/>
+                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="WzW-LN-adf"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="top" secondItem="EnQ-DL-6zZ" secondAttribute="top" id="e7A-NB-p4N"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="leading" secondItem="yuI-YI-vGZ" secondAttribute="leading" id="i1Y-wA-FbE"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="centerX" secondItem="dXi-cE-hFt" secondAttribute="centerX" id="k9h-fj-E0y"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="top" secondItem="yuI-YI-vGZ" secondAttribute="top" id="o6v-ve-UHO"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="leading" secondItem="EnQ-DL-6zZ" secondAttribute="leading" id="sGy-Ug-ZVh"/>
+                            <constraint firstItem="pDs-Vf-7fx" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="xtn-k0-fEr"/>
+                            <constraint firstItem="EnQ-DL-6zZ" firstAttribute="trailing" secondItem="yuI-YI-vGZ" secondAttribute="trailing" id="zlQ-q7-gEI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yuI-YI-vGZ"/>
                     </view>
@@ -534,6 +583,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="descriptionText" destination="bLa-rX-ecG" id="Zfw-QO-AyG"/>
                         <outlet property="digitalSwitch" destination="eTc-Gc-ecS" id="gC9-6S-sJa"/>
                         <outlet property="hasBoxSwitch" destination="4qK-vA-Pqi" id="SLh-fU-YsX"/>
+                        <outlet property="platformPicker" destination="C4g-05-2na" id="Jzm-Sx-hOq"/>
                         <outlet property="specialEditionSwitch" destination="Pc4-4d-brd" id="0x0-pH-oy3"/>
                         <outlet property="youTubeField" destination="fCo-fO-zSz" id="yku-Ev-idq"/>
                     </connections>

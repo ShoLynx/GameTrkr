@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class GamesController: UIViewController, UITableViewDataSource {
+class GamesController: UIViewController {
     
     @IBOutlet var gameTable: UITableView!
     @IBOutlet weak var noGamesText: UITextView!
@@ -17,20 +18,31 @@ class GamesController: UIViewController, UITableViewDataSource {
     
     var platform: Platform!
     var games: [Game] = []
+    var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        gameTable.dataSource = self
+        gameTable.delegate = self
+        
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
-        updateEditButton()
         
         navigationItem.title = platform.name
         
-        noGamesText.isHidden = true
-        if games.isEmpty {
-            noGamesText.isHidden = false
+        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
+        let predicate = NSPredicate(format: "platform == %@", platform)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            games = result
+            gameTable.reloadData()
         }
+        
+        updateEditButton()
+        updateEmptyText()
     }
     
     @objc private func toggleEditing() {
@@ -43,11 +55,14 @@ class GamesController: UIViewController, UITableViewDataSource {
     }
     
     func addGame(title: String) {
-        //TODO: need viewContext values
-//        let game = Game(name: title)
-//        games.append(game)
+        let game = Game(context: dataController.viewContext)
+        game.title = title
+        games.append(game)
+        try? dataController.viewContext.save()
         gameTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         updateEditButton()
+        updateEmptyText()
+        gameTable.reloadData()
     }
     
     func deleteGame(at indexPath: IndexPath) {
@@ -56,11 +71,23 @@ class GamesController: UIViewController, UITableViewDataSource {
         if numberOfGames == 0 {
             setEditing(false, animated: true)
         }
+        
         updateEditButton()
+        updateEmptyText()
+        gameTable.reloadData()
     }
     
     func updateEditButton() {
         navigationItem.rightBarButtonItem?.isEnabled = numberOfGames > 0
+    }
+    
+    func updateEmptyText() {
+        if games.isEmpty {
+            gameTable.isHidden = true
+            noGamesText.isHidden = false
+        } else {
+            noGamesText.isHidden = true
+        }
     }
     
     func newGameAlert() {
@@ -88,6 +115,18 @@ class GamesController: UIViewController, UITableViewDataSource {
         present(alert, animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GameDetailsController {
+            if let indexPath = gameTable.indexPathForSelectedRow {
+                destinationVC.platform = platform
+                destinationVC.game = game(at: indexPath)
+            }
+        }
+    }
+}
+
+
+extension GamesController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -106,8 +145,11 @@ class GamesController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //segue to selected platform's Games controller
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete: deleteGame(at: indexPath)
+        default: ()
+        }
     }
     
     func game(at indexPath: IndexPath) -> Game {

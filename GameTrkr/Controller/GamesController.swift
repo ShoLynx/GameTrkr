@@ -89,6 +89,7 @@ class GamesController: UIViewController {
             gameTable.isHidden = true
             noGamesText.isHidden = false
         } else {
+            gameTable.isHidden = false
             noGamesText.isHidden = true
         }
     }

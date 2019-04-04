@@ -83,6 +83,7 @@ class PlatformController: UIViewController {
             platformTable.isHidden = true
             noPlatformsText.isHidden = false
         } else {
+            platformTable.isHidden = false
             noPlatformsText.isHidden = true
         }
     }

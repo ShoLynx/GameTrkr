@@ -114,7 +114,7 @@
                         <outlet property="addPlatformButton" destination="4NQ-E7-kKj" id="U4K-hY-tc5"/>
                         <outlet property="noPlatformsText" destination="IIk-5u-ebC" id="Jhb-ep-s0f"/>
                         <outlet property="platformTable" destination="63H-Kv-q70" id="g8z-bK-2Lh"/>
-                        <segue destination="tBg-60-Mfv" kind="push" identifier="toGamesController" id="Sad-bw-bkV"/>
+                        <segue destination="tBg-60-Mfv" kind="show" identifier="goToGamesController" id="bAu-2f-vGU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mgh-um-Owh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -198,7 +198,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="gameTable" destination="8lM-sd-DyV" id="DIj-cz-hBB"/>
                         <outlet property="newGameButton" destination="aOQ-9v-T4w" id="NBB-Oy-UMF"/>
                         <outlet property="noGamesText" destination="hM9-7Z-Tcs" id="RrH-Ws-M3F"/>
-                        <segue destination="f60-RZ-aMQ" kind="push" id="mdS-fD-Wze"/>
+                        <segue destination="f60-RZ-aMQ" kind="show" identifier="goToDetailsController" id="Tvh-b1-Rys"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mI3-VS-Yy2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -365,8 +365,8 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="specialEditionRadio" destination="vdH-d2-YFn" id="8EK-Qo-ql0"/>
                         <outlet property="watchAnotherVideoButton" destination="dx6-ZL-dj1" id="jKC-nn-Bck"/>
                         <outlet property="youtubePlayerView" destination="tye-lp-uc9" id="faS-hR-8Z8"/>
-                        <segue destination="JDs-aX-KrJ" kind="showDetail" id="yQ8-mP-FfX"/>
-                        <segue destination="hd0-LW-aIc" kind="push" id="XT2-L4-cVh"/>
+                        <segue destination="hd0-LW-aIc" kind="show" identifier="goToEditController" id="vBR-su-gUH"/>
+                        <segue destination="JDs-aX-KrJ" kind="presentation" identifier="goToImageController" id="avw-zY-hQ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aug-xT-Grr" userLabel="First Responder" sceneMemberID="firstResponder"/>

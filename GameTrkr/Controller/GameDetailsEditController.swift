@@ -23,11 +23,23 @@ class GameDetailsEditController: UIViewController {
     var platform: Platform!
     var game: Game!
     let gameDetails = GameDetailsController()
+    var platformName: String!
+    var gameTitle: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = platform.name + " " + game.name
+        if let name = platform.name {
+            platformName = name
+        }
+        
+        if let title = game.title {
+            gameTitle = title
+        }
+        
+        navigationItem.title = platformName + " " + gameTitle
+        
         youTubeField.isEnabled = false
         descriptionText.isEditable = false
         

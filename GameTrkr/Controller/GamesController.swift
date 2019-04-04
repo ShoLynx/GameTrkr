@@ -43,8 +43,9 @@ class GamesController: UIViewController, UITableViewDataSource {
     }
     
     func addGame(title: String) {
-        let game = Game(name: title)
-        games.append(game)
+        //TODO: need viewContext values
+//        let game = Game(name: title)
+//        games.append(game)
         gameTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         updateEditButton()
     }
@@ -100,7 +101,7 @@ class GamesController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: GameCell.defaultReuseIdentifier, for: indexPath) as! GameCell
         let iGame = game(at: indexPath)
         
-        cell.gameTitle.text = iGame.name
+        cell.gameTitle.text = iGame.title
         
         return cell
     }

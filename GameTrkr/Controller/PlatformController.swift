@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PlatformController: UIViewController, UITableViewDataSource {
     
@@ -15,12 +16,22 @@ class PlatformController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var addPlatformButton: UIBarButtonItem!
     
     var platforms: [Platform] = []
+    
+    var dataController: DataController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
+        
+        let fetchRequest: NSFetchRequest<Platform> = Platform.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            platforms = result
+            platformTable.reloadData()
+        }
         
         noPlatformsText.isHidden = true
         if platforms.isEmpty {
@@ -40,9 +51,11 @@ class PlatformController: UIViewController, UITableViewDataSource {
     }
     
     func addPlatform(title: String) {
-        let platform = Platform(name: title)
+        let platform = Platform(context: dataController.viewContext)
+        platform.name = title
         platforms.append(platform)
-        platformTable.insertRows(at: [IndexPath(row: numberOfPlatforms - 1, section: 0)], with: .fade)
+        try? dataController.viewContext.save()
+        platformTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
         updateEditButton()
     }
     
@@ -96,8 +109,11 @@ class PlatformController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlatformCell.defaultReuseIdentifier, for: indexPath) as! PlatformCell
         let iPlatform = platform(at: indexPath)
         
+        if let count = iPlatform.games?.count {
+            cell.gamesSub.text = "Games: \(count)"
+        }
         cell.platformName.text = iPlatform.name
-        cell.gamesSub.text = "Games: \(iPlatform.games.count)"
+        
         
         return cell
     }

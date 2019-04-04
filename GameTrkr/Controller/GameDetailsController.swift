@@ -29,11 +29,21 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     var hasDescription: Bool!
     var platform: Platform!
     var game: Game!
+    var platformName: String!
+    var gameTitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = platform.name + " " + game.name
+        if let name = platform.name {
+            platformName = name
+        }
+        
+        if let title = game.title {
+            gameTitle = title
+        }
+        
+        navigationItem.title = platformName + " " + gameTitle
         
         hasDefaultYoutubeURL = false
         //need default youtubeURL to be search with Platform and Game

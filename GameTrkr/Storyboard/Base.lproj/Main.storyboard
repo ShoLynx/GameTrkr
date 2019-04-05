@@ -172,7 +172,11 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Md9-Qg-Vp6"/>
-                                    <barButtonItem title="Add New Game" id="aOQ-9v-T4w"/>
+                                    <barButtonItem title="Add New Game" id="aOQ-9v-T4w">
+                                        <connections>
+                                            <action selector="addTappedWithSender:" destination="tBg-60-Mfv" id="1bc-Kx-ufX"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eF6-DR-I5E"/>
                                 </items>
                             </toolbar>
@@ -297,7 +301,11 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <constraint firstAttribute="height" constant="44" id="DxB-Bl-vUT"/>
                                         </constraints>
                                         <items>
-                                            <barButtonItem title="Add New Photo" width="100" id="taG-0E-ceL"/>
+                                            <barButtonItem title="Add New Photo" width="100" id="taG-0E-ceL">
+                                                <connections>
+                                                    <action selector="photoSelect:" destination="f60-RZ-aMQ" id="KfF-bb-PET"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="vnJ-cO-9Uy"/>
                                             <barButtonItem title="Remove Photos" width="100" id="f12-Nn-RTE">
                                                 <connections>

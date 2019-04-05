@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class GameDetailsEditController: UIViewController {
     
@@ -25,9 +26,9 @@ class GameDetailsEditController: UIViewController {
     var game: Game!
     let platforms: [Platform] = []
     let gameDetails = GameDetailsController()
+    var dataController: DataController!
     var platformName: String!
     var gameTitle: String!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,38 +50,77 @@ class GameDetailsEditController: UIViewController {
         descriptionText.isEditable = false
         
         defaultVideoSwitch.isOn = false
-        if defaultVideoSwitch.isOn {
-            youTubeField.isEnabled = true
-            gameDetails.hasDefaultYoutubeURL = true
-            game.youtubeURL = youTubeField.text ?? ""
-        }
+        updateDefaultVideoSwitch()
         
         digitalSwitch.isOn = false
-        if digitalSwitch.isOn {
-            game.isDigital = true
-        }
+        updateDigitalSwitch()
         
         hasBoxSwitch.isOn = false
-        if digitalSwitch.isOn {
-            game.hasBox = true
-        }
+        updateHasBoxSwitch()
         
         specialEditionSwitch.isOn = false
-        if specialEditionSwitch.isOn {
-            game.isSpecialEdition = true
-        }
+        updateSpecialEditionSwitch()
         
         addDescriptionSwitch.isOn = false
-        if addDescriptionSwitch.isOn {
-            descriptionText.isEditable = true
-            gameDetails.hasDescription = true
-            game.gameText = descriptionText.text
-        }
+        updateDescriptionSwitch()
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        try? dataController.viewContext.save()
     }
     
     @IBAction func exitEdit(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func updateDefaultVideoSwitch() {
+        if defaultVideoSwitch.isOn {
+            youTubeField.isEnabled = true
+            gameDetails.hasDefaultYoutubeURL = true
+            game.youtubeURL = youTubeField.text ?? ""
+        } else {
+            youTubeField.isEnabled = false
+            gameDetails.hasDefaultYoutubeURL = false
+            game.youtubeURL = nil
+        }
+    }
+    
+    fileprivate func updateDigitalSwitch() {
+        if digitalSwitch.isOn {
+            game.isDigital = true
+        } else {
+            game.isDigital = false
+        }
+    }
+    
+    fileprivate func updateHasBoxSwitch() {
+        if digitalSwitch.isOn {
+            game.hasBox = true
+        } else {
+            game.hasBox = false
+        }
+    }
+    
+    fileprivate func updateSpecialEditionSwitch() {
+        if specialEditionSwitch.isOn {
+            game.isSpecialEdition = true
+        } else {
+            game.isSpecialEdition = false
+        }
+    }
+    
+    fileprivate func updateDescriptionSwitch() {
+        if addDescriptionSwitch.isOn {
+            descriptionText.isEditable = true
+            gameDetails.hasDescription = true
+            game.gameText = descriptionText.text
+        } else {
+            descriptionText.isEditable = false
+            gameDetails.hasDescription = false
+        }
     }
 }
 

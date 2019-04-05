@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource {
+class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var youtubePlayerView: UIView!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
@@ -25,10 +26,11 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     
     var youtubeURL: String!
     var hasDefaultYoutubeURL: Bool!
-    var gameImages: [UIImage] = []
+    var gameImages: [Photo] = []
     var hasDescription: Bool!
     var platform: Platform!
     var game: Game!
+    var dataController: DataController!
     var platformName: String!
     var gameTitle: String!
     
@@ -45,9 +47,18 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         
         navigationItem.title = platformName + " " + gameTitle
         
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "game == %@", game)
+        fetchRequest.predicate = predicate
+        if let result = try? dataController.viewContext.fetch(fetchRequest) {
+            gameImages = result
+            gameImageCollection.reloadData()
+        }
+        
         hasDefaultYoutubeURL = false
         //need default youtubeURL to be search with Platform and Game
         if hasDefaultYoutubeURL {
+            game.youtubeURL = youtubeURL
             //apply game.youtubeURL to player
         }
         
@@ -72,23 +83,32 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
             deletePhotoButton.isEnabled = false
         }
         
+        hasDescription = false
         gameDescription.isHidden = true
         if hasDescription {
             gameDescription.isHidden = false
             gameDescription.text = game.gameText
+        } else {
+            gameDescription.isHidden = true
         }
         
         updateDeleteButton()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super .viewWillDisappear(animated)
+        
+        GameDetailsController().dataController = dataController
+    }
+    
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
-        isEditing = true
+        self.setEditing(!self.isEditing, animated: true)
+        deletePhotoButton.title = self.isEditing ? "Done" : "Remove Photos"
         
         if isEditing {
             addNewPhotoButton.isEnabled = false
             watchAnotherVideoButton.isEnabled = false
             editButton.isEnabled = false
-            sender.title = "Done"
         }
     }
     
@@ -110,6 +130,18 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GameDetailsController {
+            destinationVC.platform = platform
+            destinationVC.game = game
+            destinationVC.dataController = dataController
+        }
+    }
+    
+}
+
+extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -122,7 +154,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         let image = photo(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamePhotoCell.defaultReuseIdentifier, for: indexPath) as! GamePhotoCell
         
-        cell.gameImage.image = image
+//        cell.gameImage.image = UIImage(data: image)
         
         return cell
     }
@@ -130,7 +162,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
         let image = photo(at: indexPath)
-        detailController.selectedImage = image
+//        detailController.selectedImage = UIImage(data: image)
         self.navigationController!.pushViewController(detailController, animated: true)
         
         if isEditing {
@@ -141,7 +173,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     
     var numberOfPhotos: Int { return gameImages.count }
     
-    func photo(at indexPath: IndexPath) -> UIImage {
+    func photo(at indexPath: IndexPath) -> Photo {
         return gameImages[indexPath.row]
     }
     

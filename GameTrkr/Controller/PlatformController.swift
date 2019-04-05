@@ -39,6 +39,15 @@ class PlatformController: UIViewController {
         updateEmptyText()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        
+        if let indexPath = platformTable.indexPathForSelectedRow {
+            platformTable.deselectRow(at: indexPath, animated: false)
+            platformTable.reloadRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     @objc private func toggleEditing() {
         platformTable.setEditing(!platformTable.isEditing, animated: true)
         navigationItem.rightBarButtonItem?.title = platformTable.isEditing ? "Done" : "Edit"
@@ -146,6 +155,10 @@ extension PlatformController: UITableViewDataSource, UITableViewDelegate {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToGamesController", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

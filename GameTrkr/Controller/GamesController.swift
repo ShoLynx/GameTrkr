@@ -45,6 +45,12 @@ class GamesController: UIViewController {
         updateEmptyText()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        PlatformController().dataController = dataController
+    }
+    
     @objc private func toggleEditing() {
         gameTable.setEditing(!gameTable.isEditing, animated: true)
         navigationItem.rightBarButtonItem?.title = gameTable.isEditing ? "Done" : "Edit"
@@ -124,6 +130,7 @@ class GamesController: UIViewController {
             if let indexPath = gameTable.indexPathForSelectedRow {
                 destinationVC.platform = platform
                 destinationVC.game = game(at: indexPath)
+                destinationVC.dataController = dataController
             }
         }
     }
@@ -147,6 +154,10 @@ extension GamesController: UITableViewDataSource, UITableViewDelegate {
         cell.gameTitle.text = iGame.title
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToDetailsController", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

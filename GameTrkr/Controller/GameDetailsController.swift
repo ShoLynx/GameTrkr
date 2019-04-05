@@ -101,6 +101,10 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         GameDetailsController().dataController = dataController
     }
     
+    @IBAction func enterEditDetails(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToEditController", sender: nil)
+    }
+    
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
         self.setEditing(!self.isEditing, animated: true)
         deletePhotoButton.title = self.isEditing ? "Done" : "Remove Photos"
@@ -131,7 +135,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? GameDetailsController {
+        if let destinationVC = segue.destination as? GameDetailsEditController {
             destinationVC.platform = platform
             destinationVC.game = game
             destinationVC.dataController = dataController

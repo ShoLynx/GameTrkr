@@ -72,10 +72,6 @@ class GameDetailsEditController: UIViewController {
         try? dataController.viewContext.save()
     }
     
-    @IBAction func exitEdit(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     fileprivate func updateDefaultVideoSwitch() {
         if defaultVideoSwitch.isOn {
             youTubeField.isEnabled = true

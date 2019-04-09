@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class GameDetailsController: UIViewController {
     
     @IBOutlet weak var youtubePlayerView: UIView!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
@@ -26,11 +26,13 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     
     var youtubeURL: String!
     var hasDefaultYoutubeURL: Bool!
-    var gameImages: [Photo] = []
     var hasDescription: Bool!
     var platform: Platform!
     var game: Game!
     var dataController: DataController!
+    var fetchedResultsController: NSFetchedResultsController<Photo>!
+    var pickerController: UIImagePickerController!
+    var blockOperations: [BlockOperation] = []
     var platformName: String!
     var gameTitle: String!
     
@@ -38,14 +40,6 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         navigationItem.title = platform.name! + " " + game.title!
-        
-        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-        let predicate = NSPredicate(format: "game == %@", game)
-        fetchRequest.predicate = predicate
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            gameImages = result
-            gameImageCollection.reloadData()
-        }
         
         hasDefaultYoutubeURL = false
         //need default youtubeURL to be search with Platform and Game
@@ -70,9 +64,14 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         emptyImageCollectionLabel.isHidden = true
-        if gameImages.isEmpty {
-            emptyImageCollectionLabel.isHidden = false
-            deletePhotoButton.isEnabled = false
+        if let sections = fetchedResultsController.sections {
+            if sections[0].numberOfObjects > 0 {
+                emptyImageCollectionLabel.isHidden = true
+                deletePhotoButton.isEnabled = true
+            } else {
+                emptyImageCollectionLabel.isHidden = false
+                deletePhotoButton.isEnabled = false
+            }
         }
         
         hasDescription = false
@@ -87,10 +86,35 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         updateDeleteButton()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super .viewWillDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        GameDetailsController().dataController = dataController
+        setupFetchedResultsController()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        fetchedResultsController = nil
+        for operation: BlockOperation in blockOperations {
+            operation.cancel()
+        }
+        
+        blockOperations.removeAll(keepingCapacity: false)
+    }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "game == %@", game)
+        fetchRequest.predicate = predicate
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "photos")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
     }
     
     @IBAction func enterEditDetails(_ sender: UIBarButtonItem) {
@@ -108,16 +132,6 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func updateDeleteButton() {
-        deletePhotoButton.isEnabled = numberOfPhotos > 0
-    }
-    
-    func photoSelector(source: UIImagePickerController.SourceType) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        present(pickerController, animated: true, completion: nil)
-    }
-    
     @IBAction func photoSelect(_ sender: Any) {
         photoSelector(source: .photoLibrary)
     }
@@ -125,6 +139,23 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func cancel() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    func updateDeleteButton() {
+        if let sections = fetchedResultsController.sections {
+            if sections[0].numberOfObjects > 0 {
+                deletePhotoButton.isEnabled = true
+            } else {
+                deletePhotoButton.isEnabled = false
+            }
+        }
+    }
+    
+    func photoSelector(source: UIImagePickerController.SourceType) {
+        pickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        present(pickerController, animated: true, completion: nil)
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? GameDetailsEditController {
@@ -136,41 +167,79 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     
 }
 
-extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return fetchedResultsController.sections?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfPhotos
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let image = photo(at: indexPath)
+        let image = fetchedResultsController.object(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamePhotoCell.defaultReuseIdentifier, for: indexPath) as! GamePhotoCell
         
-//        cell.gameImage.image = UIImage(data: image)
+        cell.gameImage.image = UIImage(data: image.photo!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
-        let image = photo(at: indexPath)
-//        detailController.selectedImage = UIImage(data: image)
+        let image = fetchedResultsController.object(at: indexPath)
+        detailController.selectedImage = UIImage(data: image.photo!)
         self.navigationController!.pushViewController(detailController, animated: true)
         
         if isEditing {
-            gameImages.remove(at: indexPath.row)
+            dataController.viewContext.delete(image)
+            try? dataController.viewContext.save()
         }
     }
     
+    //blockOperations methods gathered from https://stackoverflow.com/questions/20554137/nsfetchedresultscontollerdelegate-for-collectionview/20554673#20554673
     
-    var numberOfPhotos: Int { return gameImages.count }
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        blockOperations.removeAll(keepingCapacity: false)
+    }
     
-    func photo(at indexPath: IndexPath) -> Photo {
-        return gameImages[indexPath.row]
+    func controller(controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: AnyObject, anIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        if type == NSFetchedResultsChangeType.insert {
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.gameImageCollection!.reloadItems(at: [indexPath! as IndexPath])
+                }
+            }))
+        } else if type == NSFetchedResultsChangeType.delete {
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.gameImageCollection!.deleteItems(at: [indexPath! as IndexPath])
+                }
+            }))
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        gameImageCollection.performBatchUpdates({ () -> Void in
+            for operation: BlockOperation in self.blockOperations {
+                operation.start()
+            }
+        }, completion: { (finished) -> Void in
+            self.blockOperations.removeAll(keepingCapacity: false)
+        })
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let photo = Photo(context: dataController.viewContext)
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            photo.photo = image.pngData()!
+            try? dataController.viewContext.save()
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

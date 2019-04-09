@@ -17,7 +17,6 @@ class GamesController: UIViewController {
     @IBOutlet weak var newGameButton: UIBarButtonItem!
     
     var platform: Platform!
-//    var games: [Game] = []
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Game>!
     
@@ -193,6 +192,5 @@ extension GamesController: UITableViewDataSource, UITableViewDelegate, NSFetched
             break
         }
     }
-    
-    
+
 }

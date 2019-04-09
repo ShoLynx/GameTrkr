@@ -17,8 +17,9 @@ class GamesController: UIViewController {
     @IBOutlet weak var newGameButton: UIBarButtonItem!
     
     var platform: Platform!
-    var games: [Game] = []
+//    var games: [Game] = []
     var dataController: DataController!
+    var fetchedResultsController: NSFetchedResultsController<Game>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,23 +31,14 @@ class GamesController: UIViewController {
         self.navigationItem.rightBarButtonItem = editButton
         
         navigationItem.title = platform.name
+    
         
-        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
-        let predicate = NSPredicate(format: "platform == %@", platform)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            games = result
-            gameTable.reloadData()
-        }
-        
-        updateEditButton()
-        updateEmptyText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
+        
+        setupFetchedResultsController()
         
         if let indexPath = gameTable.indexPathForSelectedRow {
             gameTable.deselectRow(at: indexPath, animated: false)
@@ -54,11 +46,28 @@ class GamesController: UIViewController {
         }
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//
-//        PlatformController().dataController = dataController
-//    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        fetchedResultsController = nil
+    }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
+        let predicate = NSPredicate(format: "platform == %@", platform)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "games")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+        updateEditButton()
+        updateEmptyText()
+    }
     
     @objc private func toggleEditing() {
         gameTable.setEditing(!gameTable.isEditing, animated: true)
@@ -72,40 +81,30 @@ class GamesController: UIViewController {
     func addGame(title: String) {
         let game = Game(context: dataController.viewContext)
         game.title = title
-        games.append(game)
         try? dataController.viewContext.save()
-        gameTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-        updateEditButton()
-        updateEmptyText()
-        gameTable.reloadData()
     }
     
     func deleteGame(at indexPath: IndexPath) {
-        let gameToDelete = game(at: indexPath)
+        let gameToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(gameToDelete)
         try? dataController.viewContext.save()
-        games.remove(at: indexPath.row)
-        gameTable.deleteRows(at: [indexPath], with: .fade)
-        if numberOfGames == 0 {
-            setEditing(false, animated: true)
-        }
-        
-        updateEditButton()
-        updateEmptyText()
-        gameTable.reloadData()
     }
     
     func updateEditButton() {
-        navigationItem.rightBarButtonItem?.isEnabled = numberOfGames > 0
+        if let sections = fetchedResultsController.sections {
+            navigationItem.rightBarButtonItem?.isEnabled = sections[0].numberOfObjects > 0
+        }
     }
     
     func updateEmptyText() {
-        if games.isEmpty {
-            gameTable.isHidden = true
-            noGamesText.isHidden = false
-        } else {
-            gameTable.isHidden = false
-            noGamesText.isHidden = true
+        if let sections = fetchedResultsController.sections {
+            if sections[0].numberOfObjects > 0 {
+                gameTable.isHidden = false
+                noGamesText.isHidden = true
+            } else {
+                gameTable.isHidden = true
+                noGamesText.isHidden = false
+            }
         }
     }
     
@@ -138,7 +137,7 @@ class GamesController: UIViewController {
         if let destinationVC = segue.destination as? GameDetailsController {
             if let indexPath = gameTable.indexPathForSelectedRow {
                 destinationVC.platform = platform
-                destinationVC.game = game(at: indexPath)
+                destinationVC.game = fetchedResultsController.object(at: indexPath)
                 destinationVC.dataController = dataController
             }
         }
@@ -146,19 +145,19 @@ class GamesController: UIViewController {
 }
 
 
-extension GamesController: UITableViewDataSource, UITableViewDelegate {
+extension GamesController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return fetchedResultsController.sections?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfGames
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: GameCell.defaultReuseIdentifier, for: indexPath) as! GameCell
-        let iGame = game(at: indexPath)
+        let iGame = fetchedResultsController.object(at: indexPath)
         
         cell.gameTitle.text = iGame.title
         
@@ -176,9 +175,24 @@ extension GamesController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func game(at indexPath: IndexPath) -> Game {
-        return games[indexPath.row]
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        gameTable.beginUpdates()
     }
     
-    var numberOfGames: Int { return games.count }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        gameTable.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            gameTable.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            gameTable.deleteRows(at: [indexPath!], with: .fade)
+        default:
+            break
+        }
+    }
+    
+    
 }

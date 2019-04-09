@@ -27,11 +27,12 @@ class PlatformController: UIViewController {
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
         
-        setupFetchedResultsController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
+        
+        setupFetchedResultsController()
         
         if let indexPath = platformTable.indexPathForSelectedRow {
             platformTable.deselectRow(at: indexPath, animated: false)

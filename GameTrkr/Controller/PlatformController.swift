@@ -15,9 +15,9 @@ class PlatformController: UIViewController {
     @IBOutlet weak var noPlatformsText: UITextView!
     @IBOutlet weak var addPlatformButton: UIBarButtonItem!
     
-    var platforms: [Platform] = []
     var dataController: DataController!
-
+    var fetchedResultsController: NSFetchedResultsController<Platform>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,16 +27,7 @@ class PlatformController: UIViewController {
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
         
-        let fetchRequest: NSFetchRequest<Platform> = Platform.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        if let result = try? dataController.viewContext.fetch(fetchRequest) {
-            platforms = result
-            platformTable.reloadData()
-        }
-        
-        updateEditButton()
-        updateEmptyText()
+        setupFetchedResultsController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +37,27 @@ class PlatformController: UIViewController {
             platformTable.deselectRow(at: indexPath, animated: false)
             platformTable.reloadRows(at: [indexPath], with: .fade)
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        fetchedResultsController = nil
+    }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Platform> = Platform.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+        updateEmptyText()
+        updateEditButton()
     }
     
     @objc private func toggleEditing() {
@@ -60,40 +72,30 @@ class PlatformController: UIViewController {
     func addPlatform(title: String) {
         let platform = Platform(context: dataController.viewContext)
         platform.name = title
-        platforms.append(platform)
         try? dataController.viewContext.save()
-        platformTable.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-        updateEditButton()
-        updateEmptyText()
-        platformTable.reloadData()
     }
     
     func deletePlatform(at indexPath: IndexPath) {
-        let platformToDelete = platform(at: indexPath)
+        let platformToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(platformToDelete)
         try? dataController.viewContext.save()
-        platforms.remove(at: indexPath.row)
-        platformTable.deleteRows(at: [indexPath], with: .fade)
-        if numberOfPlatforms == 0 {
-            setEditing(false, animated: true)
-        }
-        
-        updateEditButton()
-        updateEmptyText()
-        platformTable.reloadData()
     }
     
     func updateEditButton() {
-        navigationItem.rightBarButtonItem?.isEnabled = numberOfPlatforms > 0
+        if let sections = fetchedResultsController.sections {
+            navigationItem.rightBarButtonItem?.isEnabled = sections[0].numberOfObjects > 0
+        }
     }
     
     func updateEmptyText() {
-        if platforms.isEmpty {
-            platformTable.isHidden = true
-            noPlatformsText.isHidden = false
-        } else {
-            platformTable.isHidden = false
-            noPlatformsText.isHidden = true
+        if let sections = fetchedResultsController.sections {
+            if sections[0].numberOfObjects > 0 {
+                platformTable.isHidden = false
+                noPlatformsText.isHidden = true
+            } else {
+                platformTable.isHidden = true
+                noPlatformsText.isHidden = false
+            }
         }
     }
     
@@ -125,7 +127,7 @@ class PlatformController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? GamesController {
             if let indexPath = platformTable.indexPathForSelectedRow {
-                destinationVC.platform = platform(at: indexPath)
+                destinationVC.platform = fetchedResultsController.object(at: indexPath)
                 destinationVC.dataController = dataController
             }
         }
@@ -133,19 +135,19 @@ class PlatformController: UIViewController {
     
 }
 
-extension PlatformController: UITableViewDataSource, UITableViewDelegate {
+extension PlatformController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return fetchedResultsController.sections?.count ?? 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfPlatforms
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlatformCell.defaultReuseIdentifier, for: indexPath) as! PlatformCell
-        let iPlatform = platform(at: indexPath)
+        let iPlatform = fetchedResultsController.object(at: indexPath)
         
         if let count = iPlatform.games?.count {
             cell.gamesSub.text = "Games: \(count)"
@@ -167,10 +169,24 @@ extension PlatformController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func platform(at indexPath: IndexPath) -> Platform {
-        return platforms[indexPath.row]
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        platformTable.beginUpdates()
     }
     
-    var numberOfPlatforms: Int { return platforms.count }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        platformTable.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            platformTable.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            platformTable.deleteRows(at: [indexPath!], with: .fade)
+        default:
+            break
+        }
+    }
+
 }
 

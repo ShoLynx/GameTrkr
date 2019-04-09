@@ -34,8 +34,6 @@ class GameDetailsEditController: UIViewController {
         
         navigationItem.title = platform.name! + " " + game.title!
         
-        platforms = PlatformController().platforms
-        
         if game.youtubeURL != nil {
             defaultVideoSwitch.isOn = true
             youTubeField.text = game.youtubeURL

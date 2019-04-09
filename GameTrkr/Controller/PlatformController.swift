@@ -153,7 +153,6 @@ extension PlatformController: UITableViewDataSource, UITableViewDelegate {
         
         cell.platformName.text = iPlatform.name
         
-        
         return cell
     }
     

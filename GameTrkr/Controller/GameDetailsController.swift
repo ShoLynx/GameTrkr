@@ -37,15 +37,7 @@ class GameDetailsController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let name = platform.name {
-            platformName = name
-        }
-        
-        if let title = game.title {
-            gameTitle = title
-        }
-        
-        navigationItem.title = platformName + " " + gameTitle
+        navigationItem.title = platform.name! + " " + game.title!
         
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         let predicate = NSPredicate(format: "game == %@", game)

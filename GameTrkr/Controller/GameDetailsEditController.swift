@@ -12,7 +12,6 @@ import CoreData
 
 class GameDetailsEditController: UIViewController {
     
-    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var defaultVideoSwitch: UISwitch!
     @IBOutlet weak var youTubeField: UITextField!
     @IBOutlet weak var digitalSwitch: UISwitch!
@@ -24,7 +23,7 @@ class GameDetailsEditController: UIViewController {
     
     var platform: Platform!
     var game: Game!
-    let platforms: [Platform] = []
+    var platforms: [Platform] = []
     let gameDetails = GameDetailsController()
     var dataController: DataController!
     var platformName: String!
@@ -33,37 +32,51 @@ class GameDetailsEditController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let name = platform.name {
-            platformName = name
+        navigationItem.title = platform.name! + " " + game.title!
+        
+        platforms = PlatformController().platforms
+        
+        if game.youtubeURL != nil {
+            defaultVideoSwitch.isOn = true
+            youTubeField.text = game.youtubeURL
+        } else {
+            defaultVideoSwitch.isOn = false
         }
         
-        if let title = game.title {
-            gameTitle = title
+        if game.isDigital {
+            digitalSwitch.isOn = true
+        } else {
+            digitalSwitch.isOn = false
         }
         
-        navigationItem.title = platformName + " " + gameTitle
+        if game.hasBox {
+            hasBoxSwitch.isOn = true
+        } else {
+            hasBoxSwitch.isOn = false
+        }
+        
+        if game.isSpecialEdition {
+            specialEditionSwitch.isOn = true
+        } else {
+            specialEditionSwitch.isOn = false
+        }
+        
+        if game.gameText != nil {
+            addDescriptionSwitch.isOn = true
+            descriptionText.text = game.gameText
+        } else {
+            addDescriptionSwitch.isOn = false
+        }
         
         platformPicker.dataSource = self
         platformPicker.delegate = self
+        descriptionText.delegate = self
         
-        youTubeField.isEnabled = false
-        descriptionText.isEditable = false
-        
-        defaultVideoSwitch.isOn = false
         updateDefaultVideoSwitch()
-        
-        digitalSwitch.isOn = false
         updateDigitalSwitch()
-        
-        hasBoxSwitch.isOn = false
         updateHasBoxSwitch()
-        
-        specialEditionSwitch.isOn = false
         updateSpecialEditionSwitch()
-        
-        addDescriptionSwitch.isOn = false
         updateDescriptionSwitch()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,7 +125,6 @@ class GameDetailsEditController: UIViewController {
         if addDescriptionSwitch.isOn {
             descriptionText.isEditable = true
             gameDetails.hasDescription = true
-            game.gameText = descriptionText.text
         } else {
             descriptionText.isEditable = false
             gameDetails.hasDescription = false
@@ -120,7 +132,7 @@ class GameDetailsEditController: UIViewController {
     }
 }
 
-extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -138,5 +150,10 @@ extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegat
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let platformNames = [platform.name]
         return platformNames[row]
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        game.gameText = textView.text
+        try? dataController.viewContext.save()
     }
 }

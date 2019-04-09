@@ -45,11 +45,20 @@ class GamesController: UIViewController {
         updateEmptyText()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
         
-        PlatformController().dataController = dataController
+        if let indexPath = gameTable.indexPathForSelectedRow {
+            gameTable.deselectRow(at: indexPath, animated: false)
+            gameTable.reloadRows(at: [indexPath], with: .fade)
+        }
     }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        PlatformController().dataController = dataController
+//    }
     
     @objc private func toggleEditing() {
         gameTable.setEditing(!gameTable.isEditing, animated: true)

@@ -26,6 +26,7 @@ class GameDetailsEditController: UIViewController {
     var platforms: [Platform] = []
     let gameDetails = GameDetailsController()
     var dataController: DataController!
+    var fetchedResultsController: NSFetchedResultsController<Platform>!
     var platformName: String!
     var gameTitle: String!
     
@@ -69,18 +70,33 @@ class GameDetailsEditController: UIViewController {
         platformPicker.dataSource = self
         platformPicker.delegate = self
         descriptionText.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        updateDefaultVideoSwitch()
-        updateDigitalSwitch()
-        updateHasBoxSwitch()
-        updateSpecialEditionSwitch()
-        updateDescriptionSwitch()
+        setupFetchedResultsController()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         try? dataController.viewContext.save()
+        fetchedResultsController = nil
+    }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Platform> = Platform.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
     }
     
     fileprivate func updateDefaultVideoSwitch() {
@@ -130,19 +146,19 @@ class GameDetailsEditController: UIViewController {
     }
 }
 
-extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate {
+extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return fetchedResultsController.sections?.count ?? 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return platforms.count
+        return fetchedResultsController.sections?[0].numberOfObjects ?? 0
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        game.platform = platforms[row]
-        //add save function
+        game.platform = fetchedResultsController.object(at: [row])
+        try? dataController.viewContext.save()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

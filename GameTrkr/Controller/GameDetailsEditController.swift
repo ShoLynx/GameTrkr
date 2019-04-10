@@ -27,8 +27,6 @@ class GameDetailsEditController: UIViewController {
     let gameDetails = GameDetailsController()
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Platform>!
-    var platformName: String!
-    var gameTitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,8 +160,7 @@ extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let platformNames = [platform.name]
-        return platformNames[row]
+        return fetchedResultsController.sections?[0].name
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

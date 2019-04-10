@@ -11,6 +11,7 @@
         <relationship name="platform" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Platform" inverseName="games" inverseEntity="Platform" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES" codeGenerationType="class">
+        <attribute name="addDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="photos" inverseEntity="Game" syncable="YES"/>
     </entity>
@@ -19,8 +20,8 @@
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Game" inverseName="platform" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Platform" positionX="-264.8671875" positionY="-81.71484375" width="128" height="73"/>
         <element name="Game" positionX="-54" positionY="0" width="128" height="163"/>
-        <element name="Photo" positionX="150.23046875" positionY="224.796875" width="128" height="73"/>
+        <element name="Photo" positionX="150.23046875" positionY="224.796875" width="128" height="90"/>
+        <element name="Platform" positionX="-264.8671875" positionY="-81.71484375" width="128" height="73"/>
     </elements>
 </model>

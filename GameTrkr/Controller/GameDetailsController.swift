@@ -31,7 +31,7 @@ class GameDetailsController: UIViewController {
     var game: Game!
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Photo>!
-    var pickerController: UIImagePickerController!
+    let pickerController = UIImagePickerController()
     var blockOperations: [BlockOperation] = []
     var platformName: String!
     var gameTitle: String!
@@ -40,6 +40,11 @@ class GameDetailsController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = platform.name! + " " + game.title!
+        
+        gameImageCollection.delegate = self
+        pickerController.delegate = self
+        
+        setupFetchedResultsController()
         
         hasDefaultYoutubeURL = false
         //need default youtubeURL to be search with Platform and Game
@@ -107,6 +112,8 @@ class GameDetailsController: UIViewController {
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         let predicate = NSPredicate(format: "game == %@", game)
         fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "addDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "photos")
         fetchedResultsController.delegate = self
@@ -132,6 +139,10 @@ class GameDetailsController: UIViewController {
         }
     }
     
+    func photoSelector(source: UIImagePickerController.SourceType) {
+        present(pickerController, animated: true, completion: nil)
+    }
+    
     @IBAction func photoSelect(_ sender: Any) {
         photoSelector(source: .photoLibrary)
     }
@@ -149,13 +160,6 @@ class GameDetailsController: UIViewController {
             }
         }
     }
-    
-    func photoSelector(source: UIImagePickerController.SourceType) {
-        pickerController.delegate = self as UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        present(pickerController, animated: true, completion: nil)
-    }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? GameDetailsEditController {
@@ -234,6 +238,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         let photo = Photo(context: dataController.viewContext)
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             photo.photo = image.pngData()!
+            photo.addDate = Date()
             try? dataController.viewContext.save()
         }
     }

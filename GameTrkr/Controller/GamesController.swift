@@ -79,6 +79,7 @@ class GamesController: UIViewController {
     
     func addGame(title: String) {
         let game = Game(context: dataController.viewContext)
+        game.platform = platform
         game.title = title
         try? dataController.viewContext.save()
     }

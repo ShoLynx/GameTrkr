@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import GameTrkr
 
 class GameTrkrTests: XCTestCase {
 

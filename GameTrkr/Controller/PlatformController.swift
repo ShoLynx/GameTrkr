@@ -74,12 +74,14 @@ class PlatformController: UIViewController {
         let platform = Platform(context: dataController.viewContext)
         platform.name = title
         try? dataController.viewContext.save()
+        print("\(platform.name!) has been added successfully.")
     }
     
     func deletePlatform(at indexPath: IndexPath) {
         let platformToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(platformToDelete)
         try? dataController.viewContext.save()
+        print("The platform has been deleted successfully.")
     }
     
     func updateEditButton() {

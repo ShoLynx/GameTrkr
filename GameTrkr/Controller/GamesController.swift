@@ -30,8 +30,6 @@ class GamesController: UIViewController {
         self.navigationItem.rightBarButtonItem = editButton
         
         navigationItem.title = platform.name
-    
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +55,7 @@ class GamesController: UIViewController {
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "games")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
         fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
@@ -82,12 +80,14 @@ class GamesController: UIViewController {
         game.platform = platform
         game.title = title
         try? dataController.viewContext.save()
+        print("\(game.title!) has been added to the \(platform.name!) platform successfully.")
     }
     
     func deleteGame(at indexPath: IndexPath) {
         let gameToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(gameToDelete)
         try? dataController.viewContext.save()
+        print("The game has been removed successfully.")
     }
     
     func updateEditButton() {

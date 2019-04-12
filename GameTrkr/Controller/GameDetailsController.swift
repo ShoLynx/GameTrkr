@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 import CoreData
+import YouTubePlayer_Swift
 
 class GameDetailsController: UIViewController {
     
-    @IBOutlet weak var youtubePlayerView: UIView!
+    @IBOutlet weak var youtubePlayer: YouTubePlayerView!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
     @IBOutlet weak var digitalRadio: UIImageView!
     @IBOutlet weak var hasBoxRadio: UIImageView!
@@ -42,7 +43,7 @@ class GameDetailsController: UIViewController {
         navigationItem.title = platform.name! + " " + game.title!
         
         gameImageCollection.delegate = self
-        pickerController.delegate = self
+//        pickerController.delegate = self
         
         setupFetchedResultsController()
         
@@ -115,7 +116,7 @@ class GameDetailsController: UIViewController {
         let sortDescriptor = NSSortDescriptor(key: "addDate", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "photos")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "games")
         fetchedResultsController.delegate = self
         do {
             try fetchedResultsController.performFetch()
@@ -240,7 +241,10 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             photo.photo = image.pngData()!
             photo.addDate = Date()
             try? dataController.viewContext.save()
+            print("Photo added to \(platform.name!) \(game.title!) successfully.")
         }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

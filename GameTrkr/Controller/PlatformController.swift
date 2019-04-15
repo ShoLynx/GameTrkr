@@ -74,6 +74,8 @@ class PlatformController: UIViewController {
         let platform = Platform(context: dataController.viewContext)
         platform.name = title
         try? dataController.viewContext.save()
+        platformTable.reloadData()
+        updateEmptyText()
         print("\(platform.name!) has been added successfully.")
     }
     
@@ -81,6 +83,8 @@ class PlatformController: UIViewController {
         let platformToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(platformToDelete)
         try? dataController.viewContext.save()
+        platformTable.reloadData()
+        updateEmptyText()
         print("The platform has been deleted successfully.")
     }
     

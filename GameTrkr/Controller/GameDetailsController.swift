@@ -51,7 +51,7 @@ class GameDetailsController: UIViewController {
         //need default youtubeURL to be search with Platform and Game
         if hasDefaultYoutubeURL {
             game.youtubeURL = youtubeURL
-            //apply game.youtubeURL to player
+            //apply game.youtubeURL to player.  Add else statement for applying default youtubeURL
         }
         
         digitalRadio.image = UIImage(named: "RadioDigitalOff")
@@ -128,6 +128,8 @@ class GameDetailsController: UIViewController {
     @IBAction func enterEditDetails(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToEditController", sender: nil)
     }
+    
+    //Add IBAction for watchAnotherVideo button.  Set to YouTube's next video functionality
     
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
         self.setEditing(!self.isEditing, animated: true)

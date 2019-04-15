@@ -80,6 +80,8 @@ class GamesController: UIViewController {
         game.platform = platform
         game.title = title
         try? dataController.viewContext.save()
+        gameTable.reloadData()
+        updateEmptyText()
         print("\(game.title!) has been added to the \(platform.name!) platform successfully.")
     }
     
@@ -87,6 +89,8 @@ class GamesController: UIViewController {
         let gameToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(gameToDelete)
         try? dataController.viewContext.save()
+        gameTable.reloadData()
+        updateEmptyText()
         print("The game has been removed successfully.")
     }
     

@@ -34,7 +34,7 @@ struct Items: Codable {
 
 struct Id: Codable {
     let kind: String?
-    let playlistId: String?
+    let videoId: String?
 }
 
 struct Snippet: Codable {
@@ -73,4 +73,8 @@ struct High: Codable {
     let url: String?
     let width: Int?
     let height: Int?
+}
+
+struct DefaultVideo {
+    static var video: String?
 }

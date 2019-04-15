@@ -26,6 +26,7 @@ class GameDetailsController: UIViewController {
     @IBOutlet weak var gameDescription: UITextView!
     
     var youtubeURL: String!
+    var defaultURL: String!
     var hasDefaultYoutubeURL: Bool!
     var hasDescription: Bool!
     var platform: Platform!
@@ -46,56 +47,18 @@ class GameDetailsController: UIViewController {
 //        pickerController.delegate = self
         
         setupFetchedResultsController()
-        
-        hasDefaultYoutubeURL = false
-        //need default youtubeURL to be search with Platform and Game
-        if hasDefaultYoutubeURL {
-            game.youtubeURL = youtubeURL
-            //apply game.youtubeURL to player.  Add else statement for applying default youtubeURL
-        }
-        
-        digitalRadio.image = UIImage(named: "RadioDigitalOff")
-        if game.isDigital {
-            digitalRadio.image = UIImage(named: "RadioDigitalOn")
-        }
-        
-        hasBoxRadio.image = UIImage(named: "RadioHasBoxOff")
-        if game.hasBox {
-            hasBoxRadio.image = UIImage(named: "RadioHasBoxOn")
-        }
-        
-        specialEditionRadio.image = UIImage(named: "RadioSpecialEditionOff")
-        if game.isSpecialEdition {
-            specialEditionRadio.image = UIImage(named: "RadioSpecialEditionOn")
-        }
-        
-        emptyImageCollectionLabel.isHidden = true
-        if let sections = fetchedResultsController.sections {
-            if sections[0].numberOfObjects > 0 {
-                emptyImageCollectionLabel.isHidden = true
-                deletePhotoButton.isEnabled = true
-            } else {
-                emptyImageCollectionLabel.isHidden = false
-                deletePhotoButton.isEnabled = false
-            }
-        }
-        
-        hasDescription = false
-        gameDescription.isHidden = true
-        if hasDescription {
-            gameDescription.isHidden = false
-            gameDescription.text = game.gameText
-        } else {
-            gameDescription.isHidden = true
-        }
-        
-        updateDeleteButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupFetchedResultsController()
+        updateYoutubePlayer()
+        updateDigitalRadio()
+        updateHasBoxRadio()
+        updateSpecialEditionRadio()
+        updateCollectionState()
+        updateDescriptionState()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,11 +88,19 @@ class GameDetailsController: UIViewController {
         }
     }
     
+    @IBAction func photoSelect(_ sender: Any) {
+        photoSelector(source: .photoLibrary)
+    }
+    
+    @IBAction func cancel() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func enterEditDetails(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToEditController", sender: nil)
     }
     
-    //Add IBAction for watchAnotherVideo button.  Set to YouTube's next video functionality
+    //Add IBAction for watchAnotherVideo button.  Set to YouTube's next video functionality (may need to run getPlaylistVideo if next functionality is not available when game.youtubeURL is used)
     
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
         self.setEditing(!self.isEditing, animated: true)
@@ -146,21 +117,60 @@ class GameDetailsController: UIViewController {
         present(pickerController, animated: true, completion: nil)
     }
     
-    @IBAction func photoSelect(_ sender: Any) {
-        photoSelector(source: .photoLibrary)
+    //Add all updateUI functions
+    
+    func updateYoutubePlayer() {
+        if hasDefaultYoutubeURL {
+            youtubeURL = game.youtubeURL
+        } else {
+            youtubeURL = defaultURL
+        }
+        
+        youtubePlayer.loadVideoID(youtubeURL)
     }
     
-    @IBAction func cancel() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+    func updateDigitalRadio() {
+        if game.isDigital {
+            digitalRadio.image = UIImage(named: "RadioDigitalOn")
+        } else {
+            digitalRadio.image = UIImage(named: "RadioDigitalOff")
+        }
     }
     
-    func updateDeleteButton() {
+    func updateHasBoxRadio() {
+        if game.hasBox {
+            hasBoxRadio.image = UIImage(named: "RadioHasBoxOn")
+        } else {
+            hasBoxRadio.image = UIImage(named: "RadioHasBoxOff")
+        }
+    }
+    
+    func updateSpecialEditionRadio() {
+        if game.isSpecialEdition {
+            specialEditionRadio.image = UIImage(named: "RadioSpecialEditionOn")
+        } else {
+            specialEditionRadio.image = UIImage(named: "RadioSpecialEditionOff")
+        }
+    }
+    
+    func updateCollectionState() {
         if let sections = fetchedResultsController.sections {
             if sections[0].numberOfObjects > 0 {
+                emptyImageCollectionLabel.isHidden = true
                 deletePhotoButton.isEnabled = true
             } else {
+                emptyImageCollectionLabel.isHidden = false
                 deletePhotoButton.isEnabled = false
             }
+        }
+    }
+    
+    func updateDescriptionState() {
+        if hasDescription {
+            gameDescription.isHidden = false
+            gameDescription.text = game.gameText
+        } else {
+            gameDescription.isHidden = true
         }
     }
     
@@ -202,6 +212,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         if isEditing {
             dataController.viewContext.delete(image)
             try? dataController.viewContext.save()
+            updateCollectionState()
         }
     }
     
@@ -243,6 +254,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             photo.photo = image.pngData()!
             photo.addDate = Date()
             try? dataController.viewContext.save()
+            updateCollectionState()
             print("Photo added to \(platform.name!) \(game.title!) successfully.")
         }
         

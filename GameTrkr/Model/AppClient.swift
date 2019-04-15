@@ -16,13 +16,13 @@ class AppClient {
     static var apiKey = "AIzaSyBjm4J7pjXgBlJ5pU_3A09wFAwU-gt5Gs0"
     
     enum Endpoints {
-        static let youtubeBase = "https://www.googleapis.com/youtube/v3/search?part=snippet&eventType=completed&order=rating"
+        static let youtubeBase = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=rating"
         
         case getData(String, String)
         
         var stringValue: String {
             switch self {
-                case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "&q\(platformName)%2C%20\(gameTitle)=playlist&videoEmbeddable=true&key=\(apiKey)"
+                case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "&q\(platformName)%2C%20\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
             }
         }
     }
@@ -44,7 +44,7 @@ class AppClient {
                 let responseObject = try decoder.decode(YoutubeResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject.items, nil)
-                    //figure out response and apply it here
+                    DefaultVideo.video = responseObject.items[0].id[0].videoId
                 }
             } catch {
                 do {

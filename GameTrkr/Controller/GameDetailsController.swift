@@ -14,6 +14,7 @@ import YouTubePlayer_Swift
 class GameDetailsController: UIViewController {
     
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
+    @IBOutlet weak var noPlayerText: UITextView!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
     @IBOutlet weak var digitalRadio: UIImageView!
     @IBOutlet weak var hasBoxRadio: UIImageView!
@@ -27,8 +28,6 @@ class GameDetailsController: UIViewController {
     
     var youtubeURL: String!
     var defaultURL: String!
-    var hasDefaultYoutubeURL: Bool!
-    var hasDescription: Bool!
     var platform: Platform!
     var game: Game!
     var dataController: DataController!
@@ -120,13 +119,20 @@ class GameDetailsController: UIViewController {
     //Add all updateUI functions
     
     func updateYoutubePlayer() {
-        if hasDefaultYoutubeURL {
+        if game.hasDefaultYoutubeURL {
             youtubeURL = game.youtubeURL
+            noPlayerText.isHidden = true
+            //add noPlayerRefreshButton
+            youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
+        } else if !game.hasDefaultYoutubeURL && defaultURL != nil {
+            noPlayerText.isHidden = true
+            //noPlayerRefreshButton
+            youtubePlayer.loadVideoID(defaultURL)
         } else {
-            youtubeURL = defaultURL
+            youtubePlayer.isHidden = true
+            noPlayerText.isHidden = false
+            //noPlayerRefreshButton
         }
-        
-        youtubePlayer.loadVideoID(youtubeURL)
     }
     
     func updateDigitalRadio() {
@@ -166,7 +172,7 @@ class GameDetailsController: UIViewController {
     }
     
     func updateDescriptionState() {
-        if hasDescription {
+        if game.hasDescription {
             gameDescription.isHidden = false
             gameDescription.text = game.gameText
         } else {

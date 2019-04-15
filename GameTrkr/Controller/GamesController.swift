@@ -79,6 +79,11 @@ class GamesController: UIViewController {
         let game = Game(context: dataController.viewContext)
         game.platform = platform
         game.title = title
+        game.hasDefaultYoutubeURL = false
+        game.hasDescription = false
+        game.isDigital = false
+        game.hasBox = false
+        game.isSpecialEdition = false
         try? dataController.viewContext.save()
         gameTable.reloadData()
         updateEmptyText()

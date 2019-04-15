@@ -222,9 +222,23 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tye-lp-uc9" customClass="YouTubePlayerView" customModule="YouTubePlayer_Swift">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQF-DE-sh3">
+                                                <rect key="frame" x="30" y="30" width="354" height="173"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">Unable to load video.  Please check your internet connection and try loading this screen again.  You can use the Edit mode to add a YouTube share URL and update what video shows up here by default.</string>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="zQF-DE-sh3" secondAttribute="trailing" constant="30" id="2fs-t0-UPo"/>
+                                            <constraint firstItem="zQF-DE-sh3" firstAttribute="top" secondItem="tye-lp-uc9" secondAttribute="top" constant="30" id="98o-zf-3FY"/>
                                             <constraint firstAttribute="width" secondItem="tye-lp-uc9" secondAttribute="height" multiplier="16:9" id="Bon-YA-1Js"/>
+                                            <constraint firstAttribute="bottom" secondItem="zQF-DE-sh3" secondAttribute="bottom" constant="30" id="Qoc-IL-dtB"/>
+                                            <constraint firstItem="zQF-DE-sh3" firstAttribute="leading" secondItem="tye-lp-uc9" secondAttribute="leading" constant="30" id="lTz-OS-zeB"/>
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">
@@ -374,6 +388,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="gameDescription" destination="LZK-sE-Oah" id="BU0-b2-gNT"/>
                         <outlet property="gameImageCollection" destination="tJI-gI-eGF" id="EKy-at-Cjl"/>
                         <outlet property="hasBoxRadio" destination="xJ6-1f-nue" id="W4N-rM-XjQ"/>
+                        <outlet property="noPlayerText" destination="zQF-DE-sh3" id="V9W-Sd-Bn4"/>
                         <outlet property="specialEditionRadio" destination="vdH-d2-YFn" id="8EK-Qo-ql0"/>
                         <outlet property="watchAnotherVideoButton" destination="dx6-ZL-dj1" id="jKC-nn-Bck"/>
                         <outlet property="youtubePlayer" destination="tye-lp-uc9" id="h3N-fi-KwH"/>

@@ -15,7 +15,6 @@ class GameDetailsEditController: UIViewController {
     @IBOutlet weak var defaultVideoSwitch: UISwitch!
     @IBOutlet weak var youTubeField: UITextField!
     @IBOutlet weak var digitalSwitch: UISwitch!
-    @IBOutlet weak var platformPicker: UIPickerView!
     @IBOutlet weak var hasBoxSwitch: UISwitch!
     @IBOutlet weak var specialEditionSwitch: UISwitch!
     @IBOutlet weak var addDescriptionSwitch: UISwitch!
@@ -70,8 +69,7 @@ class GameDetailsEditController: UIViewController {
             descriptionText.text = game.gameText
         }
         
-        platformPicker.dataSource = self
-        platformPicker.delegate = self
+        youTubeField.delegate = self
         descriptionText.delegate = self
         
         setupFetchedResultsController()
@@ -157,27 +155,22 @@ class GameDetailsEditController: UIViewController {
     }
 }
 
-extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, NSFetchedResultsControllerDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return fetchedResultsController.sections?[0].numberOfObjects ?? 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        game.platform = fetchedResultsController.object(at: [row])
-        try? dataController.viewContext.save()
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return fetchedResultsController.sections?[0].name
-    }
+extension GameDetailsEditController: UITextViewDelegate, UITextFieldDelegate,  NSFetchedResultsControllerDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         game.gameText = textView.text
+        try? dataController.viewContext.save()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let defaultText = "Enter a description for your game."
+        if textView.text == defaultText {
+            textView.text = ""
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        game.youtubeURL = textField.text
         try? dataController.viewContext.save()
     }
 }

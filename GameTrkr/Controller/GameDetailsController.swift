@@ -15,6 +15,7 @@ class GameDetailsController: UIViewController {
     
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
     @IBOutlet weak var noPlayerText: UITextView!
+    @IBOutlet weak var watchAVideoButton: UIButton!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
     @IBOutlet weak var digitalRadio: UIImageView!
     @IBOutlet weak var hasBoxRadio: UIImageView!
@@ -144,11 +145,14 @@ class GameDetailsController: UIViewController {
         if game.hasDefaultYoutubeURL {
             youtubeURL = game.youtubeURL
             noPlayerText.isHidden = true
-            //add noPlayerRefreshButton
+            watchAVideoButton.isHidden = true
+            watchAVideoButton.isEnabled = false
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
         } else {
             youtubePlayer.isHidden = true
             noPlayerText.isHidden = false
+            watchAVideoButton.isHidden = false
+            watchAVideoButton.isEnabled = true
             watchAnotherVideoButton.isEnabled = false
             //noPlayerRefreshButton
         }

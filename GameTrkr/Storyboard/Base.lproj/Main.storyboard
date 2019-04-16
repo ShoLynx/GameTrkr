@@ -397,6 +397,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="digitalRadio" destination="S1L-YM-6G1" id="tlj-G2-UDR"/>
                         <outlet property="editButton" destination="yUL-QB-qrY" id="X8l-id-zRe"/>
                         <outlet property="emptyImageCollectionLabel" destination="reZ-FN-dkH" id="nYy-ZY-Bgg"/>
+                        <outlet property="flowLayout" destination="b0g-Yo-0hr" id="lgR-7O-et3"/>
                         <outlet property="gameDescription" destination="LZK-sE-Oah" id="BU0-b2-gNT"/>
                         <outlet property="gameImageCollection" destination="tJI-gI-eGF" id="EKy-at-Cjl"/>
                         <outlet property="hasBoxRadio" destination="xJ6-1f-nue" id="W4N-rM-XjQ"/>

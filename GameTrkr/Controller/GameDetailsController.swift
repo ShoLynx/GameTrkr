@@ -20,6 +20,7 @@ class GameDetailsController: UIViewController {
     @IBOutlet weak var digitalRadio: UIImageView!
     @IBOutlet weak var hasBoxRadio: UIImageView!
     @IBOutlet weak var specialEditionRadio: UIImageView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var gameImageCollection: UICollectionView!
     @IBOutlet weak var emptyImageCollectionLabel: UILabel!
     @IBOutlet weak var addNewPhotoButton: UIBarButtonItem!
@@ -34,7 +35,7 @@ class GameDetailsController: UIViewController {
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Photo>!
     let pickerController = UIImagePickerController()
-    var blockOperations: [BlockOperation] = []
+    var photoArray: [Photo] = []
     var platformName: String!
     var gameTitle: String!
     
@@ -44,9 +45,12 @@ class GameDetailsController: UIViewController {
         navigationItem.title = platform.name! + " " + game.title!
         
         gameImageCollection.delegate = self
-//        pickerController.delegate = self
+        pickerController.delegate = self
         
         setupFetchedResultsController()
+        setCollectionFormat()
+        
+        photoArray = fetchedResultsController.fetchedObjects ?? []
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,11 +69,6 @@ class GameDetailsController: UIViewController {
         super.viewWillDisappear(animated)
         
         fetchedResultsController = nil
-        for operation: BlockOperation in blockOperations {
-            operation.cancel()
-        }
-        
-        blockOperations.removeAll(keepingCapacity: false)
     }
     
     fileprivate func setupFetchedResultsController() {
@@ -86,6 +85,17 @@ class GameDetailsController: UIViewController {
         } catch {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
+    }
+    
+    fileprivate func setCollectionFormat() {
+        let space: CGFloat = 4.0
+        let size = self.view.frame.size
+        let dWidth = (size.width - (space)) / 3.0
+        let dHeight = (size.height - (space)) / 1.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dWidth, height: dHeight)
     }
     
     @IBAction func photoSelect(_ sender: Any) {
@@ -108,8 +118,14 @@ class GameDetailsController: UIViewController {
         
         if isEditing {
             addNewPhotoButton.isEnabled = false
+            watchAVideoButton.isEnabled = false
             watchAnotherVideoButton.isEnabled = false
             editButton.isEnabled = false
+        } else {
+            addNewPhotoButton.isEnabled = true
+            watchAVideoButton.isEnabled = true
+            watchAnotherVideoButton.isEnabled = true
+            editButton.isEnabled = true
         }
     }
     
@@ -119,6 +135,7 @@ class GameDetailsController: UIViewController {
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
         if videos != nil {
+            youtubePlayer.isHidden = false
             defaultURL = DefaultVideo.video
             youtubePlayer.loadVideoID(defaultURL)
         } else {
@@ -133,16 +150,14 @@ class GameDetailsController: UIViewController {
         show(alertVC, sender: nil)
     }
     
-    
-    
     func photoSelector(source: UIImagePickerController.SourceType) {
+        pickerController.allowsEditing = false
         present(pickerController, animated: true, completion: nil)
     }
     
-    //Add all updateUI functions
-    
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
+            youtubePlayer.isHidden = false
             youtubeURL = game.youtubeURL
             noPlayerText.isHidden = true
             watchAVideoButton.isHidden = true
@@ -154,7 +169,6 @@ class GameDetailsController: UIViewController {
             watchAVideoButton.isHidden = false
             watchAVideoButton.isEnabled = true
             watchAnotherVideoButton.isEnabled = false
-            //noPlayerRefreshButton
         }
     }
     
@@ -183,14 +197,12 @@ class GameDetailsController: UIViewController {
     }
     
     func updateCollectionState() {
-        if let sections = fetchedResultsController.sections {
-            if sections[0].numberOfObjects > 0 {
-                emptyImageCollectionLabel.isHidden = true
-                deletePhotoButton.isEnabled = true
-            } else {
-                emptyImageCollectionLabel.isHidden = false
-                deletePhotoButton.isEnabled = false
-            }
+        if photoArray.count > 0 {
+            emptyImageCollectionLabel.isHidden = true
+            deletePhotoButton.isEnabled = true
+        } else {
+            emptyImageCollectionLabel.isHidden = false
+            deletePhotoButton.isEnabled = false
         }
     }
     
@@ -215,16 +227,12 @@ class GameDetailsController: UIViewController {
 
 extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return photoArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let image = fetchedResultsController.object(at: indexPath)
+        let image = photoArray[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamePhotoCell.defaultReuseIdentifier, for: indexPath) as! GamePhotoCell
         
         cell.gameImage.image = UIImage(data: image.photo!)
@@ -234,7 +242,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
-        let image = fetchedResultsController.object(at: indexPath)
+        let image = photoArray[indexPath.row]
         detailController.selectedImage = UIImage(data: image.photo!)
         self.navigationController!.pushViewController(detailController, animated: true)
         
@@ -245,44 +253,15 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         }
     }
     
-    //blockOperations methods gathered from https://stackoverflow.com/questions/20554137/nsfetchedresultscontollerdelegate-for-collectionview/20554673#20554673
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        blockOperations.removeAll(keepingCapacity: false)
-    }
-    
-    func controller(controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: AnyObject, anIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        if type == NSFetchedResultsChangeType.insert {
-            blockOperations.append(BlockOperation(block: { [weak self] in
-                if let this = self {
-                    this.gameImageCollection!.reloadItems(at: [indexPath! as IndexPath])
-                }
-            }))
-        } else if type == NSFetchedResultsChangeType.delete {
-            blockOperations.append(BlockOperation(block: { [weak self] in
-                if let this = self {
-                    this.gameImageCollection!.deleteItems(at: [indexPath! as IndexPath])
-                }
-            }))
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        gameImageCollection.performBatchUpdates({ () -> Void in
-            for operation: BlockOperation in self.blockOperations {
-                operation.start()
-            }
-        }, completion: { (finished) -> Void in
-            self.blockOperations.removeAll(keepingCapacity: false)
-        })
-    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let photo = Photo(context: dataController.viewContext)
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            photo.photo = image.pngData()!
+            let photoData: Data = image.pngData()!
+            photo.photo = photoData
             photo.addDate = Date()
             try? dataController.viewContext.save()
+            photoArray.append(photo)
             updateCollectionState()
             print("Photo added to \(platform.name!) \(game.title!) successfully.")
         }

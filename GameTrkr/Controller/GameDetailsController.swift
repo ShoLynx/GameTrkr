@@ -112,6 +112,28 @@ class GameDetailsController: UIViewController {
         }
     }
     
+    @IBAction func retreiveDefaultVideo(_ sender: UIButton) {
+        AppClient.getPlaylistVideo(platformName: platform.name!, gameTitle: game.title!, completion: handleURLResponse(videos:error:))
+    }
+    
+    func handleURLResponse(videos: [Items]?, error: Error?) {
+        if videos != nil {
+            defaultURL = DefaultVideo.video
+            youtubePlayer.loadVideoID(defaultURL)
+        } else {
+            showVideoRetreivalFailure()
+            print(error!)
+        }
+    }
+    
+    func showVideoRetreivalFailure() {
+        let alertVC = UIAlertController(title: "Unable to Get Video", message: "Please check your internet connection and try the Watch Video button, again.", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
+    
+    
+    
     func photoSelector(source: UIImagePickerController.SourceType) {
         present(pickerController, animated: true, completion: nil)
     }
@@ -124,13 +146,10 @@ class GameDetailsController: UIViewController {
             noPlayerText.isHidden = true
             //add noPlayerRefreshButton
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
-        } else if !game.hasDefaultYoutubeURL && defaultURL != nil {
-            noPlayerText.isHidden = true
-            //noPlayerRefreshButton
-            youtubePlayer.loadVideoID(defaultURL)
         } else {
             youtubePlayer.isHidden = true
             noPlayerText.isHidden = false
+            watchAnotherVideoButton.isEnabled = false
             //noPlayerRefreshButton
         }
     }

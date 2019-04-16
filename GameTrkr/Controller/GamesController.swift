@@ -175,7 +175,7 @@ extension GamesController: UITableViewDataSource, UITableViewDelegate, NSFetched
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToDetailsController", sender: nil)
-        //use AppClient.getPlaylistVideo here.  Set handleYoutubeResponse for when successful it performs segue with destinationVC.defaultURL = DefaultVideo.video.
+        //use AppClient.getPlaylistVideo here.  Set handleYoutubeResponse for when successful it
         //If unsuccessful, perform same segue with destinationVC.youtubePlayer = hidden ,until the destinationVC can check for game.youtubeURL.
     }
     

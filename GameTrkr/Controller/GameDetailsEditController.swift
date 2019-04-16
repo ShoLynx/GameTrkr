@@ -48,6 +48,12 @@ class GameDetailsEditController: UIViewController {
             digitalSwitch.isOn = false
         }
         
+        if game.hasBox {
+            hasBoxSwitch.isOn = true
+        } else {
+            hasBoxSwitch.isOn = false
+        }
+        
         if game.isSpecialEdition {
             specialEditionSwitch.isOn = true
         } else {

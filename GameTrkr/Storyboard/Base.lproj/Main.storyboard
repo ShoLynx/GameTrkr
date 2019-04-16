@@ -223,22 +223,31 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tye-lp-uc9" customClass="YouTubePlayerView" customModule="YouTubePlayer_Swift">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQF-DE-sh3">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-qh-dkw">
                                                 <rect key="frame" x="30" y="30" width="354" height="173"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <string key="text">Unable to load video.  Please check your internet connection and try loading this screen again.  You can use the Edit mode to add a YouTube share URL and update what video shows up here by default.</string>
-                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQF-DE-sh3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="151"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <string key="text">If you have an internet connection, you can watch videos, now.  You can also use the Edit mode to add a YouTube share URL and update what video shows up here by default.</string>
+                                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7M-Hg-TYa">
+                                                        <rect key="frame" x="0.0" y="151" width="354" height="22"/>
+                                                        <state key="normal" title="Watch a Video"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="zQF-DE-sh3" secondAttribute="trailing" constant="30" id="2fs-t0-UPo"/>
-                                            <constraint firstItem="zQF-DE-sh3" firstAttribute="top" secondItem="tye-lp-uc9" secondAttribute="top" constant="30" id="98o-zf-3FY"/>
                                             <constraint firstAttribute="width" secondItem="tye-lp-uc9" secondAttribute="height" multiplier="16:9" id="Bon-YA-1Js"/>
-                                            <constraint firstAttribute="bottom" secondItem="zQF-DE-sh3" secondAttribute="bottom" constant="30" id="Qoc-IL-dtB"/>
-                                            <constraint firstItem="zQF-DE-sh3" firstAttribute="leading" secondItem="tye-lp-uc9" secondAttribute="leading" constant="30" id="lTz-OS-zeB"/>
+                                            <constraint firstAttribute="trailing" secondItem="sVI-qh-dkw" secondAttribute="trailing" constant="30" id="FzX-K7-RfR"/>
+                                            <constraint firstItem="sVI-qh-dkw" firstAttribute="leading" secondItem="tye-lp-uc9" secondAttribute="leading" constant="30" id="hdV-YU-6xV"/>
+                                            <constraint firstAttribute="bottom" secondItem="sVI-qh-dkw" secondAttribute="bottom" constant="30" id="lyP-Yn-T2p"/>
+                                            <constraint firstItem="sVI-qh-dkw" firstAttribute="top" secondItem="tye-lp-uc9" secondAttribute="top" constant="30" id="ynS-OH-q3Y"/>
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">

@@ -27,7 +27,7 @@ class AppClient {
         }
     }
     
-    func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
+    class func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
         let originalString = "\(Endpoints.getData(platformName, gameTitle))"
         let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let target = URL(string: urlString)!

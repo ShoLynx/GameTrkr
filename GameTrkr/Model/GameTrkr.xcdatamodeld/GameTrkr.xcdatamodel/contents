@@ -22,8 +22,8 @@
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Game" inverseName="platform" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="-54" positionY="0" width="128" height="195"/>
-        <element name="Photo" positionX="150.23046875" positionY="224.796875" width="128" height="90"/>
+        <element name="Game" positionX="-54" positionY="0" width="128" height="193"/>
+        <element name="Photo" positionX="150.23046875" positionY="224.796875" width="128" height="88"/>
         <element name="Platform" positionX="-264.8671875" positionY="-81.71484375" width="128" height="73"/>
     </elements>
 </model>

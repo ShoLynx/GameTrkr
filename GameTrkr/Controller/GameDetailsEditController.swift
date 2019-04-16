@@ -24,20 +24,22 @@ class GameDetailsEditController: UIViewController {
     var platform: Platform!
     var game: Game!
     var platforms: [Platform] = []
-    let gameDetails = GameDetailsController()
     var dataController: DataController!
-    var fetchedResultsController: NSFetchedResultsController<Platform>!
+    var fetchedResultsController: NSFetchedResultsController<Game>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = platform.name! + " " + game.title!
         
-        if game.youtubeURL != nil {
+        if game.hasDefaultYoutubeURL {
             defaultVideoSwitch.isOn = true
-            youTubeField.text = game.youtubeURL
         } else {
             defaultVideoSwitch.isOn = false
+        }
+        
+        if game.youtubeURL != nil {
+            youTubeField.text = game.youtubeURL
         }
         
         if game.isDigital {
@@ -46,46 +48,50 @@ class GameDetailsEditController: UIViewController {
             digitalSwitch.isOn = false
         }
         
-        if game.hasBox {
-            hasBoxSwitch.isOn = true
-        } else {
-            hasBoxSwitch.isOn = false
-        }
-        
         if game.isSpecialEdition {
             specialEditionSwitch.isOn = true
         } else {
             specialEditionSwitch.isOn = false
         }
         
-        if game.gameText != nil {
+        if game.hasDescription {
             addDescriptionSwitch.isOn = true
-            descriptionText.text = game.gameText
         } else {
             addDescriptionSwitch.isOn = false
+        }
+        
+        if game.gameText != nil {
+            descriptionText.text = game.gameText
         }
         
         platformPicker.dataSource = self
         platformPicker.delegate = self
         descriptionText.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         setupFetchedResultsController()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        if defaultVideoSwitch.isOn {
+            game.youtubeURL = youTubeField.text
+        }
+        
+        if addDescriptionSwitch.isOn {
+            game.gameText = descriptionText.text
+        }
         
         try? dataController.viewContext.save()
         fetchedResultsController = nil
     }
     
     fileprivate func setupFetchedResultsController() {
-        let fetchRequest: NSFetchRequest<Platform> = Platform.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
+        let predicate = NSPredicate(format: "platform == %@", game)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
@@ -97,49 +103,50 @@ class GameDetailsEditController: UIViewController {
         }
     }
     
-    fileprivate func updateDefaultVideoSwitch() {
-        if defaultVideoSwitch.isOn {
+    @IBAction func defaultYoutbeVideoSwitched(_ sender: UISwitch) {
+        if sender.isOn == true {
             youTubeField.isEnabled = true
-            gameDetails.hasDefaultYoutubeURL = true
+            game.hasDefaultYoutubeURL = true
             game.youtubeURL = youTubeField.text ?? ""
         } else {
             youTubeField.isEnabled = false
-            gameDetails.hasDefaultYoutubeURL = false
+            game.hasDefaultYoutubeURL = false
             game.youtubeURL = nil
         }
     }
     
-    fileprivate func updateDigitalSwitch() {
-        if digitalSwitch.isOn {
+    @IBAction func isDigitalSwitched(_ sender: UISwitch) {
+        if sender.isOn == true {
             game.isDigital = true
         } else {
             game.isDigital = false
         }
     }
     
-    fileprivate func updateHasBoxSwitch() {
-        if digitalSwitch.isOn {
+    @IBAction func hasBoxSwitched(_ sender: UISwitch) {
+        if sender.isOn == true {
             game.hasBox = true
         } else {
             game.hasBox = false
         }
     }
     
-    fileprivate func updateSpecialEditionSwitch() {
-        if specialEditionSwitch.isOn {
+    @IBAction func isSpecialEditionSwitched(_ sender: UISwitch) {
+        if sender.isOn == true {
             game.isSpecialEdition = true
         } else {
             game.isSpecialEdition = false
         }
     }
     
-    fileprivate func updateDescriptionSwitch() {
-        if addDescriptionSwitch.isOn {
+    @IBAction func hasDescriptionSwitched(_ sender: UISwitch) {
+        if sender.isOn == true {
             descriptionText.isEditable = true
-            gameDetails.hasDescription = true
+            game.hasDescription = true
+            game.gameText = descriptionText.text
         } else {
             descriptionText.isEditable = false
-            gameDetails.hasDescription = false
+            game.hasDescription = false
         }
     }
 }
@@ -155,7 +162,7 @@ extension GameDetailsEditController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        game.platform = fetchedResultsController.object(at: [row])
+//        game.platform = fetchedResultsController.object(at: [row])
         try? dataController.viewContext.save()
     }
     

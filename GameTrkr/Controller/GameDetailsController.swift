@@ -14,8 +14,7 @@ import YouTubePlayer_Swift
 class GameDetailsController: UIViewController {
     
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
-    @IBOutlet weak var noPlayerText: UITextView!
-    @IBOutlet weak var watchAVideoButton: UIButton!
+    @IBOutlet weak var loadVideoButton: UIBarButtonItem!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
     @IBOutlet weak var digitalRadio: UIImageView!
     @IBOutlet weak var hasBoxRadio: UIImageView!
@@ -111,6 +110,9 @@ class GameDetailsController: UIViewController {
     }
     
     //Add IBAction for watchAnotherVideo button.  Set to YouTube's next video functionality (may need to run getPlaylistVideo if next functionality is not available when game.youtubeURL is used)
+    @IBAction func nextVideo(_ sender: UIBarButtonItem) {
+        youtubePlayer.nextVideo()
+    }
     
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
         self.setEditing(!self.isEditing, animated: true)
@@ -118,18 +120,18 @@ class GameDetailsController: UIViewController {
         
         if isEditing {
             addNewPhotoButton.isEnabled = false
-            watchAVideoButton.isEnabled = false
+            loadVideoButton.isEnabled = false
             watchAnotherVideoButton.isEnabled = false
             editButton.isEnabled = false
         } else {
             addNewPhotoButton.isEnabled = true
-            watchAVideoButton.isEnabled = true
+            loadVideoButton.isEnabled = true
             watchAnotherVideoButton.isEnabled = true
             editButton.isEnabled = true
         }
     }
     
-    @IBAction func retreiveDefaultVideo(_ sender: UIButton) {
+    @IBAction func retreiveDefaultVideo(_ sender: UIBarButtonItem) {
         AppClient.getPlaylistVideo(platformName: platform.name!, gameTitle: game.title!, completion: handleURLResponse(videos:error:))
     }
     
@@ -139,15 +141,15 @@ class GameDetailsController: UIViewController {
             defaultURL = DefaultVideo.video
             youtubePlayer.loadVideoID(defaultURL)
         } else {
-            showVideoRetreivalFailure()
+            showVideoRetreivalFailure(message: error?.localizedDescription ?? "")
             print(error!)
         }
     }
     
-    func showVideoRetreivalFailure() {
-        let alertVC = UIAlertController(title: "Unable to Get Video", message: "Please check your internet connection and try the Watch Video button, again.", preferredStyle: .alert)
+    func showVideoRetreivalFailure(message: String) {
+        let alertVC = UIAlertController(title: "Unable to Get Video", message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        present(alertVC, animated: true)
     }
     
     func photoSelector(source: UIImagePickerController.SourceType) {
@@ -157,17 +159,9 @@ class GameDetailsController: UIViewController {
     
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
-            youtubePlayer.isHidden = false
             youtubeURL = game.youtubeURL
-            noPlayerText.isHidden = true
-            watchAVideoButton.isHidden = true
-            watchAVideoButton.isEnabled = false
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
         } else {
-            youtubePlayer.isHidden = true
-            noPlayerText.isHidden = false
-            watchAVideoButton.isHidden = false
-            watchAVideoButton.isEnabled = true
             watchAnotherVideoButton.isEnabled = false
         }
     }

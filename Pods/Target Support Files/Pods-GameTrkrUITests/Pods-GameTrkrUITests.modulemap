@@ -1,0 +1,6 @@
+framework module Pods_GameTrkrUITests {
+  umbrella header "Pods-GameTrkrUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

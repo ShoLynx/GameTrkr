@@ -7,32 +7,37 @@
 //
 
 import Foundation
-import UIKit
 
 class AppClient {
     
     //MARK: API keys and contact URLs
     
-    static var apiKey = "AIzaSyBjm4J7pjXgBlJ5pU_3A09wFAwU-gt5Gs0"
+    static let apiKey = "AIzaSyBjm4J7pjXgBlJ5pU_3A09wFAwU-gt5Gs0"
     
     enum Endpoints {
-        static let youtubeBase = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&order=rating"
+        static let youtubeBase = "https://www.googleapis.com/youtube/v3/"
         
         case getData(String, String)
         
         var stringValue: String {
             switch self {
-                case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "&q\(platformName)%2C%20\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
+            case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "search?part=snippet&maxResults=25&order=rating&q=\(platformName)%2C%20\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
             }
+        }
+        
+        var url: URL {
+            return URL(string: stringValue)!
         }
     }
     
     class func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
-        let originalString = "\(Endpoints.getData(platformName, gameTitle))"
-        let urlString = originalString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let target = URL(string: urlString)!
+//        var originalURL = Endpoints.getData(platformName, gameTitle)
+//        var noSpaceURL = originalURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        let task = URLSession.shared.dataTask(with: target) { (data, response, error) in
+        var request = URLRequest(url: Endpoints.getData(platformName, gameTitle).url)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)

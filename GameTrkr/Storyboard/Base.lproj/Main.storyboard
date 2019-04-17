@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vRl-eI-I40">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -43,18 +43,18 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ks4-Tb-mNs" id="MFd-Ba-GWJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="waD-Ug-QCo">
-                                                    <rect key="frame" x="20" y="5" width="33.5" height="20.5"/>
+                                                    <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s3L-EE-teJ">
-                                                    <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
+                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -137,11 +137,11 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TPG-e7-Qkx" id="Zy2-xc-MAw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HVn-S7-J6e">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -222,35 +222,9 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tye-lp-uc9" customClass="YouTubePlayerView" customModule="YouTubePlayer_Swift">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sVI-qh-dkw">
-                                                <rect key="frame" x="20" y="20" width="374" height="193"/>
-                                                <subviews>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zQF-DE-sh3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="193"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <string key="text">If you have an internet connection, you can watch videos, now.  You can also use the Edit mode to add a YouTube share URL and update what video shows up here by default.</string>
-                                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    </textView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7M-Hg-TYa">
-                                                        <rect key="frame" x="0.0" y="193" width="374" height="0.0"/>
-                                                        <state key="normal" title="Watch a Video"/>
-                                                        <connections>
-                                                            <action selector="retreiveDefaultVideo:" destination="f60-RZ-aMQ" eventType="touchUpInside" id="8Oz-2U-wTn"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tye-lp-uc9" secondAttribute="height" multiplier="16:9" id="Bon-YA-1Js"/>
-                                            <constraint firstAttribute="trailing" secondItem="sVI-qh-dkw" secondAttribute="trailing" constant="20" id="FzX-K7-RfR"/>
-                                            <constraint firstItem="sVI-qh-dkw" firstAttribute="leading" secondItem="tye-lp-uc9" secondAttribute="leading" constant="20" id="hdV-YU-6xV"/>
-                                            <constraint firstAttribute="bottom" secondItem="sVI-qh-dkw" secondAttribute="bottom" constant="20" id="lyP-Yn-T2p"/>
-                                            <constraint firstItem="sVI-qh-dkw" firstAttribute="top" secondItem="tye-lp-uc9" secondAttribute="top" constant="20" id="ynS-OH-q3Y"/>
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">
@@ -260,22 +234,30 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="ywC-Ch-oqt"/>
                                         </constraints>
                                         <items>
+                                            <barButtonItem title="Load Video" id="J3q-K9-oB3">
+                                                <connections>
+                                                    <action selector="retreiveDefaultVideo:" destination="f60-RZ-aMQ" id="HJg-HL-DwO"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="qSx-8J-XeK"/>
-                                            <barButtonItem title="Watch Another Video" width="200" id="dx6-ZL-dj1"/>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="KIx-5L-MZe"/>
+                                            <barButtonItem title="Watch Another Video" width="200" id="dx6-ZL-dj1">
+                                                <connections>
+                                                    <action selector="nextVideo:" destination="f60-RZ-aMQ" id="Lrt-Wn-wFV"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                     </toolbar>
                                     <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Egm-kx-JU6">
                                         <rect key="frame" x="0.0" y="277" width="414" height="100"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioDigitalOff" translatesAutoresizingMaskIntoConstraints="NO" id="S1L-YM-6G1">
-                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="132.66666666666666" height="100"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioHasBoxOff" translatesAutoresizingMaskIntoConstraints="NO" id="xJ6-1f-nue">
-                                                <rect key="frame" x="140.5" y="0.0" width="133" height="100"/>
+                                                <rect key="frame" x="140.66666666666669" y="0.0" width="132.66666666666669" height="100"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RadioSpecialEditionOff" translatesAutoresizingMaskIntoConstraints="NO" id="vdH-d2-YFn">
-                                                <rect key="frame" x="281.5" y="0.0" width="132.5" height="100"/>
+                                                <rect key="frame" x="281.33333333333331" y="0.0" width="132.66666666666669" height="100"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -283,7 +265,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tJI-gI-eGF">
-                                        <rect key="frame" x="0.0" y="377" width="414" height="177.5"/>
+                                        <rect key="frame" x="0.0" y="377" width="414" height="177.33333333333337"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tJI-gI-eGF" secondAttribute="height" multiplier="7:3" id="3sX-9p-ds8"/>
@@ -295,7 +277,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your image collection is empty." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="reZ-FN-dkH">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="177.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="177.33333333333337"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -322,7 +304,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </cells>
                                     </collectionView>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpy-x1-imQ">
-                                        <rect key="frame" x="0.0" y="554.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="554.33333333333337" width="414" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="DxB-Bl-vUT"/>
                                         </constraints>
@@ -341,7 +323,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                         </items>
                                     </toolbar>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZK-sE-Oah">
-                                        <rect key="frame" x="0.0" y="598.5" width="414" height="170"/>
+                                        <rect key="frame" x="0.0" y="598.33333333333337" width="414" height="170"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="0gF-vq-u2M"/>
@@ -401,9 +383,8 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                         <outlet property="gameDescription" destination="LZK-sE-Oah" id="BU0-b2-gNT"/>
                         <outlet property="gameImageCollection" destination="tJI-gI-eGF" id="EKy-at-Cjl"/>
                         <outlet property="hasBoxRadio" destination="xJ6-1f-nue" id="W4N-rM-XjQ"/>
-                        <outlet property="noPlayerText" destination="zQF-DE-sh3" id="V9W-Sd-Bn4"/>
+                        <outlet property="loadVideoButton" destination="J3q-K9-oB3" id="6yP-zY-deH"/>
                         <outlet property="specialEditionRadio" destination="vdH-d2-YFn" id="8EK-Qo-ql0"/>
-                        <outlet property="watchAVideoButton" destination="u7M-Hg-TYa" id="hKI-ir-3HG"/>
                         <outlet property="watchAnotherVideoButton" destination="dx6-ZL-dj1" id="jKC-nn-Bck"/>
                         <outlet property="youtubePlayer" destination="tye-lp-uc9" id="h3N-fi-KwH"/>
                         <segue destination="hd0-LW-aIc" kind="show" identifier="goToEditController" id="vBR-su-gUH"/>
@@ -437,7 +418,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem systemItem="flexibleSpace" id="ysZ-us-BUO"/>
                                             <barButtonItem style="plain" id="jUB-Ee-z9F">
                                                 <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="hGF-du-hRR">
-                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="defaultYoutbeVideoSwitched:" destination="hd0-LW-aIc" eventType="valueChanged" id="CnC-av-u0L"/>
@@ -467,7 +448,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="ySa-gd-agY"/>
                                             <barButtonItem style="plain" id="OeX-uy-oPm">
                                                 <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="eTc-Gc-ecS">
-                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="isDigitalSwitched:" destination="hd0-LW-aIc" eventType="valueChanged" id="Gmt-40-0cz"/>
@@ -488,7 +469,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="wU7-jP-L4X"/>
                                             <barButtonItem style="plain" id="vcJ-XD-K2Y">
                                                 <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="4qK-vA-Pqi">
-                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="hasBoxSwitched:" destination="hd0-LW-aIc" eventType="valueChanged" id="VhV-L9-BBq"/>
@@ -509,7 +490,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="Qgz-zn-Fe9"/>
                                             <barButtonItem style="plain" id="in1-vN-OSa">
                                                 <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="Pc4-4d-brd">
-                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="isSpecialEditionSwitched:" destination="hd0-LW-aIc" eventType="valueChanged" id="SXe-K8-ZFc"/>
@@ -530,7 +511,7 @@ If necessary, you can change a game's platform using the game's Edit mode.</stri
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="9cT-zQ-WHc"/>
                                             <barButtonItem style="plain" id="EEd-Zk-S1l">
                                                 <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="fill" on="YES" id="c7T-Rq-FJH">
-                                                    <rect key="frame" x="343" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="343" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="hasDescriptionSwitched:" destination="hd0-LW-aIc" eventType="valueChanged" id="DlY-Wn-FzX"/>

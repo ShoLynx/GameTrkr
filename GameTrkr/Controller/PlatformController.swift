@@ -11,6 +11,8 @@ import CoreData
 
 class PlatformController: UIViewController {
     
+    //  MARK: Class Setup
+    
     @IBOutlet weak var platformTable: UITableView!
     @IBOutlet weak var noPlatformsText: UITextView!
     @IBOutlet weak var addPlatformButton: UIBarButtonItem!
@@ -18,20 +20,24 @@ class PlatformController: UIViewController {
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Platform>!
     
+    //  MARK: Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Set table datasource and delegate as Platform Controller
         platformTable.dataSource = self
         platformTable.delegate = self
         
+        //Create an edit toggle for the right navigation button
         let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toggleEditing))
         self.navigationItem.rightBarButtonItem = editButton
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(animated)
         
+        //Set up FRC at viewDidAppear to accomodate for reenabling FRC when dismissing other view controllers.
         setupFetchedResultsController()
         
         if let indexPath = platformTable.indexPathForSelectedRow {
@@ -42,7 +48,15 @@ class PlatformController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        //Relinquish FRC for the next viewable view controller.
         fetchedResultsController = nil
+    }
+    
+    //  MARK: IBActions and Class Functions
+    
+    @IBAction func addTapped(sender: Any) {
+        newPlatformAlert()
     }
     
     fileprivate func setupFetchedResultsController() {
@@ -66,10 +80,6 @@ class PlatformController: UIViewController {
         navigationItem.rightBarButtonItem?.title = platformTable.isEditing ? "Done" : "Edit"
     }
     
-    @IBAction func addTapped(sender: Any) {
-        newPlatformAlert()
-    }
-    
     func addPlatform(title: String) {
         let platform = Platform(context: dataController.viewContext)
         platform.name = title
@@ -89,12 +99,14 @@ class PlatformController: UIViewController {
     }
     
     func updateEditButton() {
+        //Disable the Edit button if there are no platforms in the table.  Must be applied to all functions that affect number of Platforms.
         if let sections = fetchedResultsController.sections {
             navigationItem.rightBarButtonItem?.isEnabled = sections[0].numberOfObjects > 0
         }
     }
     
     func updateEmptyText() {
+        //Hides the table and displays instruction text when there are no platforms in the table.  Must be applied to all functions that affect number of Platforms.
         if let sections = fetchedResultsController.sections {
             if sections[0].numberOfObjects > 0 {
                 platformTable.isHidden = false
@@ -107,6 +119,7 @@ class PlatformController: UIViewController {
     }
     
     func newPlatformAlert() {
+        //Displays an alert view with a text field allowing users to add a platform to the table.
         let alert = UIAlertController(title: "New Platform", message: "Enter a name for this platform.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak self] action in
@@ -141,6 +154,8 @@ class PlatformController: UIViewController {
     }
     
 }
+
+    //  MARK: Class extension - Protocol list and delegate rules.
 
 extension PlatformController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     

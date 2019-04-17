@@ -12,6 +12,8 @@ import CoreData
 
 class GamesController: UIViewController {
     
+    //  MARK: Class Setup
+    
     @IBOutlet var gameTable: UITableView!
     @IBOutlet weak var noGamesText: UITextView!
     @IBOutlet weak var newGameButton: UIBarButtonItem!
@@ -19,6 +21,8 @@ class GamesController: UIViewController {
     var platform: Platform!
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Game>!
+    
+    //  MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +52,12 @@ class GamesController: UIViewController {
         fetchedResultsController = nil
     }
     
+    //  MARK: IBActions and Class functions
+    
+    @IBAction func addTapped(sender: Any) {
+        newGameAlert()
+    }
+    
     fileprivate func setupFetchedResultsController() {
         let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
         let predicate = NSPredicate(format: "platform == %@", platform)
@@ -71,19 +81,18 @@ class GamesController: UIViewController {
         navigationItem.rightBarButtonItem?.title = gameTable.isEditing ? "Done" : "Edit"
     }
     
-    @IBAction func addTapped(sender: Any) {
-        newGameAlert()
-    }
-    
     func addGame(title: String) {
         let game = Game(context: dataController.viewContext)
         game.platform = platform
         game.title = title
+        
+        //It is important to set these defaults at object creation.  These values will affect the switches in GameDetailsEditController.
         game.hasDefaultYoutubeURL = false
         game.hasDescription = false
         game.isDigital = false
         game.hasBox = false
         game.isSpecialEdition = false
+        
         try? dataController.viewContext.save()
         gameTable.reloadData()
         updateEmptyText()
@@ -152,6 +161,8 @@ class GamesController: UIViewController {
         }
     }
 }
+
+    //  MARK: Class extension - Protocol lists and delegate rules
 
 
 extension GamesController: UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {

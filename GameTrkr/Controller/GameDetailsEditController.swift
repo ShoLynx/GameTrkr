@@ -12,6 +12,8 @@ import CoreData
 
 class GameDetailsEditController: UIViewController {
     
+    // MARK: Class setup
+    
     @IBOutlet weak var defaultVideoSwitch: UISwitch!
     @IBOutlet weak var youTubeField: UITextField!
     @IBOutlet weak var digitalSwitch: UISwitch!
@@ -26,10 +28,14 @@ class GameDetailsEditController: UIViewController {
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Game>!
     
+    // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = platform.name! + " " + game.title!
+        
+        // Set the default position of all switches in the view.  New games will default to all switches being off, since their values are defaulted to off at creation.
         
         if game.hasDefaultYoutubeURL {
             defaultVideoSwitch.isOn = true
@@ -37,6 +43,7 @@ class GameDetailsEditController: UIViewController {
             defaultVideoSwitch.isOn = false
         }
         
+        // Load existing youtubeURLs of they are available.
         if game.youtubeURL != nil {
             youTubeField.text = game.youtubeURL
         }
@@ -65,6 +72,7 @@ class GameDetailsEditController: UIViewController {
             addDescriptionSwitch.isOn = false
         }
         
+        // Load existing game descriptions if they are avaialble.
         if game.gameText != nil {
             descriptionText.text = game.gameText
         }
@@ -72,8 +80,8 @@ class GameDetailsEditController: UIViewController {
         youTubeField.delegate = self
         descriptionText.delegate = self
         
+        // Adding to viewDidLoad, as this view is the last in the chain.  It cannot be backed into.
         setupFetchedResultsController()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,21 +99,7 @@ class GameDetailsEditController: UIViewController {
         fetchedResultsController = nil
     }
     
-    fileprivate func setupFetchedResultsController() {
-        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
-        let predicate = NSPredicate(format: "platform == %@", game)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
-        }
-    }
+    // MARK: IBActions and Class functions
     
     @IBAction func defaultYoutbeVideoSwitched(_ sender: UISwitch) {
         if sender.isOn == true {
@@ -153,7 +147,25 @@ class GameDetailsEditController: UIViewController {
             game.hasDescription = false
         }
     }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Game> = Game.fetchRequest()
+        let predicate = NSPredicate(format: "platform == %@", game)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "platforms")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
 }
+
+    // MARK: Class extension - Protocol list and delegate rules
 
 extension GameDetailsEditController: UITextViewDelegate, UITextFieldDelegate,  NSFetchedResultsControllerDelegate {
     

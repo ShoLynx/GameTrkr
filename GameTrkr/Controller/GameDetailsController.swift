@@ -13,6 +13,8 @@ import YouTubePlayer_Swift
 
 class GameDetailsController: UIViewController {
     
+    // MARK: Class setup
+    
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
     @IBOutlet weak var loadVideoButton: UIBarButtonItem!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
@@ -37,6 +39,8 @@ class GameDetailsController: UIViewController {
     var photoArray: [Photo] = []
     var platformName: String!
     var gameTitle: String!
+    
+    // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,32 +74,7 @@ class GameDetailsController: UIViewController {
         fetchedResultsController = nil
     }
     
-    fileprivate func setupFetchedResultsController() {
-        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-        let predicate = NSPredicate(format: "game == %@", game)
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "addDate", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "games")
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
-        }
-    }
-    
-    fileprivate func setCollectionFormat() {
-        let space: CGFloat = 4.0
-        let size = self.view.frame.size
-        let dWidth = (size.width - (space)) / 3.0
-        let dHeight = (size.height - (space)) / 1.0
-        
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dWidth, height: dHeight)
-    }
+    // MARK: IBActions and Class functions
     
     @IBAction func photoSelect(_ sender: Any) {
         photoSelector(source: .photoLibrary)
@@ -109,7 +88,6 @@ class GameDetailsController: UIViewController {
         performSegue(withIdentifier: "goToEditController", sender: nil)
     }
     
-    //Add IBAction for watchAnotherVideo button.  Set to YouTube's next video functionality (may need to run getPlaylistVideo if next functionality is not available when game.youtubeURL is used)
     @IBAction func nextVideo(_ sender: UIBarButtonItem) {
         youtubePlayer.nextVideo()
     }
@@ -132,7 +110,36 @@ class GameDetailsController: UIViewController {
     }
     
     @IBAction func retreiveDefaultVideo(_ sender: UIBarButtonItem) {
+        // Calls Youtube API to get the first video from a search using Platform name and Game title as search terms.
         AppClient.getPlaylistVideo(platformName: platform.name!, gameTitle: game.title!, completion: handleURLResponse(videos:error:))
+    }
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let predicate = NSPredicate(format: "game == %@", game)
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "addDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "games")
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
+    
+    fileprivate func setCollectionFormat() {
+        //Sets the formatting rules for the collection view's FlowLayout.
+        let space: CGFloat = 4.0
+        let size = self.view.frame.size
+        let dWidth = (size.width - (space)) / 3.0
+        let dHeight = (size.height - (space)) / 1.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSize(width: dWidth, height: dHeight)
     }
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
@@ -156,6 +163,8 @@ class GameDetailsController: UIViewController {
         pickerController.allowsEditing = false
         present(pickerController, animated: true, completion: nil)
     }
+    
+    // MARK: UI Update functions - Set the state of the controller assets
     
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
@@ -218,6 +227,8 @@ class GameDetailsController: UIViewController {
     }
     
 }
+
+    // MARK: Class extension - Protocol list and delegate rules
 
 extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate {
     

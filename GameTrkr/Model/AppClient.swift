@@ -26,9 +26,13 @@ class AppClient {
         }
         
         var url: URL {
+            // Currently crashes when utilizing GameDetailsController Load Video button.
             return URL(string: stringValue)!
         }
     }
+    
+    //MARK: Global Function
+    //getPlaylistVideo grabs 25 video objects and applys the first of the objects to DefaultVideo.video.
     
     class func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
 //        var originalURL = Endpoints.getData(platformName, gameTitle)
@@ -53,6 +57,7 @@ class AppClient {
                 }
             } catch {
                 do {
+                    //Grabs the API error message for error alerts
                     let decoder = JSONDecoder()
                     let errorResponse = try decoder.decode(ErrorResponse.self, from: data)
                     DispatchQueue.main.async {

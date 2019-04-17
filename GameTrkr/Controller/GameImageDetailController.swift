@@ -11,10 +11,14 @@ import UIKit
 
 class GameImageDetailController: UIViewController {
     
+    // MARK: Class setup
+    
     @IBOutlet weak var fullscreenImage: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     
     var selectedImage: UIImage!
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,8 @@ class GameImageDetailController: UIViewController {
         
         fullscreenImage.image = selectedImage
     }
+    
+    // MARK: Exit function
     
     @IBAction func exitDetail (_ sender: Any) {
         dismiss(animated: true, completion: nil)

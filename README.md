@@ -9,7 +9,7 @@ After opening **GameTrkr**, you will be presented with an empty *Platform Table*
 
 Once you add a Platform, you can add games to said platform.  Follow the instructions to add Games in the same manner as adding platforms.
 
-### Platform/ Game Table Controls
+### Platform/Game Table Controls
 -	Add New Platform/Game button: provides a view for you to add a Platform or Game
 -	Edit (with Platforms/Games available): enter the table’s Edit mode, where you have the option to remove Platforms and Games
 -	Scroll (with Platforms/Games available): swipe vertically to scroll through the available Platforms and Games

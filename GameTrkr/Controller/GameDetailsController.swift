@@ -254,6 +254,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         if isEditing {
             dataController.viewContext.delete(image)
             try? dataController.viewContext.save()
+            gameImageCollection.reloadData()
             updateCollectionState()
         }
     }
@@ -267,6 +268,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             photo.addDate = Date()
             try? dataController.viewContext.save()
             photoArray.append(photo)
+            gameImageCollection.reloadData()
             updateCollectionState()
             print("Photo added to \(platform.name!) \(game.title!) successfully.")
         }

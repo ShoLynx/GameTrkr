@@ -14,7 +14,6 @@ class GameImageDetailController: UIViewController {
     // MARK: Class setup
     
     @IBOutlet weak var fullscreenImage: UIImageView!
-    @IBOutlet weak var closeButton: UIButton!
     
     var selectedImage: UIImage!
     
@@ -23,15 +22,6 @@ class GameImageDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        closeButton.layer.cornerRadius = 10.0
-        closeButton.layer.masksToBounds = true
-        
         fullscreenImage.image = selectedImage
-    }
-    
-    // MARK: Exit function
-    
-    @IBAction func exitDetail (_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
 }

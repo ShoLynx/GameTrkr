@@ -49,11 +49,12 @@ class GameDetailsController: UIViewController {
         
         navigationItem.title = platform.name! + " " + game.title!
         
-        gameImageCollection.delegate = self
-        pickerController.delegate = self
-        
         setupFetchedResultsController()
         setCollectionFormat()
+        
+        pickerController.delegate = self
+        gameImageCollection.delegate = self
+        gameImageCollection.dataSource = self
         
         photoArray = fetchedResultsController.fetchedObjects ?? []
     }
@@ -67,6 +68,7 @@ class GameDetailsController: UIViewController {
         updateHasBoxRadio()
         updateSpecialEditionRadio()
         updateCollectionState()
+        gameImageCollection.reloadData()
         updateDescriptionState()
     }
     
@@ -163,7 +165,6 @@ class GameDetailsController: UIViewController {
     }
     
     func photoSelector(source: UIImagePickerController.SourceType) {
-        pickerController.allowsEditing = false
         present(pickerController, animated: true, completion: nil)
     }
     
@@ -229,7 +230,6 @@ class GameDetailsController: UIViewController {
             destinationVC.dataController = dataController
         }
     }
-    
 }
 
     // MARK: Class extension - Protocol list and delegate rules
@@ -241,10 +241,10 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let image = photoArray[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GamePhotoCell.defaultReuseIdentifier, for: indexPath) as! GamePhotoCell
+        let image = photoArray[indexPath.row]
         
-        cell.gameImage.image = UIImage(data: image.photo!)
+        cell.gameImage.image = UIImage(data: image.photoData!)
         
         return cell
     }
@@ -259,8 +259,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             updateCollectionState()
         } else {
             let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
-            
-            detailController.selectedImage = UIImage(data: image.photo!)
+            detailController.selectedImage = UIImage(data: image.photoData!)
             self.navigationController!.pushViewController(detailController, animated: true)
         }
     }
@@ -269,8 +268,8 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         let photo = Photo(context: dataController.viewContext)
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let photoData: Data = image.pngData()!
-            photo.photo = photoData
+            let imageData: Data = image.pngData()!
+            photo.photoData = imageData
             photo.addDate = Date()
             try? dataController.viewContext.save()
             photoArray.append(photo)

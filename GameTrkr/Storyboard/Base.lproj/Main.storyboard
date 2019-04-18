@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63H-Kv-q70">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlatformCell" textLabel="waD-Ug-QCo" detailTextLabel="s3L-EE-teJ" style="IBUITableViewCellStyleSubtitle" id="Ks4-Tb-mNs" customClass="PlatformCell" customModule="GameTrkr" customModuleProvider="target">
@@ -82,7 +82,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="tdc-l5-3b2">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cas-TU-6Pw"/>
                                     <barButtonItem title="Add New Platform" id="4NQ-E7-kKj">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
@@ -169,7 +169,7 @@ Select your game to watch related videos, add photos or make other customization
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Md9-Qg-Vp6"/>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w">
@@ -291,12 +291,17 @@ Select your game to watch related videos, add photos or make other customization
                                                     <rect key="frame" x="0.0" y="0.0" width="174" height="175.33333333333337"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sVr-Bz-woP">
-                                                            <rect key="frame" x="0.0" y="0.0" width="174" height="175"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sVr-Bz-woP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="174" height="175.33333333333334"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
+                                                <constraints>
+                                                    <constraint firstItem="sVr-Bz-woP" firstAttribute="top" secondItem="7II-b1-FiJ" secondAttribute="top" id="7BC-vh-Z2q"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sVr-Bz-woP" secondAttribute="trailing" id="7O6-69-JTk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sVr-Bz-woP" secondAttribute="bottom" id="lfk-N4-Qrt"/>
+                                                    <constraint firstItem="sVr-Bz-woP" firstAttribute="leading" secondItem="7II-b1-FiJ" secondAttribute="leading" id="tBQ-Lq-OOp"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="gameImage" destination="sVr-Bz-woP" id="p3D-zZ-ATo"/>
                                                 </connections>
@@ -379,6 +384,7 @@ Select your game to watch related videos, add photos or make other customization
                     </navigationItem>
                     <connections>
                         <outlet property="addNewPhotoButton" destination="taG-0E-ceL" id="eCL-sq-j01"/>
+                        <outlet property="collectionViewConstraints" destination="3sX-9p-ds8" id="dVt-IH-WOc"/>
                         <outlet property="deletePhotoButton" destination="f12-Nn-RTE" id="Cau-Ul-uNg"/>
                         <outlet property="digitalRadio" destination="S1L-YM-6G1" id="tlj-G2-UDR"/>
                         <outlet property="editButton" destination="yUL-QB-qrY" id="X8l-id-zRe"/>
@@ -431,7 +437,7 @@ Select your game to watch related videos, add photos or make other customization
                                             </barButtonItem>
                                         </items>
                                     </toolbar>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube share URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
                                         <rect key="frame" x="8" y="52" width="398" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>

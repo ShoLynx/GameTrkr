@@ -29,6 +29,8 @@ class GameDetailsController: UIViewController {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var gameDescription: UITextView!
     
+    @IBOutlet weak var collectionViewConstraints: NSLayoutConstraint!
+    
     var youtubeURL: String!
     var defaultURL: String!
     var platform: Platform!
@@ -104,7 +106,7 @@ class GameDetailsController: UIViewController {
         } else {
             addNewPhotoButton.isEnabled = true
             loadVideoButton.isEnabled = true
-            watchAnotherVideoButton.isEnabled = true
+            watchAnotherVideoButton.isEnabled = false
             editButton.isEnabled = true
         }
     }
@@ -132,9 +134,9 @@ class GameDetailsController: UIViewController {
     
     fileprivate func setCollectionFormat() {
         //Sets the formatting rules for the collection view's FlowLayout.
-        let space: CGFloat = 4.0
+        let space: CGFloat = 2.0
         let size = self.view.frame.size
-        let dWidth = (size.width - (space)) / 3.0
+        let dWidth = (size.width - (space)) / 1.0
         let dHeight = (size.height - (space)) / 1.0
         
         flowLayout.minimumInteritemSpacing = space
@@ -144,11 +146,12 @@ class GameDetailsController: UIViewController {
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
         if videos != nil {
-            youtubePlayer.isHidden = false
             defaultURL = DefaultVideo.video
             youtubePlayer.loadVideoID(defaultURL)
+            watchAnotherVideoButton.isEnabled = true
         } else {
             showVideoRetreivalFailure(message: error?.localizedDescription ?? "")
+            watchAnotherVideoButton.isEnabled = false
             print(error!)
         }
     }
@@ -170,6 +173,7 @@ class GameDetailsController: UIViewController {
         if game.hasDefaultYoutubeURL {
             youtubeURL = game.youtubeURL
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
+            watchAnotherVideoButton.isEnabled = false
         } else {
             watchAnotherVideoButton.isEnabled = false
         }
@@ -246,16 +250,18 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
         let image = photoArray[indexPath.row]
-        detailController.selectedImage = UIImage(data: image.photo!)
-        self.navigationController!.pushViewController(detailController, animated: true)
         
         if isEditing {
             dataController.viewContext.delete(image)
             try? dataController.viewContext.save()
             gameImageCollection.reloadData()
             updateCollectionState()
+        } else {
+            let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
+            
+            detailController.selectedImage = UIImage(data: image.photo!)
+            self.navigationController!.pushViewController(detailController, animated: true)
         }
     }
     

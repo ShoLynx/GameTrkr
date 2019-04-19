@@ -16,6 +16,9 @@ class GameDetailsController: UIViewController {
     // MARK: Class setup
     
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
+    @IBOutlet weak var curtainView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var emptyPlayerText: UITextView!
     @IBOutlet weak var loadVideoButton: UIBarButtonItem!
     @IBOutlet weak var watchAnotherVideoButton: UIBarButtonItem!
     @IBOutlet weak var digitalRadio: UIImageView!
@@ -41,6 +44,8 @@ class GameDetailsController: UIViewController {
     var photoArray: [Photo] = []
     var platformName: String!
     var gameTitle: String!
+    var videoArray: [Items] = []
+    var currentVideo: Int = 0
     
     // MARK: Life cycle
     
@@ -61,6 +66,10 @@ class GameDetailsController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        curtainView.isHidden = false
+        emptyPlayerText.isHidden = false
+        activityIndicator.hidesWhenStopped = true
         
         setupFetchedResultsController()
         updateYoutubePlayer()
@@ -93,7 +102,17 @@ class GameDetailsController: UIViewController {
     }
     
     @IBAction func nextVideo(_ sender: UIBarButtonItem) {
-        youtubePlayer.nextVideo()
+        curtainView.isHidden = false
+        activityIndicator.startAnimating()
+        currentVideo = currentVideo + 1
+        if currentVideo >= 25 {
+            currentVideo = 0
+        }
+        
+        youtubePlayer.loadVideoID(videoArray[currentVideo].id.videoId!)
+        curtainView.isHidden = true
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
     }
     
     @IBAction func toggleEditing(_ sender: UIBarButtonItem) {
@@ -148,14 +167,21 @@ class GameDetailsController: UIViewController {
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
         if videos != nil {
-            defaultURL = videos![0].id.videoId
+            curtainView.isHidden = false
+            emptyPlayerText.isHidden = true
+            activityIndicator.startAnimating()
+            videoArray = videos!
+            defaultURL = videoArray[currentVideo].id.videoId
             youtubePlayer.loadVideoID(defaultURL)
+            curtainView.isHidden = true
+            activityIndicator.stopAnimating()
             watchAnotherVideoButton.isEnabled = true
         } else {
             showVideoRetreivalFailure(message: error?.localizedDescription ?? "")
             watchAnotherVideoButton.isEnabled = false
             print(error!)
         }
+        activityIndicator.hidesWhenStopped = true
     }
     
     func showVideoRetreivalFailure(message: String) {
@@ -172,12 +198,18 @@ class GameDetailsController: UIViewController {
     
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
+            curtainView.isHidden = false
+            emptyPlayerText.isHidden = true
+            activityIndicator.startAnimating()
             youtubeURL = game.youtubeURL
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
+            curtainView.isHidden = true
+            activityIndicator.stopAnimating()
             watchAnotherVideoButton.isEnabled = false
         } else {
             watchAnotherVideoButton.isEnabled = false
         }
+        activityIndicator.hidesWhenStopped = true
     }
     
     func updateDigitalRadio() {

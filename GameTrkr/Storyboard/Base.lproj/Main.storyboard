@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63H-Kv-q70">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlatformCell" textLabel="waD-Ug-QCo" detailTextLabel="s3L-EE-teJ" style="IBUITableViewCellStyleSubtitle" id="Ks4-Tb-mNs" customClass="PlatformCell" customModule="GameTrkr" customModuleProvider="target">
@@ -82,7 +82,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="tdc-l5-3b2">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cas-TU-6Pw"/>
                                     <barButtonItem title="Add New Platform" id="4NQ-E7-kKj">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
@@ -169,7 +169,7 @@ Select your game to watch related videos, add photos or make other customization
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Md9-Qg-Vp6"/>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w">
@@ -225,6 +225,32 @@ Select your game to watch related videos, add photos or make other customization
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tye-lp-uc9" secondAttribute="height" multiplier="16:9" id="Bon-YA-1Js"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMf-b8-8sh">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yWR-VQ-1DT">
+                                                <rect key="frame" x="20" y="25" width="374" height="183"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">If you have an Internet connection, you can watch YouTube videos now by tapping Load Video.  You can also set the default video with a YouTube URL on the Edit screen.</string>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Bi3-nt-QTR">
+                                                <rect key="frame" x="197" y="106.33333333333334" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="yWR-VQ-1DT" secondAttribute="bottom" constant="25" id="CVo-1f-ZM7"/>
+                                            <constraint firstItem="yWR-VQ-1DT" firstAttribute="leading" secondItem="VMf-b8-8sh" secondAttribute="leading" constant="20" id="R8y-Fy-moC"/>
+                                            <constraint firstAttribute="width" secondItem="VMf-b8-8sh" secondAttribute="height" multiplier="16:9" id="aCv-vn-YjK"/>
+                                            <constraint firstItem="yWR-VQ-1DT" firstAttribute="top" secondItem="VMf-b8-8sh" secondAttribute="top" constant="25" id="gvx-3n-AtS"/>
+                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerX" secondItem="VMf-b8-8sh" secondAttribute="centerX" id="qGB-GI-wuu"/>
+                                            <constraint firstAttribute="trailing" secondItem="yWR-VQ-1DT" secondAttribute="trailing" constant="20" id="v3X-GH-3LG"/>
+                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerY" secondItem="VMf-b8-8sh" secondAttribute="centerY" id="vEg-rS-6bD"/>
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">
@@ -344,8 +370,10 @@ Select your game to watch related videos, add photos or make other customization
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="05u-tA-Cqs"/>
+                                    <constraint firstAttribute="trailing" secondItem="VMf-b8-8sh" secondAttribute="trailing" id="32z-TA-PGa"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="centerX" secondItem="xLR-Vj-1ia" secondAttribute="centerX" id="93q-L1-MRB"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="leading" secondItem="YMk-bA-Ml2" secondAttribute="leading" id="96q-Tz-kny"/>
+                                    <constraint firstItem="VMf-b8-8sh" firstAttribute="top" secondItem="xLR-Vj-1ia" secondAttribute="top" id="EU3-yX-fFp"/>
                                     <constraint firstItem="Egm-kx-JU6" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="Ihd-Cf-t9Z"/>
                                     <constraint firstAttribute="trailing" secondItem="LZK-sE-Oah" secondAttribute="trailing" id="KnO-AV-eaE"/>
                                     <constraint firstItem="Egm-kx-JU6" firstAttribute="top" secondItem="YMk-bA-Ml2" secondAttribute="bottom" id="Pia-Ok-7LC"/>
@@ -354,6 +382,7 @@ Select your game to watch related videos, add photos or make other customization
                                     <constraint firstItem="LZK-sE-Oah" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="UFh-uY-zeP"/>
                                     <constraint firstAttribute="trailing" secondItem="zpy-x1-imQ" secondAttribute="trailing" id="bep-sn-IVG"/>
                                     <constraint firstAttribute="trailing" secondItem="tJI-gI-eGF" secondAttribute="trailing" id="bjt-nm-4fl"/>
+                                    <constraint firstItem="VMf-b8-8sh" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="fKS-IU-e3T"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="bottom" secondItem="YMk-bA-Ml2" secondAttribute="top" id="i70-KE-ud1"/>
                                     <constraint firstItem="tye-lp-uc9" firstAttribute="trailing" secondItem="YMk-bA-Ml2" secondAttribute="trailing" id="jmc-Gd-E2s"/>
                                     <constraint firstItem="zpy-x1-imQ" firstAttribute="leading" secondItem="xLR-Vj-1ia" secondAttribute="leading" id="m5A-tW-jKd"/>
@@ -383,12 +412,15 @@ Select your game to watch related videos, add photos or make other customization
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="Bi3-nt-QTR" id="bp4-yN-l95"/>
                         <outlet property="addNewPhotoButton" destination="taG-0E-ceL" id="eCL-sq-j01"/>
                         <outlet property="collectionViewConstraints" destination="3sX-9p-ds8" id="dVt-IH-WOc"/>
+                        <outlet property="curtainView" destination="VMf-b8-8sh" id="TQa-QU-fFH"/>
                         <outlet property="deletePhotoButton" destination="f12-Nn-RTE" id="Cau-Ul-uNg"/>
                         <outlet property="digitalRadio" destination="S1L-YM-6G1" id="tlj-G2-UDR"/>
                         <outlet property="editButton" destination="yUL-QB-qrY" id="X8l-id-zRe"/>
                         <outlet property="emptyImageCollectionLabel" destination="7IU-FG-hh5" id="Upp-Sg-DVd"/>
+                        <outlet property="emptyPlayerText" destination="yWR-VQ-1DT" id="BmI-hd-zzi"/>
                         <outlet property="flowLayout" destination="b0g-Yo-0hr" id="lgR-7O-et3"/>
                         <outlet property="gameDescription" destination="LZK-sE-Oah" id="BU0-b2-gNT"/>
                         <outlet property="gameImageCollection" destination="tJI-gI-eGF" id="EKy-at-Cjl"/>

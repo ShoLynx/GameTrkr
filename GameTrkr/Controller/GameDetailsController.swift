@@ -303,6 +303,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             let imageData = image.jpegData(compressionQuality: 1.0)
             photo.photoData = imageData
             photo.addDate = Date()
+            photo.game = self.game
             try? dataController.viewContext.save()
             photoArray.append(photo)
             gameImageCollection.reloadData()

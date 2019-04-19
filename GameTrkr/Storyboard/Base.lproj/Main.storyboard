@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="63H-Kv-q70">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlatformCell" textLabel="waD-Ug-QCo" detailTextLabel="s3L-EE-teJ" style="IBUITableViewCellStyleSubtitle" id="Ks4-Tb-mNs" customClass="PlatformCell" customModule="GameTrkr" customModuleProvider="target">
@@ -82,7 +82,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="tdc-l5-3b2">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cas-TU-6Pw"/>
                                     <barButtonItem title="Add New Platform" id="4NQ-E7-kKj">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8lM-sd-DyV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameCell" textLabel="HVn-S7-J6e" style="IBUITableViewCellStyleDefault" id="TPG-e7-Qkx" customClass="GameCell" customModule="GameTrkr" customModuleProvider="target">
@@ -169,7 +169,7 @@ Select your game to watch related videos, add photos or make other customization
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="I1U-P8-pil">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Md9-Qg-Vp6"/>
                                     <barButtonItem title="Add New Game" id="aOQ-9v-T4w">
@@ -230,7 +230,7 @@ Select your game to watch related videos, add photos or make other customization
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMf-b8-8sh">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yWR-VQ-1DT">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWR-VQ-1DT">
                                                 <rect key="frame" x="20" y="25" width="374" height="183"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">If you have an Internet connection, you can watch YouTube videos now by tapping Load Video.  You can also set the default video with a YouTube URL on the Edit screen.</string>

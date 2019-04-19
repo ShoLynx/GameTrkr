@@ -32,5 +32,4 @@ To customize this page, you can use the *Settings* mode by tapping Edit.  Here, 
 ## Planned Updates
 -	The Set Default Video function currently can only use full YouTube URLs.  Update planned for the app to be able to use Share URLs, as well
 -	Users will be able to move games from one platform to another with a picker view in Settings
--	If the YouTube view is inactive, instructional text will appear at the view
 -	*Ultimate Update*: Web functionality.  User updates are saved to a website, instead of locally.  Users can access their game library and customizations with either the app or the website and share their collections with others.  This will require user authentication on both the app and website.

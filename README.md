@@ -7,7 +7,7 @@ Clone the GitHub repository and use Xcode to open the xcworkspacefile.  Use Xcod
 ## How to Use
 After opening **GameTrkr**, you will be presented with an empty *Platform Table* that will give you instructions on how to add Platforms and Games.  Platforms can be the video game consoles you use to play your games (i.e. Nintendo Switch, PlayStation 4, Xbox One, etc.), handhelds (Game Boy, Game Gear, etc.) or your PC.  Since PC games can be launched from several launchers, like Steam, BattleNet or Epic, it is suggested that you name your PC platforms after these launchers, but this is up to you.
 
-Once you add a Platform, you can add games to said platform.  Follow the instructions to add Games in the same manner as adding platforms.
+Once you add a Platform, you can add games to said platform.  Follow the instructions to add Games in the same manner as adding Platforms.
 
 ### Platform/Game Table Controls
 -	Add New Platform/Game button: provides a view for you to add a Platform or Game
@@ -32,4 +32,5 @@ To customize this page, you can use the *Settings* mode by tapping Edit.  Here, 
 ## Planned Updates
 -	The Set Default Video function currently can only use full YouTube URLs.  Update planned for the app to be able to use Share URLs, as well
 -	Users will be able to move games from one platform to another with a picker view in Settings
+- Thumbnails will be utilized in Customizable Game Page collection view to show more than one picture.
 -	*Ultimate Update*: Web functionality.  User updates are saved to a website, instead of locally.  Users can access their game library and customizations with either the app or the website and share their collections with others.  This will require user authentication on both the app and website.

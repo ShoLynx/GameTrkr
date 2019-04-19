@@ -14,7 +14,7 @@ struct YoutubeResponse: Codable {
     let nextPageToken: String?
     let prevPageToken: String?
     let regionCode: String?
-    let pageInfo: [PageInfo]
+    let pageInfo: PageInfo
     let items: [Items]
 }
 
@@ -26,8 +26,8 @@ struct PageInfo: Codable {
 struct Items: Codable {
     let kind: String?
     let etag: String?
-    let id: [Id]
-    let snippet: [Snippet]
+    let id: Id
+    let snippet: Snippet
     let channelTitle: String?
     let liveBroadcastContent: String?
 }
@@ -42,13 +42,13 @@ struct Snippet: Codable {
     let channelId: String?
     let title: String?
     let description: String?
-    let thumbnails: [Thumbnails]
+    let thumbnails: Thumbnails
 }
 
 struct Thumbnails: Codable {
-    let defaultSet: [DefaultSet]
-    let medium: [Medium]
-    let high: [High]
+    let defaultSet: DefaultSet
+    let medium: Medium
+    let high: High
     
     enum CodingKeys: String, CodingKey {
         case defaultSet = "default"
@@ -73,8 +73,4 @@ struct High: Codable {
     let url: String?
     let width: Int?
     let height: Int?
-}
-
-struct DefaultVideo {
-    static var video: String?
 }

@@ -148,7 +148,7 @@ class GameDetailsController: UIViewController {
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
         if videos != nil {
-            defaultURL = DefaultVideo.video
+            defaultURL = videos![0].id.videoId
             youtubePlayer.loadVideoID(defaultURL)
             watchAnotherVideoButton.isEnabled = true
         } else {
@@ -268,7 +268,7 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         let photo = Photo(context: dataController.viewContext)
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            let imageData: Data = image.pngData()!
+            let imageData = image.jpegData(compressionQuality: 1.0)
             photo.photoData = imageData
             photo.addDate = Date()
             try? dataController.viewContext.save()

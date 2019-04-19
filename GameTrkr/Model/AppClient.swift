@@ -21,13 +21,12 @@ class AppClient {
         
         var stringValue: String {
             switch self {
-            case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "search?part=snippet&maxResults=25&order=rating&q=\(platformName)%2C%20\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
+            case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "search?part=snippet&maxResults=25&order=rating&q=\(platformName)" + " " + "\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
             }
         }
         
-        var url: URL {
-            // Currently crashes when utilizing GameDetailsController Load Video button.
-            return URL(string: stringValue)!
+        var originalURL: String {
+            return stringValue
         }
     }
     
@@ -35,10 +34,10 @@ class AppClient {
     //getPlaylistVideo grabs 25 video objects and applies the first of the objects to DefaultVideo.video.
     
     class func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
-//        var originalURL = Endpoints.getData(platformName, gameTitle)
-//        var noSpaceURL = originalURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = Endpoints.getData(platformName, gameTitle).originalURL
+        let noSpaceURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        var request = URLRequest(url: Endpoints.getData(platformName, gameTitle).url)
+        var request = URLRequest(url: URL(string: noSpaceURL)!)
         request.httpMethod = "GET"
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -53,7 +52,7 @@ class AppClient {
                 let responseObject = try decoder.decode(YoutubeResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject.items, nil)
-                    DefaultVideo.video = responseObject.items[0].id[0].videoId
+                    print(String(data: data, encoding: .utf8)!)
                 }
             } catch {
                 do {

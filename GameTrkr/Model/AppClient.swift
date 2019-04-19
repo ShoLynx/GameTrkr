@@ -31,7 +31,7 @@ class AppClient {
     }
     
     //MARK: Global Function
-    //getPlaylistVideo grabs 25 video objects and applies the first of the objects to DefaultVideo.video.
+    //getPlaylistVideo grabs 25 video objects for use with GameDetailsController's Load Video button and Watch Another Video button.
     
     class func getPlaylistVideo(platformName: String, gameTitle: String, completion: @escaping([Items]?, Error?) -> Void) {
         let url = Endpoints.getData(platformName, gameTitle).originalURL

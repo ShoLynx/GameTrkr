@@ -287,7 +287,8 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
         if isEditing {
             dataController.viewContext.delete(image)
             try? dataController.viewContext.save()
-            gameImageCollection.reloadData()
+            photoArray.remove(at: indexPath.row)
+            collectionView.deleteItems(at: [indexPath])
             updateCollectionState()
         } else {
             let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
@@ -295,6 +296,8 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             self.navigationController!.pushViewController(detailController, animated: true)
         }
     }
+    
+    //JPEG conversion method found at https://stackoverflow.com/questions/51531165/uiimagejpegrepresentation-has-been-replaced-by-instance-method-uiimage-jpegdata
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let photo = Photo(context: dataController.viewContext)

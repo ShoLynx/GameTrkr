@@ -110,7 +110,7 @@ class GameDetailsController: UIViewController {
     @IBAction func nextVideo(_ sender: UIBarButtonItem) {
         showActivityIndicator()
         currentVideo = currentVideo + 1
-        if currentVideo >= 25 {
+        if currentVideo >= 50 {
             currentVideo = 0
         }
         

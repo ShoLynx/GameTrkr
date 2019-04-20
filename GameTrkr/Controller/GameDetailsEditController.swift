@@ -82,6 +82,13 @@ class GameDetailsEditController: UIViewController {
         
         // Adding to viewDidLoad, as this view is the last in the chain.  It cannot be backed into.
         setupFetchedResultsController()
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,6 +104,8 @@ class GameDetailsEditController: UIViewController {
         
         try? dataController.viewContext.save()
         fetchedResultsController = nil
+        
+        unsubscribeFromKeyboardNotifications()
     }
     
     // MARK: IBActions and Class functions
@@ -163,6 +172,34 @@ class GameDetailsEditController: UIViewController {
             fatalError("The fetch could not be performed: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: TextView obscurrance prevention
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil);
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if descriptionText.isFirstResponder {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
 }
 
     // MARK: Class extension - Protocol list and delegate rules
@@ -171,6 +208,10 @@ extension GameDetailsEditController: UITextViewDelegate, UITextFieldDelegate,  N
     
     func textViewDidEndEditing(_ textView: UITextView) {
         game.gameText = textView.text
+        if textView.text!.isEmpty {
+            game.gameText = nil
+            game.hasDescription = false
+        }
         try? dataController.viewContext.save()
     }
     
@@ -181,8 +222,18 @@ extension GameDetailsEditController: UITextViewDelegate, UITextFieldDelegate,  N
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         game.youtubeURL = textField.text
+        if textField.text!.isEmpty {
+            game.youtubeURL = nil
+            game.hasDefaultYoutubeURL = false
+        }
         try? dataController.viewContext.save()
     }
 }

@@ -21,7 +21,7 @@ class AppClient {
         
         var stringValue: String {
             switch self {
-            case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "search?part=snippet&maxResults=25&order=rating&q=\(platformName)" + " " + "\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
+            case .getData(let platformName, let gameTitle): return Endpoints.youtubeBase + "search?part=snippet&maxResults=50&order=rating&q=\(platformName)" + " " + "\(gameTitle)&type=video&videoEmbeddable=true&key=\(apiKey)"
             }
         }
         

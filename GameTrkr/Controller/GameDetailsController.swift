@@ -110,12 +110,12 @@ class GameDetailsController: UIViewController {
     @IBAction func nextVideo(_ sender: UIBarButtonItem) {
         showActivityIndicator()
         currentVideo = currentVideo + 1
-        if currentVideo >= 50 {
+        if currentVideo >= videoArray.count {
             currentVideo = 0
         }
         
         youtubePlayer.loadVideoID(videoArray[currentVideo].id.videoId!)
-        if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+        if youtubePlayer.playerState == YouTubePlayerState.Unstarted || youtubePlayer.ready {
             curtainView.isHidden = true
             activityIndicator.stopAnimating()
         }
@@ -216,27 +216,23 @@ class GameDetailsController: UIViewController {
     }
     
     func handleURLResponse(videos: [Items]?, error: Error?) {
-        if videos != nil {
+        if videos != nil && videos!.count > 0 {
             showActivityIndicator()
             videoArray = videos!
             defaultURL = videoArray[currentVideo].id.videoId
             youtubePlayer.loadVideoID(defaultURL)
             
-            if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+            if youtubePlayer.playerState == YouTubePlayerState.Unstarted || youtubePlayer.ready {
                 curtainView.isHidden = true
                 activityIndicator.stopAnimating()
-            }
-            
-            if youtubePlayer.ready == false {
-                perform(#selector(youtubeDefaultURLTimeout), with: nil, afterDelay: 20)
             }
             
             activityIndicator.hidesWhenStopped = true
             watchAnotherVideoButton.isEnabled = true
         } else {
-            showVideoRetreivalFailure(message: error?.localizedDescription ?? "")
+            showVideoRetreivalFailure(message: error?.localizedDescription ?? "No videos available.")
             watchAnotherVideoButton.isEnabled = false
-            print(error!)
+            print(error ?? "No videos available.")
         }
     }
     
@@ -258,7 +254,7 @@ class GameDetailsController: UIViewController {
             youtubeURL = game.youtubeURL
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
             
-            if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+            if youtubePlayer.playerState == YouTubePlayerState.Unstarted || youtubePlayer.ready {
                 curtainView.isHidden = true
                 activityIndicator.stopAnimating()
             }

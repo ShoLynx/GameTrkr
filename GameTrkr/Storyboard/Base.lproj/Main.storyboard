@@ -222,9 +222,16 @@ Select your game to watch related videos, add photos or make other customization
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tye-lp-uc9" customClass="YouTubePlayerView" customModule="YouTubePlayer_Swift">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vQd-3P-9TP">
+                                                <rect key="frame" x="188.66666666666666" y="98" width="37" height="37"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.49933978870000001" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="vQd-3P-9TP" firstAttribute="centerX" secondItem="tye-lp-uc9" secondAttribute="centerX" id="3WL-FI-Oco"/>
                                             <constraint firstAttribute="width" secondItem="tye-lp-uc9" secondAttribute="height" multiplier="16:9" id="Bon-YA-1Js"/>
+                                            <constraint firstItem="vQd-3P-9TP" firstAttribute="centerY" secondItem="tye-lp-uc9" secondAttribute="centerY" id="U1e-f1-xS8"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VMf-b8-8sh">
@@ -238,19 +245,19 @@ Select your game to watch related videos, add photos or make other customization
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Bi3-nt-QTR">
-                                                <rect key="frame" x="197" y="106.33333333333334" width="20" height="20"/>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bi3-nt-QTR">
+                                                <rect key="frame" x="188.66666666666666" y="98" width="37" height="37"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerX" secondItem="VMf-b8-8sh" secondAttribute="centerX" id="37C-5B-0Uz"/>
                                             <constraint firstAttribute="bottom" secondItem="yWR-VQ-1DT" secondAttribute="bottom" constant="25" id="CVo-1f-ZM7"/>
                                             <constraint firstItem="yWR-VQ-1DT" firstAttribute="leading" secondItem="VMf-b8-8sh" secondAttribute="leading" constant="20" id="R8y-Fy-moC"/>
                                             <constraint firstAttribute="width" secondItem="VMf-b8-8sh" secondAttribute="height" multiplier="16:9" id="aCv-vn-YjK"/>
                                             <constraint firstItem="yWR-VQ-1DT" firstAttribute="top" secondItem="VMf-b8-8sh" secondAttribute="top" constant="25" id="gvx-3n-AtS"/>
-                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerX" secondItem="VMf-b8-8sh" secondAttribute="centerX" id="qGB-GI-wuu"/>
+                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerY" secondItem="VMf-b8-8sh" secondAttribute="centerY" id="jrw-tl-Dzq"/>
                                             <constraint firstAttribute="trailing" secondItem="yWR-VQ-1DT" secondAttribute="trailing" constant="20" id="v3X-GH-3LG"/>
-                                            <constraint firstItem="Bi3-nt-QTR" firstAttribute="centerY" secondItem="VMf-b8-8sh" secondAttribute="centerY" id="vEg-rS-6bD"/>
                                         </constraints>
                                     </view>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="YMk-bA-Ml2">
@@ -428,6 +435,7 @@ Select your game to watch related videos, add photos or make other customization
                         <outlet property="loadVideoButton" destination="J3q-K9-oB3" id="6yP-zY-deH"/>
                         <outlet property="specialEditionRadio" destination="vdH-d2-YFn" id="8EK-Qo-ql0"/>
                         <outlet property="watchAnotherVideoButton" destination="dx6-ZL-dj1" id="jKC-nn-Bck"/>
+                        <outlet property="youtubeIndicator" destination="vQd-3P-9TP" id="XwS-xn-yWK"/>
                         <outlet property="youtubePlayer" destination="tye-lp-uc9" id="h3N-fi-KwH"/>
                         <segue destination="hd0-LW-aIc" kind="show" identifier="goToEditController" id="vBR-su-gUH"/>
                         <segue destination="JDs-aX-KrJ" kind="presentation" identifier="goToImageController" id="avw-zY-hQ0"/>

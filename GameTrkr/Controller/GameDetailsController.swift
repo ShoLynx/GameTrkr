@@ -16,6 +16,7 @@ class GameDetailsController: UIViewController {
     // MARK: Class setup
     
     @IBOutlet weak var youtubePlayer: YouTubePlayerView!
+    @IBOutlet weak var youtubeIndicator: UIActivityIndicatorView!
     @IBOutlet weak var curtainView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emptyPlayerText: UITextView!
@@ -49,6 +50,8 @@ class GameDetailsController: UIViewController {
     
     // MARK: Life cycle
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,14 +65,17 @@ class GameDetailsController: UIViewController {
         gameImageCollection.dataSource = self
         
         photoArray = fetchedResultsController.fetchedObjects ?? []
+        
+        showYouTubePlayerActivityIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        emptyPlayerText.text = "If you have an Internet connection, you can watch YouTube videos now by tapping Load Video.\n\nYou can also set the default video with a YouTube URL in Edit mode."
+        
         curtainView.isHidden = false
         emptyPlayerText.isHidden = false
-        activityIndicator.hidesWhenStopped = true
         
         setupFetchedResultsController()
         updateYoutubePlayer()
@@ -102,16 +108,22 @@ class GameDetailsController: UIViewController {
     }
     
     @IBAction func nextVideo(_ sender: UIBarButtonItem) {
-        curtainView.isHidden = false
-        activityIndicator.startAnimating()
+        showActivityIndicator()
         currentVideo = currentVideo + 1
         if currentVideo >= 25 {
             currentVideo = 0
         }
         
         youtubePlayer.loadVideoID(videoArray[currentVideo].id.videoId!)
-        curtainView.isHidden = true
-        activityIndicator.stopAnimating()
+        if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+            curtainView.isHidden = true
+            activityIndicator.stopAnimating()
+        }
+        
+        if youtubePlayer.ready == false {
+            perform(#selector(youtubeNextVideoTimeout), with: nil, afterDelay: 20)
+        }
+        
         activityIndicator.hidesWhenStopped = true
     }
     
@@ -165,23 +177,67 @@ class GameDetailsController: UIViewController {
         flowLayout.itemSize = CGSize(width: dWidth, height: dHeight)
     }
     
+    fileprivate func showActivityIndicator() {
+        curtainView.isHidden = false
+        emptyPlayerText.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    fileprivate func showYouTubePlayerActivityIndicator() {
+        if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+            youtubeIndicator.startAnimating()
+        }
+        
+        if youtubePlayer.ready {
+            youtubeIndicator.stopAnimating()
+        }
+        
+        youtubeIndicator.hidesWhenStopped = true
+    }
+    
+    // Timeout functionality found at https://www.hackingwithswift.com/example-code/system/how-to-run-code-after-a-delay-using-asyncafter-and-perform
+    
+    @objc fileprivate func youtubeDefaultURLTimeout() {
+        emptyPlayerText.text = "The YouTube player may not recognize that URL.\n\nPlease update the URL with another in the Edit mode or tap Load Video to watch a video now."
+        
+        curtainView.isHidden = false
+        emptyPlayerText.isHidden = false
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
+    }
+    
+    @objc fileprivate func youtubeNextVideoTimeout() {
+        emptyPlayerText.text = "The YouTube player is unable to get the next video\n\nPlease check your Internet connection and try again."
+        
+        curtainView.isHidden = false
+        emptyPlayerText.isHidden = false
+        activityIndicator.stopAnimating()
+        activityIndicator.hidesWhenStopped = true
+    }
+    
     func handleURLResponse(videos: [Items]?, error: Error?) {
         if videos != nil {
-            curtainView.isHidden = false
-            emptyPlayerText.isHidden = true
-            activityIndicator.startAnimating()
+            showActivityIndicator()
             videoArray = videos!
             defaultURL = videoArray[currentVideo].id.videoId
             youtubePlayer.loadVideoID(defaultURL)
-            curtainView.isHidden = true
-            activityIndicator.stopAnimating()
+            
+            if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+                curtainView.isHidden = true
+                activityIndicator.stopAnimating()
+            }
+            
+            if youtubePlayer.ready == false {
+                perform(#selector(youtubeDefaultURLTimeout), with: nil, afterDelay: 20)
+            }
+            
+            activityIndicator.hidesWhenStopped = true
             watchAnotherVideoButton.isEnabled = true
         } else {
             showVideoRetreivalFailure(message: error?.localizedDescription ?? "")
             watchAnotherVideoButton.isEnabled = false
             print(error!)
         }
-        activityIndicator.hidesWhenStopped = true
     }
     
     func showVideoRetreivalFailure(message: String) {
@@ -198,18 +254,24 @@ class GameDetailsController: UIViewController {
     
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
-            curtainView.isHidden = false
-            emptyPlayerText.isHidden = true
-            activityIndicator.startAnimating()
+            showActivityIndicator()
             youtubeURL = game.youtubeURL
             youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
-            curtainView.isHidden = true
-            activityIndicator.stopAnimating()
+            
+            if youtubePlayer.playerState == YouTubePlayerState.Unstarted {
+                curtainView.isHidden = true
+                activityIndicator.stopAnimating()
+            }
+            
+            if youtubePlayer.ready == false {
+                perform(#selector(youtubeDefaultURLTimeout), with: nil, afterDelay: 20)
+            }
+            
+            activityIndicator.hidesWhenStopped = true
             watchAnotherVideoButton.isEnabled = false
         } else {
             watchAnotherVideoButton.isEnabled = false
         }
-        activityIndicator.hidesWhenStopped = true
     }
     
     func updateDigitalRadio() {

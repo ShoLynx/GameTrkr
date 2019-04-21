@@ -139,7 +139,6 @@ class GameDetailsController: UIViewController {
         } else {
             addNewPhotoButton.isEnabled = true
             loadVideoButton.isEnabled = true
-            watchAnotherVideoButton.isEnabled = false
             editButton.isEnabled = true
         }
     }
@@ -347,7 +346,12 @@ extension GameDetailsController: UICollectionViewDataSource, UICollectionViewDel
             try? dataController.viewContext.save()
             photoArray.remove(at: indexPath.row)
             collectionView.deleteItems(at: [indexPath])
-            updateCollectionState()
+            
+            if photoArray.count == 0 {
+                toggleEditing(deletePhotoButton)
+                updateCollectionState()
+            }
+            
         } else {
             let detailController = self.storyboard!.instantiateViewController(withIdentifier: "GameImageDetailController") as! GameImageDetailController
             detailController.selectedImage = UIImage(data: image.photoData!)

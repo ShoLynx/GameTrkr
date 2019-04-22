@@ -64,8 +64,6 @@ class GameDetailsController: UIViewController {
         gameImageCollection.delegate = self
         gameImageCollection.dataSource = self
         
-        photoArray = fetchedResultsController.fetchedObjects ?? []
-        
         showYouTubePlayerActivityIndicator()
     }
     
@@ -85,6 +83,8 @@ class GameDetailsController: UIViewController {
         updateCollectionState()
         gameImageCollection.reloadData()
         updateDescriptionState()
+        
+        photoArray = fetchedResultsController.fetchedObjects ?? []
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -167,9 +167,8 @@ class GameDetailsController: UIViewController {
     fileprivate func setCollectionFormat() {
         //Sets the formatting rules for the collection view's FlowLayout.
         let space: CGFloat = 2.0
-        let size = self.view.frame.size
-        let dWidth = (size.width - (space)) / 1.0
-        let dHeight = (size.height - (space)) / 1.0
+        let dHeight = gameImageCollection.frame.height / 1.0
+        let dWidth = dHeight
         
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space

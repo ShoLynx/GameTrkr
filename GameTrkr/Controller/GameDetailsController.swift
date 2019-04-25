@@ -196,7 +196,7 @@ class GameDetailsController: UIViewController {
     // Timeout functionality found at https://www.hackingwithswift.com/example-code/system/how-to-run-code-after-a-delay-using-asyncafter-and-perform
     
     @objc fileprivate func youtubeDefaultURLTimeout() {
-        emptyPlayerText.text = "The YouTube player may not recognize that URL.\n\nPlease update the URL with another in the Edit mode or tap Load Video to watch a video now."
+        emptyPlayerText.text = "The YouTube player may not recognize that URL/Video ID.\n\nPlease update it with another in the Edit mode or tap Load Video to watch a video now."
         
         curtainView.isHidden = false
         emptyPlayerText.isHidden = false
@@ -244,13 +244,35 @@ class GameDetailsController: UIViewController {
         present(pickerController, animated: true, completion: nil)
     }
     
+    func retrieveVideoId(URLString: String) -> String? {
+        guard let url = URLComponents(string: URLString) else {
+            return nil
+        }
+    
+        if url.host == "www.youtube.com" {
+            return url.queryItems?.first(where: { $0.name == "v" })?.value
+        } else if url.host == "youtu.be" {
+            return url.path
+        } else {
+            return URLString
+        }
+    }
+    
     // MARK: UI Update functions - Set the state of the controller assets
     
     func updateYoutubePlayer() {
         if game.hasDefaultYoutubeURL {
             showActivityIndicator()
             youtubeURL = game.youtubeURL
-            youtubePlayer.loadVideoURL(URL(string: youtubeURL)!)
+            let videoId = retrieveVideoId(URLString: youtubeURL)
+            
+            if videoId != nil {
+                youtubePlayer.loadVideoID(videoId!)
+            } else {
+                curtainView.isHidden = false
+                emptyPlayerText.text = "The YouTube player may not recognize that URL/Video ID.\n\nPlease update it with another in the Edit mode or tap Load Video to watch a video now."
+                emptyPlayerText.isHidden = false
+            }
             
             if youtubePlayer.playerState == YouTubePlayerState.Unstarted || youtubePlayer.ready {
                 curtainView.isHidden = true

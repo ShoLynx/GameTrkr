@@ -477,7 +477,7 @@ Select your game to watch related videos, add photos or make other customization
                                             </barButtonItem>
                                         </items>
                                     </toolbar>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a YouTube URL or Video ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fCo-fO-zSz">
                                         <rect key="frame" x="8" y="52" width="398" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="p0s-LT-sby"/>

@@ -2,7 +2,7 @@
 **GameTrkr** is designed as a video game software tracking app for video game enthusiasts as a final project for the Udacity iOS Developer program.
 
 ## Installation
-Clone the GitHub repository and use Xcode to open the xcworkspacefile.  Use Xcode to install to Simulator or your device.
+Clone the GitHub repository and use Xcode to open the xcworkspace file.  Use Xcode to install to Simulator or your device.
 
 ## How to Use
 After opening **GameTrkr**, you will be presented with an empty *Platform Table* that will give you instructions on how to add Platforms and Games.  Platforms can be the video game consoles you use to play your games (i.e. Nintendo Switch, PlayStation 4, Xbox One, etc.), handhelds (Game Boy, Game Gear, etc.) or your PC.  Since PC games can be launched from several launchers, like Steam, BattleNet or Epic, it is suggested that you name your PC platforms after these launchers, but this is up to you.
@@ -26,11 +26,9 @@ Once you add a Game, you can enter a *customizable page* you can use to track se
 -	Scroll: swipe vertically to scroll through the page’s contents
 -	Edit button: enter the page's *Settings* mode
 
-To customize this page, you can use the *Settings* mode by tapping Edit.  Here, you can toggle the radio buttons that show if a game is digital, if it has its original packaging, or if the game is a special edition.  If you don’t like the videos that appear by selecting Load Video, you can set a default video by adding a YouTube URL.  This video will always appear when the page loads.  Use the Add Description switch to add a description to the custom page.
+To customize this page, you can use the *Settings* mode by tapping Edit.  Here, you can toggle the radio buttons that show if a game is digital, if it has its original packaging, or if the game is a special edition.  If you don’t like the videos that appear by selecting Load Video, you can set a default video by adding a YouTube URL, a YouTube Share URL or a YouTube video ID.  This video will always appear when the page loads.  Use the Add Description switch to add a description to the custom page.
 
 
 ## Planned Updates
--	The Set Default Video function currently can only use full YouTube URLs.  Update planned for the app to be able to use Share URLs, as well
 -	Users will be able to move games from one platform to another with a picker view in Settings
-- Thumbnails will be utilized in Customizable Game Page collection view to show more than one picture.
 -	*Ultimate Update*: Web functionality.  User updates are saved to a website, instead of locally.  Users can access their game library and customizations with either the app or the website and share their collections with others.  This will require user authentication on both the app and website.
